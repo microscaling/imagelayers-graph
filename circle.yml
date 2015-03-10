@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: 0.10.35
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - npm install -g karma
+    - npm install -g bower
+    - npm install -g grunt-cli
+  post:
+    - gem install compass
+    - bower install
+
+test:
+  override:
+    - grunt test
