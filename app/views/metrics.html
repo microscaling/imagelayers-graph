@@ -1,0 +1,26 @@
+ <ul>
+    <li>
+      <dl>
+        <dt>Total Number of Layers:</dt>
+        <dd>{{ metrics.count }}</dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt>Total Physical Size:</dt>
+        <dd ng-bind-html='metrics.size | size'></dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt>Average Size:</dt>
+        <dd ng-bind-html='metrics.ave | size'></dd>
+      </dl>
+    </li>
+    <li>
+      <dl>
+        <dt>Largest Size:</dt>
+        <dd ng-bind-html='metrics.largest | size'></dd>
+      </dl>
+    </li>
+ </ul>

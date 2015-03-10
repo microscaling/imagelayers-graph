@@ -1,0 +1,19 @@
+<header>
+    Add Images
+</header>
+<aside>
+    Enter image names and tags below or paste a list of images to inspect them.
+</aside>
+<main>
+    <section ng-repeat="item in searchList" mass-autocomplete>
+        <div image-search data-model="item"></div>
+    </section>
+    <div class="plus-button" ng-click="addRow()">Add Another Row</div>
+</main>
+<div style="clear:both;"></div>
+<footer>
+    <div class="ngdialog-buttons">
+	    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="addImages()">Add Images</button>
+        <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeDialog()">Cancel</button>
+    </div>
+</footer>

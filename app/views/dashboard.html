@@ -1,0 +1,13 @@
+<section class="metrics" data-graph='graph' metrics></section>
+<section class="search" ng-controller="SearchCtrl as search">
+  <h3>Docker Images</h3>
+    <div class="plus-button" ng-click="showSearch()">Add Images</div>
+  <input type='text' placeholder='Filter by Layer...' >
+</section>
+<section class="graph" data-graph="graph" grid>
+</section>
+<section class="journal" journal>
+    <ul>
+        <li ng-repeat='command in commands'>{{ command }}</li>
+    </ul>
+</section>

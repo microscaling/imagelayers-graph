@@ -1,0 +1,20 @@
+<div class="leaves" ng-show="leaves.length > 0">
+    <section ng-repeat="repo in leaves">
+        <div>{{ repo.name }}:{{ repo.tag }}</div>
+        <div class="size" ng-bind-html="repo.size | size "></div>
+    </section>
+</div>
+<div class="matrix">
+  <div ng-repeat="box in grid" class="repeat-animation" ng-mouseenter="highlightCommand(box.layer.id)" ng-switch on="box.layer.id">
+
+    <div class="box empty" ng-switch-when="empty"></div>
+    <div ng-switch-default style="width: {{ box.width }}px" ng-class="box.type">
+        <span class="id">
+          {{ box.layer.id }}
+        </span>
+        <span ng-bind-html='box.layer.Size | size' class="size">
+      </span>
+    </div>
+      <div style="clear:both;" ng-show="($index + 1) % leaves.length == 0"></div>
+  </div>
+</div>
