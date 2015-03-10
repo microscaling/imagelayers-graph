@@ -78,7 +78,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: process.env.IMAGE_LAYERS_API
+            apiEndpoint: 'http://localhost:8888'
           }
         }
       },
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: '<%= process.env.IMAGE_LAYERS_API %>'
+            apiEndpoint: process.env.IMAGE_LAYERS_API
           }
         }
       }
