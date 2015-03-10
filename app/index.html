@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/animations.css" type="text/css">
     <link rel="stylesheet" href="styles/dialog.css" type="text/css">
+     <!-- endbuild -->
     <title>Image Layers</title>
   </head>
 
@@ -32,7 +33,7 @@
   </main>
 
 
-    <!-- build:js(.) scripts/vendor.js -->
+    <!-- build:js({.,app}) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -44,22 +45,21 @@
     <script src="bower_components/ngDialog/js/ngDialog.js"></script>
     <!-- endbower -->
     <script src="lib/massautocomplete.js"></script>
-    <script src="scripts/config.js"></script>
     <!-- endbuild -->
 
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/dashboard.js"></script>
-        <script src="scripts/controllers/search.js"></script>
-        <script src="scripts/directives/grid.js"></script>
-        <script src="scripts/directives/imagesearch.js"></script>
-        <script src="scripts/directives/journal.js"></script>
-        <script src="scripts/directives/metrics.js"></script>
-        <script src="scripts/filters/size.js"></script>
-        <script src="scripts/services/commandservice.js"></script>
-        <script src="scripts/services/gridservice.js"></script>
-        <script src="scripts/services/registryservice.js"></script>
-        <!-- endbuild -->
+      <!-- build:js({.tmp,app}) scripts/scripts.js -->
+      <script src="scripts/config.js"></script>
+      <script src="scripts/app.js"></script>
+      <script src="scripts/controllers/dashboard.js"></script>
+      <script src="scripts/controllers/search.js"></script>
+      <script src="scripts/directives/grid.js"></script>
+      <script src="scripts/directives/imagesearch.js"></script>
+      <script src="scripts/directives/journal.js"></script>
+      <script src="scripts/directives/metrics.js"></script>
+      <script src="scripts/filters/size.js"></script>
+      <script src="scripts/services/commandservice.js"></script>
+      <script src="scripts/services/gridservice.js"></script>
+      <script src="scripts/services/registryservice.js"></script>
+      <!-- endbuild -->
 </body>
 </html>

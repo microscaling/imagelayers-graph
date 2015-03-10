@@ -26,7 +26,7 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:qa
       - ./bin/deploy_qa.sh
-  Production:  
+  Production:
     branch: release
     commands:
       - export IMAGE_LAYERS_API=http://x.x.x.x:xxxx && grunt build
@@ -34,3 +34,4 @@ deployment:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:latest
       - ./bin/deploy_pro.sh
+

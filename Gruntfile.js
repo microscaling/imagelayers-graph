@@ -84,7 +84,7 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          dest: '<%= yeoman.dist %>/scripts/config.js'
+          dest: '.tmp/scripts/config.js'
         },
         constants: {
           ENV: {
@@ -174,7 +174,8 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*'
+            '!<%= yeoman.dist %>/.git{,*/}*',
+            '<%= yeoman.app %>/scripts/config.js'
           ]
         }]
       },
@@ -407,6 +408,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'lib/{,*/}*.js',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
@@ -458,6 +460,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'ngconstant:development',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',

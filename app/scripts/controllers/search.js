@@ -44,5 +44,4 @@ angular.module('iLayers')
           $location.search('images', self.buildQueryParams($scope.searchList));
           ngDialog.closeAll();
         };
-
       }]);
