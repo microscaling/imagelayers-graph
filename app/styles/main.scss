@@ -32,82 +32,80 @@ header {
   background: #d8d8d8;
   height: 60px;
   top: 0;
-}
 
-header .logo {
-  width: 190px;
-  border: none;
-  padding: 0;
-  margin: 0;
-  float: left;
-}
+  .logo {
+    width: 190px;
+    border: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+  }
 
-header h1.logo:hover {
-  border: none;
-  padding: 0;
-  margin: 0;
-}
+  h1.logo {
+    float: left;
+    &:hover {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
 
-header .logo a {
-  overflow: hidden;
-  white-space: nowrap;
-  text-indent: -9999px;
-  color: transparent;
-  background: url('../images/logo_image_layers.svg') no-repeat center center;
-  background-size: 100%;
-  width: 100%;
-  display: block;
-  height: 54px;
-  margin: 0 auto;
-}
+    a {
+      background: url('../images/logo_image_layers.svg') no-repeat center center;
+      background-size: 100%;
+    }
+  }
 
-header h1.logo {
-  float: left;
-}
+  .logo a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: -9999px;
+    color: transparent;
+    background: url('../images/logo_image_layers.svg') no-repeat center center;
+    background-size: 100%;
+    width: 100%;
+    display: block;
+    height: 54px;
+    margin: 0 auto;
+  }
 
-header h1.logo a {
-  background: url('../images/logo_image_layers.svg') no-repeat center center;
-  background-size: 100%;
-}
+  cite.logo {
+    float: right;
+    a {
+      background: url("../images/ctl_logo_base_grey.svg") 0 15px no-repeat;
+      background-size: 140px 30px;
+    }
+  }
 
-header cite.logo {
-  float: right;
-}
+  nav {
+    background: #555;
+    width: 100%;
+    display: block;
+    padding-left: 190px;
+    margin-bottom: 0;
 
-header cite.logo a {
-  background: url("../images/ctl_logo_base.svg") 0 15px no-repeat;
-  background-size: 140px 30px;
-}
+    ul li {
+      text-transform: uppercase;
+      font-weight: 400;
+      float: left;
 
-header nav {
-  background: #555;
-  width: 100%;
-  display: block;
-  padding-left: 190px;
-  margin-bottom: 0;
-}
+      a {
+        color: #FFF;
+        text-decoration: none;
+        padding: 20px 15px;
+        font-size: 12px;
+        letter-spacing: 2px;
+        display: block;
+        width: 100%;
+        text-align: center;
 
-header nav ul li {
-  text-transform: uppercase;
-  font-weight: 400;
-  float: left;
-}
-
-header nav ul li a {
-  color: #FFF;
-  text-decoration: none;
-  padding: 20px 15px;
-  font-size: 12px;
-  letter-spacing: 2px;
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-header nav ul li a:hover {
-  color: #FFF;
-  background-color: rgb(132, 188, 57);
-  transition: background-color 0.25s ease;
+        &:hover {
+          color: #FFF;
+          background-color: rgb(132, 188, 57);
+          transition: background-color 0.25s ease;
+        }
+      }
+    }
+  }
 }
 
 #social-icons {
@@ -116,21 +114,21 @@ header nav ul li a:hover {
   right: 0;
   width: 58px;
   padding: 20px 10px 20px 0px;
-}
 
-#social-icons a {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-}
+  a {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
 
-#social-icons a.github {
-  background-image: url("../images/logo_github_white.svg");
-  margin-right: 2px;
-}
+    &.github {
+      background-image: url("../images/logo_github_white.svg");
+      margin-right: 2px;
+    }
 
-#social-icons a.twitter {
-  background-image: url("../images/logo_twitter_white.svg");
+    &.twitter {
+      background-image: url("../images/logo_twitter_white.svg");
+    }
+  }
 }
 
 .plus-button {
@@ -139,98 +137,35 @@ header nav ul li a:hover {
   position: relative;
   text-decoration: underline;
   padding-left: 30px;
-}
 
-.plus-button:hover {
-  text-decoration: none;
-  cursor: pointer;
-}
+  &:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-.plus-button:before {
-  content: '';
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: #91B748;
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-}
+  &:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #91B748;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+  }
 
-.plus-button:after {
-  content: '';
-  background: url(../images/plus-white.svg) 50% 50% no-repeat;
-  background-size: 10px 10px;
-  display: block;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-
-/* Metrics */
-section.metrics {
-  width: 100%;
-  background: #2d2d2d;
-  padding: 10px 20px;
-}
-
-section.metrics li {
-  display: inline-block;
-  width: 239px;
-  height: 51px;
-  border-right: 1px solid #4b4b4b;
-}
-
-section.metrics li:last-child {
-  border-right: none;
-}
-
-section.metrics dl {
-  margin: 0;
-  padding: 5px 20px;
-}
-
-section.metrics dt {
-  color: #5f5f5f;
-  font-size: 12px;
-  font-weight: normal;
-  margin-bottom: 5px;
-}
-
-section.metrics dd {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  line-height: 20px;
-  font-size: 26px;
-  font-weight: bold;
-  letter-spacing: 0.075em;
-}
-
-section.metrics dd span {
-  color: #6c6c6c;
-}
-
-/* Search */
-section.search {
-  width: 100%;
-  height: 60px;
-  background: #fff;
-  box-shadow: 0 0 5px rgba(0,0,0,.4);
-}
-
-section.search h3 {
-  float: left;
-  margin-top: 18px;
-  margin-left: 40px;
-}
-
-section.search .plus-button {
-  margin-left: 15px;
+  &:after {
+    content: '';
+    background: url(../images/plus-white.svg) 50% 50% no-repeat;
+    background-size: 10px 10px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 
 section input[type="text"] {
@@ -243,6 +178,68 @@ section input[type="text"] {
   font-style: italic;
 }
 
+/* Metrics */
+section.metrics {
+  width: 100%;
+  background: #2d2d2d;
+  padding: 10px 20px;
+
+  li {
+    display: inline-block;
+    width: 239px;
+    height: 51px;
+    border-right: 1px solid #4b4b4b;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  dl {
+    margin: 0;
+    padding: 5px 20px;
+  }
+
+  dt {
+    color: #5f5f5f;
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+
+  dd {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    line-height: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0.075em;
+
+    span {
+      color: #6c6c6c;
+    }
+  }
+}
+
+/* Search */
+section.search {
+  width: 100%;
+  height: 60px;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.4);
+
+  h3 {
+    float: left;
+    margin-top: 18px;
+    margin-left: 40px;
+  }
+
+  .plus-button {
+    margin-left: 15px;
+  }
+}
+
 /* Graph */
 
 main {
@@ -252,172 +249,146 @@ main {
   padding-bottom: 140px;
   overflow: auto;
 
-}
+  h2 {
+    margin-top: 0;
+    margin-bottom: .5em;
+    font-size: 30px;
+  }
 
-main h2 {
-  margin-top: 0;
-  margin-bottom: .5em;
-  font-size: 30px;
-}
-main small {
-  display: block;
-}
+  small {
+    display: block;
+  }
 
-div.leaves {
-  width: 100%;
-  height: 70px;
-  margin-top: 28px;
-  border-bottom: 1px solid #b3b3b3;
-}
+  div.leaves {
+    width: 100%;
+    height: 70px;
+    margin-top: 28px;
+    border-bottom: 1px solid #b3b3b3;
 
-div.leaves section {
-  width: 180px;
-  margin-left: 20px;
-  height: 100%;
-  padding: 16px;
-  font-size: 0.85em;
-  text-align: center;
-  background: #c5c5c5;
-  color: #2d2d2d;
-  display: inline-block;
-}
+    section {
+      width: 180px;
+      margin-left: 20px;
+      height: 100%;
+      padding: 16px;
+      font-size: 0.85em;
+      text-align: center;
+      background: #c5c5c5;
+      color: #2d2d2d;
+      display: inline-block;
 
-div.leaves section:hover {
-  cursor: pointer;
-  background: #fff;
-}
+      &:hover {
+        cursor: pointer;
+        background: #fff;
+      }
+    }
 
-div.leaves .size {
-  font-size: 1.3em;
-  font-weight: bold;
-}
+    .size {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+  }
 
-section.graph .box {
-  padding: 10px;
-  float: left;
-  background: #fff;
-  color: #222;
-  margin: 20px 0 0 20px;
-  position: relative;
-  height: 60px;
-}
+  section.graph {
+    .noop {
+      width: 0;
+      height: 0;
+      display: none;
+    }
 
-section.graph .box.small {
-  height: 60px;
-}
+    .box {
+      padding: 10px;
+      float: left;
+      background: #fff;
+      color: #222;
+      margin: 20px 0 0 20px;
+      position: relative;
+      height: 60px;
 
-section.graph .box.medium {
-  height: 80px;
-}
+      &.small {
+        height: 60px;
+      }
 
-section.graph .box.large {
-  height: 100px;
-}
+      &.medium {
+        height: 80px;
+      }
 
-section.graph .box.env {
-  background: #a0a0a0;
-  color: #fff;
-}
+      &.large {
+        height: 100px;
+      }
 
-section.graph .box.cmd {
-  background: #17628A;
-  color: #fff;
-}
+      &.env {
+        background: #a0a0a0;
+        color: #fff;
+      }
 
-section.graph .box.add {
-  background: #5E913F;
-  color: #fff;
-}
+      &.cmd {
+        background: #17628A;
+        color: #fff;
+      }
 
-section.graph .box.curl {
-  background: #E8581E;
-  color: #fff;
-}
+      &.add {
+        background: #5E913F;
+        color: #fff;
+      }
 
-section.graph .box.empty {
-  background: transparent;
-  width: 180px;
-}
+      &.curl {
+        background: #E8581E;
+        color: #fff;
+      }
 
-section.graph .box > span {
-  display: block;
-  max-width: 120px;
-  margin: 0 auto;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  text-align: center;
-}
+      &.empty {
+        background: transparent;
+        width: 180px;
+      }
 
-section.graph .box span.size {
-  font-weight: bold;
-  font-size: 1.3em;
-  margin-top: 6px;
-}
+      & > span {
+        display: block;
+        max-width: 120px;
+        margin: 0 auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: center;
 
-section.graph .noop {
-  width: 0;
-  height: 0;
-  display: none;
-}
+        &.size {
+          font-weight: bold;
+          font-size: 1.3em;
+          margin-top: 6px;
+        }
+      }
+    }
+  }
 
-.layer {
-  text-align: center;
-  vertical-align: middle;
-  font-family: Consolas, Monaco, "Courier New", Courier, monospace;
-  background-color: #cccccc;
-  font-size: .75em;
-}
-p
-.google-visualization-orgchart-lineleft {
-  border-left-color: #8EC643;
-}
+  .layer {
+    text-align: center;
+    vertical-align: middle;
+    font-family: Consolas, Monaco, "Courier New", Courier, monospace;
+    background-color: #cccccc;
+    font-size: .75em;
+  }
 
-.google-visualization-orgchart-lineright {
-  border-right-color: #8EC643;
-}
+  /* Journal */
+  section.journal {
+    width: 100%;
+    min-height: 100px;
+    max-height: 150px;
+    overflow: auto;
+    background: #2d2d2d;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    padding: 20px;
+    font-size: 0.8em;
+    color: #a0a0a0;
 
-.google-visualization-orgchart-linetop {
-  border-top-color: #8EC643;
-}
-
-.google-visualization-orgchart-linebottom {
-  border-bottom-color: #8EC643;
-}
-
-.google-visualization-orgchart-nodesel {
-  border: none;
-  background: #8EC643;
-}
-
-.tags {
-  display: block;
-  font-weight: bold;
-  margin-top: 3px;
-}
-
-/* Journal */
-section.journal {
-  width: 100%;
-  min-height: 100px;
-  max-height: 150px;
-  overflow: auto;
-  background: #2d2d2d;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-  padding: 20px;
-  font-size: 0.8em;
-  color: #a0a0a0;
-}
-
-section.journal li {
-  margin: 5px 0;
-}
-
-section.journal li:first-child {
-  color: #fff;
+    li {
+      margin: 5px 0;
+      &:first-child {
+        color: #fff;
+      }
+    }
+  }
 }
 
 /* Footer */
@@ -427,18 +398,18 @@ footer {
   height: 30px;
   position: absolute;
   bottom: 0;
-}
 
-footer small {
-  font-size: 12px;
-  position: relative;
-  top: -30px;
-}
+  small {
+    font-size: 12px;
+    position: relative;
+    top: -30px;
+  }
 
-footer .logo {
-  height: 30px;
-  width: 170px;
-  display: inline-block;
-  background: url("../images/ctl_logo_base.svg") 0 20px no-repeat white;
-  background-size: 140px 30px;
+  .logo {
+    height: 30px;
+    width: 170px;
+    display: inline-block;
+    background: url("../images/ctl_logo_base.svg") 0 20px no-repeat white;
+    background-size: 140px 30px;
+  }
 }
