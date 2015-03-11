@@ -21,17 +21,17 @@ deployment:
   hub:
     branch: master
     commands:
-      - export IMAGE_LAYERS_API=http://8.22.8.236:8888 && grunt build
+      - grunt build
       - docker build -t centurylink/imagelayers-ui:qa .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:qa
-      - ./bin/deploy_qa.sh
+      - ssh root@$QA_SERVER_IP "./imagelayers_ui.sh"
   Production:
     branch: release
     commands:
-      - export IMAGE_LAYERS_API=http://x.x.x.x:xxxx && grunt build
+      - grunt build
       - docker build -t centurylink/imagelayers-ui:latest .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:latest
-      - ./bin/deploy_pro.sh
+      - ssh root@$PRO_SERVER_IP "./imagelayers_ui.sh"
 
