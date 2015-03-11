@@ -44,7 +44,7 @@ angular.module ('iLayers')
 
             $scope.tagList = [];
             for (var i=0; i < data.length; i++) {
-              $scope.tagList.push({ 'label': data[i], 'tag': data[i] });
+              $scope.tagList.push(data[i]);
             }
           });
         };

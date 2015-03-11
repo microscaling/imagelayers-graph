@@ -7,6 +7,7 @@
 <main>
     <section ng-repeat="item in searchList" mass-autocomplete>
         <div image-search data-model="item"></div>
+        <div class="dialog-remove-image" ng-click="removeImage($index)"></div>
     </section>
     <div class="plus-button" ng-click="addRow()">Add Another Row</div>
 </main>

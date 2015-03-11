@@ -18,11 +18,15 @@ angular.module('iLayers')
           return params.join(',');
         };
 
-        $scope.searchList = [];
+        $scope.searchList = [{
+            'name': '',
+            'tag': 'latest'
+        }];
 
         $scope.showSearch = function() {
           $scope.searchList = [];
           ngDialog.open({
+            closeByDocument: false,
             template: 'views/searchDialog.html',
             className: 'ngdialog-theme-layers',
             controller: 'SearchCtrl' });
@@ -41,7 +45,19 @@ angular.module('iLayers')
         };
 
         $scope.addImages = function() {
-          $location.search('images', self.buildQueryParams($scope.searchList));
-          ngDialog.closeAll();
+          var sanitizedList = [];
+
+          angular.forEach($scope.searchList, function(value) {
+            if (value.name !== '') {
+              this.push(value);
+            }
+          }, sanitizedList)
+
+          $location.search('images', self.buildQueryParams(sanitizedList));
+          $scope.closeDialog();
         };
+
+        $scope.removeImage = function(index) {
+          $scope.searchList.splice(index,1);
+        }
       }]);

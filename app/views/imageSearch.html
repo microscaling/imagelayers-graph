@@ -1,6 +1,6 @@
 <input type="text" class="image-name" ng-model="model.name" mass-autocomplete-item="autocomplete_options"></input>
 <div class="styled-select">
-   <select ng-options="opt as opt.label for opt in tagList" ng-model="model.tag"></select>
+   <select ng-options="label for label in tagList track by label" ng-model="model.tag"></select>
 </div>
 
 

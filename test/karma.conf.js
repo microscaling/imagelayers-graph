@@ -29,7 +29,7 @@ module.exports = function(config) {
       'bower_components/ngDialog/js/ngDialog.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      'app/lib/massautocomplete.js',
+      'app/lib/**/*.js',
       'app/scripts/config.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

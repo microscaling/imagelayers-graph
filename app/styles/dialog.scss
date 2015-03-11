@@ -1,3 +1,5 @@
+@import '_icons';
+
 .ngdialog,
 .ngdialog *,
 .ngdialog *:before,
@@ -238,11 +240,27 @@ body.ngdialog-open {
 
 .ngdialog.ngdialog-theme-layers input[type=text] {
   float: left;
+  outline: none;
+  margin-right: 20px;
 }
 
 .ngdialog.ngdialog-theme-layers .image-name {
   counter-increment: autocomplete;
   width: 438px;
+}
+
+.ngdialog.ngdialog-theme-layers .dialog-remove-image {
+  @include icon-grey;
+  @extend .icon-x-large;
+  width: 40px;
+  height: 38px;
+  float: left;
+  margin: 22px 0 0 20px;
+  cursor: pointer;
+
+  &:hover {
+    @include icon-red;
+  }
 }
 
 .ac-container {
@@ -302,17 +320,17 @@ body.ngdialog-open {
   height: 41px;
   margin-top: 10px;
   border: 1px solid #c5c5c5;
+  position: relative;
 
   select {
     background: transparent;
-    width: 208px;
-    padding: 8px;
-    font-size: 17px;
+    width: 190px;
+    margin: 10px 0 0 10px;
+    font-size: 15px;
+    font-style: italic;
     line-height: 1;
     border: 0;
     border-radius: 0;
     outline: none;
-
-    -webkit-appearance: none;
   }
 }

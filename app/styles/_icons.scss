@@ -1,0 +1,115 @@
+@import '_mixins';
+
+$icons: (
+  plus: 0,
+  minus: 1,
+  x: 2,
+  sprocket: 3,
+  arrowloop: 4,
+  checkmark: 5,
+  document: 6,
+  magnifying-glass: 7,
+  pencil: 8,
+  outbox: 9,
+  grid: 10,
+  envelope: 11,
+  list: 12,
+  folder: 13,
+  menu: 14,
+  house: 15,
+  star: 16,
+  thin-arrow-right: 17,
+  thick-arrow-right: 18,
+  magnifying-glass-plus: 19,
+  magnifying-glass-minus: 20,
+  comment-box: 21,
+  happy-face: 22,
+  sad-face: 23,
+  copy: 24,
+  twitter: 25,
+  linked-in: 26,
+  facebook: 27,
+  link: 28,
+  docker-blocks: 29,
+  disks: 30,
+  speedometer: 31,
+  thin-arrow-down: 32,
+  thick-arrow-down: 33,
+  thin-arrow-left: 34,
+  thick-arrow-left: 35,
+  thin-arrow-up: 36,
+  thick-arrow-up: 37,
+  github: 38
+);
+
+
+@mixin icon-base {
+  background-image: url('../images/icon_sprite.svg');
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 10px;
+  @include background-size(10px, 1000px);
+}
+
+@mixin icon-large {
+  width: 20px;
+  height: 20px;
+  @include background-size(20px, 2000px);
+}
+
+@mixin icon-medium {
+  width: 15px;
+  height: 15px;
+  @include background-size(15px, 1500px);
+}
+
+@mixin icon-grey {
+  background-image: url('../images/icon_sprite.svg');
+}
+
+@mixin icon-light-grey {
+  background-image: url('../images/icon_sprite_light_grey.svg');
+}
+
+@mixin icon-white {
+  background-image: url('../images/icon_sprite_white.svg');
+}
+
+@mixin icon-red {
+  background-image: url('../images/icon_sprite_red.svg');
+}
+
+@each $icon, $position in $icons {
+  .icon-#{$icon} {
+    @include icon-base;
+    background-position: 0 -#{($position * 20)}px;
+  }
+
+  .icon-#{$icon}-medium {
+    @include icon-base;
+    @include icon-medium;
+    background-position: 0 -#{($position * 30)}px;
+  }
+
+  .icon-#{$icon}-large {
+    @include icon-base;
+    @include icon-large;
+    background-position: 0 -#{($position * 40)}px;
+  }
+
+  .icon-#{$icon}-for-button {
+    position: relative;
+
+    &:after {
+      @extend .icon-#{$icon}-medium;
+      @include icon-white;
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      display: block;
+      height: 15px;
+      width: 15px;
+    }
+  }
+}
