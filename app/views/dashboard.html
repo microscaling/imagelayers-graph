@@ -8,6 +8,6 @@
 </section>
 <section class="journal" journal>
     <ul>
-        <li ng-repeat='command in commands'>{{ command }}</li>
+        <li ng-repeat='command in commands track by $index'>{{ command }}</li>
     </ul>
 </section>
