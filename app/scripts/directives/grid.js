@@ -18,6 +18,54 @@ angular.module('iLayers')
         graph: '='
       },
       controller: function($scope) {
+        var self = this;
+
+        self.classifyLayer = function(layer, count) {
+        var classes = ['box'],
+            sizeCls = constants.smallClass,
+            cmd = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
+
+          if (count === 0) {
+            return 'noop';
+          };
+
+          if (layer.Size > 20 * 1000) {
+            sizeCls = constants.mediumClass;
+          };
+
+          if (layer.Size > 100 * 1000) {
+            sizeCls = constants.largeClass;
+          };
+
+          classes.push(sizeCls);
+
+          if (cmd.lastIndexOf(' curl ') !== -1) {
+            classes.push('curl');
+          }
+
+          if (cmd.lastIndexOf(' ADD ') !== -1) {
+            classes.push('add');
+          }
+
+          if (cmd.lastIndexOf(' ENV ') !== -1) {
+            classes.push('env');
+          }
+
+          if (cmd.lastIndexOf(' apt-get') !== -1 || cmd.lastIndexOf(' cmd ') !== -1) {
+            classes.push('cmd');
+          }
+
+          return classes.join(' ');
+        };
+
+        self.findWidth = function(count) {
+          if (count === 0) {
+            return 0;
+          }
+          return count * constants.boxWidth + (count-1)*20;
+        };
+
+
         $scope.makeLeaves = function(grid) {
           var leaves = [];
 
@@ -31,47 +79,7 @@ angular.module('iLayers')
 
         $scope.unwrapGrid = function(grid) {
           var data = [],
-              map = grid.matrix.map,
-              findType = function(thing, count) {
-                var classes = ['box'],
-                    cmd = (thing.container_config === undefined) ? [] : (thing.container_config.Cmd !== null) ? thing.container_config.Cmd.join(' ') : '';
-
-                if (count === 0) {
-                  return 'noop';
-                }
-                if (thing.Size > 100 * 1000) {
-                  classes.push(constants.largeClass);
-                }
-                if (thing.Size > 20 * 1000) {
-                   classes.push(constants.mediumClass);
-                } else {
-                   classes.push(constants.smallClass);
-                }
-
-                if (cmd.lastIndexOf(' curl ') !== -1) {
-                  classes.push('curl');
-                }
-
-                if (cmd.lastIndexOf(' ADD ') !== -1) {
-                  classes.push('add');
-                }
-
-                if (cmd.lastIndexOf(' ENV ') !== -1) {
-                  classes.push('env');
-                }
-
-                if (cmd.lastIndexOf(' apt-get') !== -1 || cmd.lastIndexOf(' cmd ') !== -1) {
-                  classes.push('cmd');
-                }
-
-                return classes.join(' ');
-              },
-              findWidth = function(count) {
-                if (count === 0) {
-                  return 0;
-                }
-                return count * constants.boxWidth + (count-1)*20;
-              };
+              map = grid.matrix.map;
 
           for (var row=0; row < grid.rows; row++) {
             for (var col=0; col < grid.cols; col++) {
@@ -83,8 +91,8 @@ angular.module('iLayers')
                 grid.matrix.inventory[layer.id].count = 0;
               }
 
-              data.push({ 'type': findType(layer, count),
-                          'width':  findWidth(count),
+              data.push({ 'type': self.classifyLayer(layer, count),
+                          'width':  self.findWidth(count),
                           'layer': layer });
             }
           }

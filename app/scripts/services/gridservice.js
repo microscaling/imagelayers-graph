@@ -7,12 +7,11 @@ angular.module('iLayers')
       var inventory = {},
           matrix = {};
 
-      var findLongest = function(images) {
-        var max = 0;
-        for (var i=0; i < images.length; i++) {
-          max = Math.max(max, images[i].layers.length);
+      var findLongest = function(sortedImages) {
+        if (sortedImages.length === 0) {
+          return 0;
         }
-        return max;
+        return sortedImages[0].layers.length;
       };
 
       var zeroMatrix = function(rows, cols) {
@@ -55,15 +54,18 @@ angular.module('iLayers')
           return 0;
         };
 
-        return images.sort(compare);
+        if (images.length !== 0) {
+          return images.sort(compare);
+        } else {
+          return images;
+        };
       };
 
-      var buildMatrix = function(images) {
-        var long = findLongest(images),
-            sortedImages = sortImages(images);
+      var buildMatrix = function(sortedImages) {
+        var long = findLongest(sortedImages);
 
         inventory = {};
-        matrix = zeroMatrix(long, images.length);
+        matrix = zeroMatrix(long, sortedImages.length);
 
         for (var i=0; i < sortedImages.length; i++) {
           for (var j=0; j < sortedImages[i].layers.length; j++) {
@@ -87,13 +89,12 @@ angular.module('iLayers')
 
       return {
         buildGrid: function(images) {
-          var grid = {
-            rows: findLongest(images),
+          var sortedImages = sortImages(images);
+          return {
+            rows: findLongest(sortedImages),
             cols: images.length,
-            matrix: buildMatrix(images)
-          };
-
-          return grid;
+            matrix: buildMatrix(sortedImages)
+          }
         },
 
         inventory: function(id) {
