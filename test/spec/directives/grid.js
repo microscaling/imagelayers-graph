@@ -6,9 +6,9 @@ describe('Directive: grid', function () {
   // Load the templates
   beforeEach(module('views/grid.html'));
 
-var directive, scope, controller, layer, commandService;
+var directive, scope, controller, layer, commandService, gridService;
 
-  beforeEach(inject(function ($compile, $rootScope, _commandService_) {
+  beforeEach(inject(function ($compile, $rootScope, _commandService_, _gridService_) {
     var elem = angular.element("<section grid graph='graph'></section>");
     scope = $rootScope.$new();
     scope.graph = [];
@@ -17,6 +17,7 @@ var directive, scope, controller, layer, commandService;
     controller = elem.controller('grid');
     layer = { Size: 0, container_config: { Cmd: [] } };
     commandService = _commandService_;
+    gridService = _gridService_;
   }));
 
   describe('classifyLayer', function() {
@@ -64,23 +65,11 @@ var directive, scope, controller, layer, commandService;
     });
   });
 
-  describe('$scope.makeLeaves', function() {
-    it('creates an array of repo items', function() {
-      var data = { cols: 1, matrix: { map: [[{layer: { id: 'foo' } }]],
-                                      inventory: {'foo': {image: { repo: 'test' } } } } },
-          res = directive.isolateScope().makeLeaves(data);
-
-
-      expect(res.length).toEqual(1);
-      expect(res[0]).toEqual('test');
-    });
-  });
-
   describe('$scope.unwrapGrid', function() {
     it('creates an array from matrix data', function() {
       var data = { cols: 1, rows: 1, matrix: { map: [[{layer: { id: 'foo' } }]],
                                       inventory: {'foo': {image: { repo: 'test' } }, count: 1 } } },
-          res = directive.isolateScope().makeLeaves(data);
+          res = gridService.findLeaves(data);
 
       expect(res.length).toEqual(1);
     });

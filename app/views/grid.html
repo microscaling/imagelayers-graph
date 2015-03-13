@@ -1,5 +1,5 @@
 <div class="leaves" ng-show="leaves.length > 0">
-    <section ng-repeat="repo in leaves track by $index">
+    <section ng-repeat="repo in leaves | byLeaf:filters.image">
         <div>{{ repo.name }}:{{ repo.tag }}</div>
         <div class="size" ng-bind-html="repo.size | size "></div>
     </section>

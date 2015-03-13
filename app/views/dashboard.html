@@ -2,9 +2,9 @@
 <section class="search" ng-controller="SearchCtrl as search">
   <h3>Docker Images</h3>
     <div class="plus-button" ng-click="showSearch()">Add Images</div>
-  <input type='text' placeholder='Filter by Layer...' >
+  <input type='text' ng-model="filters.image" placeholder='Filter by Layer...' >
 </section>
-<section class="graph" data-graph="graph" grid>
+<section class="graph" grid>
 </section>
 <section class="journal" journal>
     <ul>

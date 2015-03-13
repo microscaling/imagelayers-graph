@@ -39,6 +39,10 @@ angular.module('iLayers')
         // public
         $scope.graph = [];
 
+        $scope.filters =  {
+          'image': ''
+        };
+
         // Load data from RouteParams
         self.searchImages($routeParams);
     }]);

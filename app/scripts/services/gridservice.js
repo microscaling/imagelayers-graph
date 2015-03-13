@@ -103,6 +103,19 @@ angular.module('iLayers')
 
         matrix: function() {
           return matrix;
+        },
+
+        findLeaves: function(grid) {
+          var leaves = [];
+
+          for (var c=0; c < grid.cols; c++) {
+            var id = grid.matrix.map[c][0].layer.id,
+                repo = grid.matrix.inventory[id].image.repo;
+            repo.identity = repo.name + '::' + repo.tag;
+            leaves.push(repo);
+          }
+
+          return leaves;
         }
       };
   }]);
