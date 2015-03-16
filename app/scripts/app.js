@@ -6,6 +6,7 @@ angular
     'ngAnimate',
     'ngDialog',
     'MassAutoComplete',
+    'luegg.directives',
     'config'
   ])
   .config(['$httpProvider', '$locationProvider', '$routeProvider',

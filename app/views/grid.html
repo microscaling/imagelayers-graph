@@ -5,10 +5,10 @@
     </section>
 </div>
 <div class="matrix">
-  <div ng-repeat="box in grid" class="repeat-animation" ng-mouseenter="highlightCommand(box.layer.id)" ng-switch on="box.layer.id">
+  <div ng-repeat="box in grid" class="repeat-animation"  ng-switch on="box.layer.id">
 
     <div class="box empty" ng-switch-when="empty"></div>
-    <div ng-switch-default style="width: {{ box.width }}px" ng-class="box.type">
+    <div ng-switch-default style="width: {{ box.width }}px" ng-class="box.type" ng-mouseenter="highlightCommand(box.layer.id)">
         <span class="id">
           {{ box.layer.id }}
         </span>

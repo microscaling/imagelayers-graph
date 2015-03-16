@@ -14,7 +14,7 @@ describe('Command Service', function() {
     it('should broadcast "command-change" event with commands', function() {
       service.highlight([{container_config: { Cmd: ['one', 'two']}}]);
       expect(rootScope.$broadcast)
-        .toHaveBeenCalledWith('command-change', {'commands': ['one two']});
+        .toHaveBeenCalledWith('command-change', {'commands': ['RUN two']});
     });
   });
 
