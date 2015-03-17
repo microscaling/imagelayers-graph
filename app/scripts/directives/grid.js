@@ -5,9 +5,6 @@ angular.module('iLayers')
     var constants = {
       colWidth: 210,
       boxWidth: 180,
-      smallClass: 'small',
-      mediumClass: 'medium',
-      largeClass: 'large'
     };
 
     return {
@@ -25,16 +22,6 @@ angular.module('iLayers')
           if (count === 0) {
             return 'noop';
           }
-
-          if (layer.Size > 20 * 1000) {
-            sizeCls = constants.mediumClass;
-          }
-
-          if (layer.Size > 100 * 1000) {
-            sizeCls = constants.largeClass;
-          }
-
-          classes.push(sizeCls);
 
           if (cmd.lastIndexOf(' curl ') !== -1) {
             classes.push('curl');
@@ -62,6 +49,11 @@ angular.module('iLayers')
           return count * constants.boxWidth + (count-1)*20;
         };
 
+        self.addDisplayProperties = function(layer) {
+          layer.displayId = layer.id.substr(0, 11);
+          return layer;
+        };
+
         $scope.unwrapGrid = function(grid) {
           var data = [],
               map = [];
@@ -82,7 +74,7 @@ angular.module('iLayers')
 
                 data.push({ 'type': self.classifyLayer(layer, count),
                             'width':  self.findWidth(count),
-                            'layer': layer });
+                            'layer': self.addDisplayProperties(layer) });
               }
             }
           };

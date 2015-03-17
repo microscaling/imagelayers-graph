@@ -323,11 +323,7 @@ main {
 
       & > span {
         display: block;
-        max-width: 120px;
         margin: 0 auto;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
         text-align: center;
 
         &.size {
