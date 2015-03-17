@@ -26,28 +26,17 @@ var directive, scope, controller, layer, commandService, gridService;
       expect(classes).toEqual('noop');
     });
 
-    it('should return size classes', function() {
-      // small
-      expect(controller.classifyLayer(layer, 1)).toEqual('box small');
-      // medium
-      layer.Size = 21 * 1000;
-      expect(controller.classifyLayer(layer, 1)).toEqual('box medium');
-      // large
-      layer.Size = 101 * 1000;
-      expect(controller.classifyLayer(layer, 1)).toEqual('box large');
-    });
-
     it('should return command classes', function() {
       layer.container_config.Cmd = [' curl '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box small curl');
+      expect(controller.classifyLayer(layer, 1)).toEqual('box curl');
       layer.container_config.Cmd = [' ADD '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box small add');
+      expect(controller.classifyLayer(layer, 1)).toEqual('box add');
       layer.container_config.Cmd = [' ENV '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box small env');
+      expect(controller.classifyLayer(layer, 1)).toEqual('box env');
       layer.container_config.Cmd = [' apt-get '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box small cmd');
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cmd');
       layer.container_config.Cmd = [' cmd '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box small cmd');
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cmd');
     });
   });
 

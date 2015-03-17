@@ -4,7 +4,7 @@ angular.module('iLayers')
   .directive('grid', ['$timeout', 'commandService', 'gridService', function($timeout, commandService, gridService) {
     var constants = {
       colWidth: 210,
-      boxWidth: 180,
+      boxWidth: 180
     };
 
     return {
