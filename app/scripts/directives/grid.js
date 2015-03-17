@@ -24,15 +24,15 @@ angular.module('iLayers')
 
           if (count === 0) {
             return 'noop';
-          };
+          }
 
           if (layer.Size > 20 * 1000) {
             sizeCls = constants.mediumClass;
-          };
+          }
 
           if (layer.Size > 100 * 1000) {
             sizeCls = constants.largeClass;
-          };
+          }
 
           classes.push(sizeCls);
 

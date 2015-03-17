@@ -41,6 +41,18 @@ header {
     padding: 0;
     margin: 0;
     float: left;
+
+    a {
+      overflow: hidden;
+      white-space: nowrap;
+      text-indent: -9999px;
+      color: transparent;
+      background-size: 100%;
+      width: 100%;
+      display: block;
+      height: 54px;
+      margin: 0 auto;
+    }
   }
 
   h1.logo {
@@ -52,22 +64,8 @@ header {
     }
 
     a {
-      background: url('../images/logo_image_layers.svg') no-repeat center center;
-      background-size: 100%;
+      background: url('../images/logo_image_layers.svg') no-repeat 10px center;
     }
-  }
-
-  .logo a {
-    overflow: hidden;
-    white-space: nowrap;
-    text-indent: -9999px;
-    color: transparent;
-    background: url('../images/logo_image_layers.svg') no-repeat center center;
-    background-size: 100%;
-    width: 100%;
-    display: block;
-    height: 54px;
-    margin: 0 auto;
   }
 
   cite.logo {
@@ -106,29 +104,6 @@ header {
           transition: background-color 0.25s ease;
         }
       }
-    }
-  }
-}
-
-#social-icons {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 58px;
-  padding: 20px 10px 20px 0px;
-
-  a {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-
-    &.github {
-      background-image: url("../images/logo_github_white.svg");
-      margin-right: 2px;
-    }
-
-    &.twitter {
-      background-image: url("../images/logo_twitter_white.svg");
     }
   }
 }
@@ -311,19 +286,14 @@ main {
       color: #222;
       margin: 20px 10px 0px 10px;
       position: relative;
-      height: 60px;
       font-size: 0.9em;
 
-      &.small {
-        height: 60px;
-      }
-
       &.medium {
-        height: 80px;
+        padding: 20px 10px;
       }
 
       &.large {
-        height: 100px;
+        padding: 40px 10px;
       }
 
       &.env {

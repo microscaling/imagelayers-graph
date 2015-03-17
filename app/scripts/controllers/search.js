@@ -51,7 +51,7 @@ angular.module('iLayers')
             if (value.name !== '') {
               this.push(value);
             }
-          }, sanitizedList)
+          }, sanitizedList);
 
           $location.search('images', self.buildQueryParams(sanitizedList));
           $scope.closeDialog();

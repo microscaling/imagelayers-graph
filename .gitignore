@@ -11,3 +11,4 @@ config.js
 .travis.yml
 .yo-rc.json
 .gitattributes
+.idea/
