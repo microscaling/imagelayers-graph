@@ -51,6 +51,7 @@ angular.module ('iLayers')
           'on_attach': attached,
           'on_select': clearError
         };
+
         scope.$watch('model', function(newValue, oldValue) {
           clearError();
 

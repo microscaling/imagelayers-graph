@@ -81,10 +81,9 @@ describe('Service: gridService', function () {
 
   describe('findLeaves', function() {
     it('creates an array of repo items', function() {
-      var data = { cols: 1, matrix: { map: [[{layer: { id: 'foo' } }]],
+      var data = { cols: 1,rows: 1,  matrix: { map: [[{layer: { id: 'foo' } }]],
                                       inventory: {'foo': {image: { repo: 'test' } } } } },
           res = gridService.findLeaves(data);
-
 
       expect(res.length).toEqual(1);
     });
