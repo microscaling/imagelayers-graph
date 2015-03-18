@@ -53,7 +53,7 @@ angular.module ('iLayers')
         };
         scope.$watch('model', function(newValue, oldValue) {
           clearError();
-          console.log('watching');
+
           if (newValue !== undefined && newValue.name !== '') {
             registryService.fetchTags(newValue.name).then(function(response) {
               scope.tagList = [];
@@ -65,7 +65,6 @@ angular.module ('iLayers')
                   clearError();
                 }
               } else {
-                 console.log('not found');
                  element.find('.image-name').addClass('not-found');
               }
               element.find('.image-name').removeClass('searching');

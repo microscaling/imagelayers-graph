@@ -27,7 +27,7 @@ angular.module('iLayers')
             classes.push('curl');
           }
 
-          if (cmd.lastIndexOf(' ADD ') !== -1) {
+          if (cmd.lastIndexOf(' install') !== -1 || cmd.lastIndexOf(' ADD ') !== -1) {
             classes.push('add');
           }
 
@@ -35,7 +35,7 @@ angular.module('iLayers')
             classes.push('env');
           }
 
-          if (cmd.lastIndexOf(' apt-get') !== -1 || cmd.lastIndexOf(' cmd ') !== -1) {
+          if ( cmd.lastIndexOf(' CMD ') !== -1) {
             classes.push('cmd');
           }
 

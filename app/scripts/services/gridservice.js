@@ -45,7 +45,8 @@ angular.module('iLayers')
 
       var sortImages = function(images) {
         var compare = function(a,b) {
-          if (a.layers.length < b.layers.length) {
+
+        if (a.layers.length < b.layers.length) {
              return 1;
           }
           if (a.layers.length > b.layers.length) {
@@ -110,9 +111,12 @@ angular.module('iLayers')
 
           for (var c=0; c < grid.cols; c++) {
             var id = grid.matrix.map[c][0].layer.id,
-                repo = grid.matrix.inventory[id].image.repo;
-            repo.identity = repo.name + '::' + repo.tag;
-            leaves.push(repo);
+                repo = grid.matrix.inventory[id].image.repo,
+                leaf = {};
+
+            angular.copy(repo, leaf);
+            leaf.identity = repo.name + '::' + (repo.tag + Math.floor(Math.random() *9000)),
+            leaves.push(leaf);
           }
 
           return leaves;

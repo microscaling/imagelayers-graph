@@ -32,23 +32,23 @@ describe('Metrics Directive', function() {
       ]
     });
 
-    it('should call sequential with the total layer count', function() {
-      directive.isolateScope().calculateMetrics(layers);
-      expect(controller.sequential).toHaveBeenCalledWith('count', 0, 3, 600);
+    it('should call sequential with the total image count', function() {
+      directive.isolateScope().calculateMetrics(layers, 2);
+      expect(controller.sequential).toHaveBeenCalledWith('count', 0, 2, 600);
     });
 
     it('should call sequential with the total layer size', function() {
-      directive.isolateScope().calculateMetrics(layers);
+      directive.isolateScope().calculateMetrics(layers, 2);
       expect(controller.sequential).toHaveBeenCalledWith('size', 0, 1500, 520);
     });
 
     it('should call sequential with the layer average', function() {
-      directive.isolateScope().calculateMetrics(layers);
-      expect(controller.sequential).toHaveBeenCalledWith('ave', 0, 500, 520);
+      directive.isolateScope().calculateMetrics(layers, 2);
+      expect(controller.sequential).toHaveBeenCalledWith('ave', 0, 750, 520);
     });
 
     it('should call sequential with the largest layer size', function() {
-      directive.isolateScope().calculateMetrics(layers);
+      directive.isolateScope().calculateMetrics(layers, 2);
       expect(controller.sequential).toHaveBeenCalledWith('largest', 0, 1000, 520);
     });
   });

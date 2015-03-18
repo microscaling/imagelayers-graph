@@ -18,10 +18,9 @@ angular.module('iLayers')
           largest: 0
         };
 
-        $scope.calculateMetrics = function(layers) {
-          var count  = 0, size = 0, ave = 0, largest = 0;
+        $scope.calculateMetrics = function(layers, images) {
+          var count  = images, size = 0, ave = 0, largest = 0;
           for (var i=0; i < layers.length; i++) {
-            count += 1;
             size += layers[i].Size;
             ave = Math.floor(size / count);
             largest = Math.max(largest, layers[i].Size);
@@ -70,7 +69,7 @@ angular.module('iLayers')
               layers = layers.concat(scope.graph[i].layers);
           }
 
-          scope.calculateMetrics(layers);
+          scope.calculateMetrics(layers, scope.graph.length);
         });
       }
     };

@@ -87,7 +87,6 @@ describe('Service: gridService', function () {
 
 
       expect(res.length).toEqual(1);
-      expect(res[0]).toEqual('test');
     });
   });
 });
