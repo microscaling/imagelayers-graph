@@ -18,13 +18,36 @@ angular.module('iLayers')
           return params.join(',');
         };
 
-        $scope.searchList = [{
-            'name': '',
-            'tag': 'latest'
-        }];
+        self.populateSearch = function() {
+           var terms = $location.search(),
+               searchList = [];
+           if (terms.images) {
+               var images = terms.images.split(',');
+               angular.forEach(images, function(value, idx) {
+                 var parts = value.split(':'),
+                     tag = 'latest';
+                 if (parts.length === 2) {
+                    tag = parts[1];
+                 }
+                 searchList.push(self.makeImage(parts[0], tag));
+               });
+           } else {
+              searchList.push(self.makeImage('', 'latest'));
+           }
+
+           return searchList;
+        };
+
+        self.makeImage = function(name, tag) {
+             return {
+            'name': name,
+            'tag': tag
+          };
+        };
+
+        $scope.searchList = self.populateSearch();
 
         $scope.showSearch = function() {
-          $scope.searchList = [];
           ngDialog.open({
             closeByDocument: false,
             template: 'views/searchDialog.html',
@@ -33,11 +56,7 @@ angular.module('iLayers')
         };
 
         $scope.addRow = function() {
-          var item = {
-            'name': '',
-            'tag': 'latest'
-          };
-          $scope.searchList.push(item);
+          $scope.searchList.push(self.makeImage('', 'latest'));
         };
 
         $scope.closeDialog = function() {

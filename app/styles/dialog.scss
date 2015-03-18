@@ -242,6 +242,10 @@ body.ngdialog-open {
   float: left;
   outline: none;
   margin-right: 20px;
+
+  &.not-found {
+    color: red;
+  }
 }
 
 .ngdialog.ngdialog-theme-layers .image-name {

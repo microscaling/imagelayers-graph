@@ -10,13 +10,13 @@ describe('Directive: imageSearch', function () {
       controller,
       directive,
       registryService,
+      deferredTag,
       scope;
 
-  beforeEach(inject(function ($compile, $rootScope, _registryService_) {
+  beforeEach(inject(function ($q, $compile, $rootScope, _registryService_) {
     var rootScope = $rootScope.$new(),
         autoElem = autoElem = angular.element("<div mass-autocomplete><section image-search model='model'></section></div>");
 
-    rootScope.model = {'name': 'foo', 'tag': '1.0.0'};
     directive = $compile(autoElem)(rootScope);
     rootScope.$digest();
 
@@ -25,9 +25,15 @@ describe('Directive: imageSearch', function () {
     controller = element.controller('imageSearch');
 
     registryService = _registryService_;
+    deferredTag = $q.defer();
+    spyOn(registryService, 'fetchTags').and.returnValue(deferredTag.promise);
+    deferredTag.resolve({});
+
+    rootScope.model = {'name': 'foo', 'tag': '1.0.0'};
   }));
 
   it('should initialize tagList', function() {
+
     expect(scope.tagList.length).toEqual(0);
   });
 
@@ -43,32 +49,27 @@ describe('Directive: imageSearch', function () {
 
   describe('suggestImages', function() {
     beforeEach(inject(function($q) {
-      deferredSuccess = $q.defer();
+      var deferredSuccess = $q.defer();
       spyOn(registryService, 'search').and.returnValue(deferredSuccess.promise);
       deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
     }));
 
     it('should return empty array when term size < 3', function() {
-      var list = controller.suggestImages('me');
+      var list = scope.suggestImages('me');
       expect(list.length).toEqual(0);
     });
 
     it('calls registryService.search when term > 2', function() {
-      var list = controller.suggestImages('term');
+      var list = scope.suggestImages('term');
       expect(registryService.search).toHaveBeenCalledWith('term');
     });
   });
 
-  describe('selectImage', function() {
-    beforeEach(inject(function($q) {
-      deferredSuccess = $q.defer();
-      spyOn(registryService, 'fetchTags').and.returnValue(deferredSuccess.promise);
-      deferredSuccess.resolve({ data: { 'foo': '123',  'bar': '456' } });
-    }));
-
-    it('calls registryService.fetchTags', function() {
-      var result = controller.selectImage({ value: 'foo' });
-      expect(registryService.fetchTags).toHaveBeenCalledWith('foo');
+  describe('$watch model', function() {
+    it('should fetchTags when model changes', function() {
+      scope.model = { name: 'blah' };
+      scope.$digest();
+      expect(registryService.fetchTags).toHaveBeenCalled();
     });
   });
 });

@@ -10,13 +10,20 @@ angular.module ('iLayers')
         model: '='
       },
       templateUrl: 'views/imageSearch.html',
-      controller: function($scope) {
-        var self = this,
-            constants = {
+      link: function(scope, element) {
+        var constants = {
               offset: 41
             };
 
-        self.suggestImages = function(term) {
+        var attached = function(element) {
+          $('.ac-container').css('top', (element[0].offsetTop + constants.offset) + 'px');
+        };
+
+        var clearError = function() {
+          element.find('.image-name').removeClass('not-found');
+        };
+
+        scope.suggestImages = function(term) {
           if (term.length > 2) {
             return registryService.search(term).then(function(response){
               var data = response.data.results,
@@ -34,30 +41,33 @@ angular.module ('iLayers')
 
         };
 
-        self.attached = function(element) {
-          $('.ac-container').css('top', (element[0].offsetTop + constants.offset) + 'px');
-        };
+        scope.tagList = [];
 
-        self.selectImage = function(selected) {
-          registryService.fetchTags(selected.value).then(function(response) {
-            var data = Object.keys(response.data);
-
-            $scope.tagList = [];
-            for (var i=0; i < data.length; i++) {
-              $scope.tagList.push(data[i]);
-            }
-          });
-        };
-
-        $scope.tagList = [];
-
-        $scope.autocomplete_options = {
-          'suggest': self.suggestImages,
+        scope.autocomplete_options = {
+          'suggest': scope.suggestImages,
           'on_error': console.log,
-          'on_attach': self.attached,
-          'on_select': self.selectImage
+          'on_attach': attached,
+          'on_select': clearError
         };
-
+        scope.$watch('model', function(newValue, oldValue) {
+          clearError();
+          console.log('watching');
+          if (newValue !== undefined && newValue.name !== '') {
+            registryService.fetchTags(newValue.name).then(function(response) {
+              scope.tagList = [];
+              if (response.data) {
+                var data = Object.keys(response.data);
+                for (var i=0; i < data.length; i++) {
+                  scope.tagList.push(data[i]);
+                  clearError();
+                }
+              } else {
+                 console.log('not found');
+                 element.find('.image-name').addClass('not-found');
+              }
+            });
+          }
+        }, true);
       }
     };
   }]);

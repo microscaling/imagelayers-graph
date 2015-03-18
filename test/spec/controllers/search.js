@@ -51,12 +51,6 @@ describe('Controller: SearchCtrl', function () {
   });
 
   describe('$scope.showSearch', function() {
-    it('should reset the searchList to empty array', function() {
-      scope.searchList = ['one', 'two'];
-      scope.showSearch();
-      expect(scope.searchList.length).toEqual(0);
-    });
-
     it('should open dialog', function() {
       var options = {
         closeByDocument: false,
