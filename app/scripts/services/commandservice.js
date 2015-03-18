@@ -17,9 +17,7 @@ angular.module('iLayers')
                   var cmd = command[command.length -1];
                   if (startsWith(cmd, nop)) {
                     cmd = cmd.split(nop)[1]
-                    cmd = cmd.replace('map[', '')
-                             .replace('/tcp:{}', '')
-                             .replace(/[\[\]]/g, '');
+                    cmd = cmd.replace(/(map|\/tcp:{}|\[|\]'?|\))/g, '');
 
                     cmds.unshift(cmd);
                   } else {
