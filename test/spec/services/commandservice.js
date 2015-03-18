@@ -16,6 +16,18 @@ describe('Command Service', function() {
       expect(rootScope.$broadcast)
         .toHaveBeenCalledWith('command-change', {'commands': ['RUN two']});
     });
+
+    it('should transform port mappings', function() {
+      service.highlight([{container_config: { Cmd: ['run', '#(nop) Expose map[9090/tcp:{}]']}}]);
+      expect(rootScope.$broadcast)
+        .toHaveBeenCalledWith('command-change', {'commands': ['Expose 9090']});
+    });
+
+    it('should transform command brackets', function() {
+      service.highlight([{container_config: { Cmd: ['run', '#(nop) cmd [testing]']}}]);
+      expect(rootScope.$broadcast)
+        .toHaveBeenCalledWith('command-change', {'commands': ['cmd testing']});
+    });
   });
 
   describe('clear', function() {

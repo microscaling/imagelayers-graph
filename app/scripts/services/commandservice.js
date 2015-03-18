@@ -16,7 +16,12 @@ angular.module('iLayers')
                 if (command !== null) {
                   var cmd = command[command.length -1];
                   if (startsWith(cmd, nop)) {
-                    cmds.unshift(cmd.split(nop)[1]);
+                    cmd = cmd.split(nop)[1]
+                    cmd = cmd.replace('map[', '')
+                             .replace('/tcp:{}', '')
+                             .replace(/[\[\]]/g, '');
+
+                    cmds.unshift(cmd);
                   } else {
                     cmds.unshift("RUN " + cmd);
                   }
