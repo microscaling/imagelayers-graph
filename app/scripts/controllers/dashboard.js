@@ -4,6 +4,7 @@ angular.module('iLayers')
   .controller('DashboardCtrl', ['$scope', '$routeParams', 'registryService',
       function($scope, $routeParams, registryService) {
         var self = this;
+        $scope.loading = undefined;
 
         //private
         self.buildTerms = function(data) {
@@ -26,12 +27,18 @@ angular.module('iLayers')
         };
 
         self.searchImages = function(route) {
+
           if (route.images !== undefined) {
+            $scope.loading = true;
+
             var searchTerms = self.buildTerms(route.images);
 
             // Load Data
             registryService.inspect(searchTerms).then(function(response){
               $scope.graph = response.data;
+              $scope.loading = false;
+            },function(){
+              console.log("Error loading ImageLayers");
             });
           }
         };

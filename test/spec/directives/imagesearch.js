@@ -15,7 +15,7 @@ describe('Directive: imageSearch', function () {
 
   beforeEach(inject(function ($q, $compile, $rootScope, _registryService_) {
     var rootScope = $rootScope.$new(),
-        autoElem = autoElem = angular.element("<div mass-autocomplete><section image-search model='model'></section></div>");
+       autoElem = angular.element("<div mass-autocomplete><section image-search model='model'></section></div>");
 
     directive = $compile(autoElem)(rootScope);
     rootScope.$digest();

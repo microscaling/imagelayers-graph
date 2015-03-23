@@ -1,5 +1,4 @@
 .repeat-animation.ng-enter-stagger,
-.repeat-animation.ng-leave-stagger,
 .repeat-animation.ng-move-stagger {
   /* 200ms will be applied between each sucessive enter operation */
   -webkit-transition-delay:0.025s;
@@ -129,4 +128,56 @@
     -ms-transform: translateY(-40px);
     transform: translateY(-40px);
   }
+}
+
+//loading indicator
+svg {
+  display: block;
+  width: 200px;
+  margin: 40px auto 0;
+}
+
+@keyframes stack {
+  0% {
+    transform: translateY(0px);
+    opacity: .75;
+  }
+  25% {
+    transform: translateY(20px);
+    opacity: .9;
+  }
+  100% {
+    opacity: .75;
+  }
+}
+
+@-webkit-keyframes stack {
+  0% {
+    transform: translateY(0px);
+    opacity: .75;
+  }
+  25% {
+    transform: translateY(20px);
+    opacity: .9;
+  }
+  100% {
+    opacity: .75;
+  }
+}
+
+.red {
+  animation: stack 2s linear infinite;
+  -webkit-animation: stack 2s linear infinite;
+}
+.blue {
+  animation: stack 2s linear 500ms infinite;
+  -webkit-animation: stack 2s linear 500ms infinite;
+}
+.orange {
+  animation: stack 2s linear 1000ms infinite;
+  -webkit-animation: stack 2s linear 1000ms infinite;
+}
+.green {
+  animation: stack 2s linear 1500ms infinite;
+  -webkit-animation: stack 2s linear 1500ms infinite;
 }

@@ -1,3 +1,14 @@
+<div class="loading" ng-show="loading">
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 160 160" enable-background="new 0 0 160 160" xml:space="preserve">
+    <polygon class="layer red" opacity="0.75" fill="#BE1E2D" points="149.3,111.3 79.4,139.1 9.5,111.3 79.4,83.5 "/>
+    <polygon class="layer blue" opacity="0.75" fill="#1C75BC" points="149.3,89.9 79.4,117.7 9.5,89.9 79.4,62.2 "/>
+    <polygon class="layer orange" opacity="0.75" fill="#F15A29" points="149.3,68.6 79.4,96.4 9.5,68.6 79.4,40.8 "/>
+    <polygon class="layer green" opacity="0.75" fill="#39B54A" points="149.3,47.3 79.4,75.1 9.5,47.3 79.4,19.5 "/>
+  </svg>
+</div>
+
+
 <div class="leaves" ng-show="leaves.length > 0">
     <section ng-repeat="repo in leaves | byLeaf:filters.image">
         <div>{{ repo.name }}:{{ repo.tag }}</div>

@@ -51,17 +51,48 @@ describe('DashboardCtrl', function() {
     beforeEach(inject(function($q) {
       deferredSuccess = $q.defer();
       spyOn(registryService, 'inspect').and.returnValue(deferredSuccess.promise);
-      deferredSuccess.resolve({data: {'repo': {}, 'layers': []}});
+      //deferredSuccess.resolve({data: {'repo': {}, 'layers': []}});
     }));
 
     it('should do nothing when no images provided', function() {
       ctrl.searchImages({});
       expect(registryService.inspect).not.toHaveBeenCalled();
+      deferredSuccess.resolve({data: {'repo': {}, 'layers': []}});
     });
 
     it('should call registryService with provided images', function() {
       ctrl.searchImages({'images': 'foo,bar:1.0.0'});
+      deferredSuccess.resolve({data: {'repo': {}, 'layers': []}});
       expect(registryService.inspect).toHaveBeenCalledWith([{"name":"foo","tag":"latest"}, {"name":"bar","tag":"1.0.0"}]);
+    });
+
+    it('should set loading to true while calling registryService', function() {
+      ctrl.searchImages({'images': 'foo,bar:1.0.0'});
+      expect(scope.loading).toEqual(true);
+    });
+
+    it('should set loading to false after registry inspect success', function() {
+      ctrl.searchImages({'images': 'foo,bar:1.0.0'});
+      expect(scope.loading).toEqual(true);
+
+      deferredSuccess.resolve({data: {'repo': {}, 'layers': []}});
+      expect(registryService.inspect).toHaveBeenCalledWith([{"name":"foo","tag":"latest"}, {"name":"bar","tag":"1.0.0"}]);
+
+      deferredSuccess.promise.then(function(){
+        expect(scope.loading).toEqual(false);
+      });
+    });
+
+    it('should not change the value of loading on error', function() {
+      ctrl.searchImages({'images': 'foo,bar:1.0.0'});
+      expect(scope.loading).toEqual(true);
+
+      deferredSuccess.reject({data: {'repo': {}, 'layers': []}});
+      expect(registryService.inspect).toHaveBeenCalledWith([{"name":"foo","tag":"latest"}, {"name":"bar","tag":"1.0.0"}]);
+
+      deferredSuccess.promise.then(function(){},function(){
+        expect(scope.loading).toEqual(true);
+      });
     });
   });
 });
