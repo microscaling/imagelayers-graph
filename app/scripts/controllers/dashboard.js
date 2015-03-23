@@ -4,7 +4,7 @@ angular.module('iLayers')
   .controller('DashboardCtrl', ['$scope', '$routeParams', 'registryService',
       function($scope, $routeParams, registryService) {
         var self = this;
-        $scope.loading = undefined;
+        $scope.loading = false;
 
         //private
         self.buildTerms = function(data) {
@@ -30,7 +30,6 @@ angular.module('iLayers')
 
           if (route.images !== undefined) {
             $scope.loading = true;
-
             var searchTerms = self.buildTerms(route.images);
 
             // Load Data

@@ -25,6 +25,8 @@ angular.module ('iLayers')
 
         scope.suggestImages = function(term) {
           if (term.length > 2) {
+            element.find('.image-name').addClass('searching');
+
             return registryService.search(term).then(function(response){
               var data = response.data.results,
                   list = [];
@@ -55,6 +57,7 @@ angular.module ('iLayers')
           if (newValue !== undefined && newValue.name !== '') {
             registryService.fetchTags(newValue.name).then(function(response) {
               scope.tagList = [];
+
               if (response.data) {
                 var data = Object.keys(response.data);
                 for (var i=0; i < data.length; i++) {
@@ -65,6 +68,7 @@ angular.module ('iLayers')
                  console.log('not found');
                  element.find('.image-name').addClass('not-found');
               }
+              element.find('.image-name').removeClass('searching');
             });
           }
         }, true);

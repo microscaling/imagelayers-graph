@@ -242,9 +242,13 @@ body.ngdialog-open {
   float: left;
   outline: none;
   margin-right: 20px;
+  text-indent: 1px;
 
   &.not-found {
     color: red;
+  }
+  &.searching {
+    background: url('../images/loading.gif') no-repeat 98% center;
   }
 }
 
@@ -336,5 +340,6 @@ body.ngdialog-open {
     border: 0;
     border-radius: 0;
     outline: none;
+    text-indent: 1px;
   }
 }
