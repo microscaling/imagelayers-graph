@@ -165,6 +165,7 @@ body.ngdialog-open {
 .ngdialog.ngdialog-theme-layers main {
   padding: 20px;
   overflow: visible;
+  position: static;
 }
 
 .ngdialog.ngdialog-theme-layers main section {

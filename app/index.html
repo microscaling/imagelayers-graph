@@ -28,16 +28,8 @@
   </head>
 
   <body ng-app="iLayers">
-  <header>
-    <h1 class='logo'>
-      <a href="" title="Home">ImageLayers</a>
-    </h1>
-    <cite class='logo'>
-      <a href="" title="CenturyLink">CenturyLink</a>
-    </cite>
-  </header>
-  <main ng-view>
-  </main>
+  <div ng-view>
+  </div>
 
     <!-- build:js({.,app}) scripts/vendor.js -->
     <!-- bower:js -->
@@ -67,6 +59,7 @@
       <script src="scripts/services/commandservice.js"></script>
       <script src="scripts/services/gridservice.js"></script>
       <script src="scripts/services/registryservice.js"></script>
+      <script src="scripts/directives/sticky.js"></script>
       <!-- endbuild -->
 
 </body>

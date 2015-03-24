@@ -1,13 +1,34 @@
-<section class="metrics" metrics></section>
-<section class="search" ng-controller="SearchCtrl as search">
-  <h3>Docker Images</h3>
-    <div class="plus-button" ng-click="showSearch()">Add Images</div>
-  <input type='text' ng-model="filters.image" placeholder='Filter by Layer...' >
-</section>
-<section class="graph" grid>
-</section>
-<section class="journal" journal scroll-glue>
-    <ul>
-        <li ng-repeat='command in commands track by $index'>{{ command }}</li>
-    </ul>
-</section>
+<main>
+    <header>
+        <h1 class='logo'>
+            <a href="" title="Home">ImageLayers</a>
+        </h1>
+        <cite class='logo'>
+            <a href="" title="CenturyLink">CenturyLink</a>
+        </cite>
+    </header>
+    <section class="metrics" metrics></section>
+    <nav sticky offset='134'>
+        <section class="search" ng-controller="SearchCtrl as search">
+          <h3>Docker Images</h3>
+            <div class="plus-button" ng-click="showSearch()">Add Images</div>
+          <input type='text' ng-model="filters.image" placeholder='Filter by Layer...' >
+        </section>
+        <div class="leaves" ng-show="leaves.length > 0">
+            <section ng-repeat="repo in leaves">
+                <div>{{ repo.name }}:{{ repo.tag }}</div>
+                <div class="size" ng-bind-html="repo.size | size "></div>
+                <div class="count">Layers: {{ repo.count }}</div>
+            </section>
+        </div>
+    </nav>
+    <section class="graph" grid>
+    </section>
+</main>
+<footer>
+    <section class="journal" journal scroll-glue>
+        <ul>
+            <li ng-repeat='command in commands track by $index'>{{ command }}</li>
+        </ul>
+    </section>
+</footer>

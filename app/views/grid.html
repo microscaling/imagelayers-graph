@@ -8,14 +8,6 @@
   </svg>
 </div>
 
-
-<div class="leaves" ng-show="leaves.length > 0">
-    <section ng-repeat="repo in leaves">
-        <div>{{ repo.name }}:{{ repo.tag }}</div>
-        <div class="size" ng-bind-html="repo.size | size "></div>
-        <div class="count">Layers: {{ repo.count }}</div>
-    </section>
-</div>
 <div class="matrix">
   <div ng-repeat="box in grid" class="repeat-animation"  ng-switch on="box.layer.id">
 
