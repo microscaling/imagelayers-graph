@@ -50,6 +50,17 @@ describe('Controller: SearchCtrl', function () {
     });
   });
 
+  describe('populateSearch', function() {
+    beforeEach(function() {
+      location.search('images', 'foo:latest');
+    });
+    it('should create list from url search string', function() {
+      var result = SearchCtrl.populateSearch();
+      expect(result[0].name).toEqual('foo');
+      expect(result[0].tag).toEqual('latest');
+    });
+  });
+
   describe('$scope.showSearch', function() {
     it('should open dialog', function() {
       var options = {
@@ -89,10 +100,10 @@ describe('Controller: SearchCtrl', function () {
     });
 
     it('should remove empty image rows from list', function() {
-      spyOn(SearchCtrl, 'buildQueryParams');
+      spyOn(location, 'url');
       scope.searchList = [{'name': '', 'tag': ''}];
       scope.addImages();
-      expect(SearchCtrl.buildQueryParams).toHaveBeenCalledWith([]);
+      expect(location.url).toHaveBeenCalled();
     });
 
     it('should change the search string', function() {

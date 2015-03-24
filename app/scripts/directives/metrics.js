@@ -6,35 +6,17 @@ angular.module('iLayers')
     return {
       templateUrl: 'views/metrics.html',
       restrict: 'A',
-      scope: {
-        graph: '='
-      },
       controller: function($scope) {
-        var self = this;
         $scope.metrics = {
           count: 0,
           size: 0,
           ave: 0,
           largest: 0
         };
+      },
+      link: function(scope) {
 
-        $scope.calculateMetrics = function(layers, images) {
-          var count  = images, size = 0, ave = 0, largest = 0;
-          for (var i=0; i < layers.length; i++) {
-            size += layers[i].Size;
-            ave = Math.floor(size / count);
-            largest = Math.max(largest, layers[i].Size);
-          }
-
-          // animate the numbers
-          self.sequential('count', 0, count, 600);
-          self.sequential('size', 0, size, 520);
-          self.sequential('ave', 0, ave, 520);
-          self.sequential('largest', 0, largest, 520);
-        };
-
-        // public
-        self.sequential = function(key, start, end, duration) {
+        scope.sequential = function(key, start, end, duration) {
 
           var range = end - start;
           var minTimer = 50;
@@ -53,7 +35,7 @@ angular.module('iLayers')
             var now = new Date().getTime();
             var remaining = Math.max((endTime - now) / duration, 0);
             var value = Math.round(end - (remaining * range));
-            $scope.metrics[key] = value;
+            scope.metrics[key] = value;
             if (value !== end) {
               $timeout(run, stepTime);
             }
@@ -61,15 +43,52 @@ angular.module('iLayers')
 
           run();
         };
-      },
-      link: function(scope) {
-        scope.$watch('graph', function() {
-          var layers = [];
-          for (var i=0; i< scope.graph.length; i++) {
-              layers = layers.concat(scope.graph[i].layers);
+
+        scope.calculateMetrics = function(data) {
+          var count  = 0,
+              size = 0,
+              ave = 0,
+              largest = 0,
+              cache = {},
+              layers = [];
+
+          for (var i=0; i< data.length; i++) {
+            angular.forEach(data[i].layers, function(l) {
+              cache[l.id] = l;
+            });
           }
 
-          scope.calculateMetrics(layers, scope.graph.length);
+          for (var key in cache) {
+            if (cache.hasOwnProperty(key)) {
+              layers.push(cache[key]);
+            }
+          }
+
+          for (var i=0; i < layers.length; i++) {
+            count += 1;
+            size += layers[i].Size;
+            largest = Math.max(largest, layers[i].Size);
+            ave = Math.floor(size / count);
+          }
+
+          // animate the numbers
+          scope.sequential('count', scope.metrics.count, count, 600);
+          scope.sequential('size', scope.metrics.size, size, 520);
+          scope.sequential('ave', scope.metrics.ave, ave, 520);
+          scope.sequential('largest', scope.metrics.largest, largest, 520);
+        };
+
+        scope.$watch('graph', function() {
+          if (scope.graph.length > 0) {
+            scope.calculateMetrics(scope.graph);
+          }
+        }, true);
+
+        scope.$watch('filters.image', function(filter) {
+          if (scope.graph !== undefined) {
+            var graphData = scope.applyFilters(scope.graph, filter);
+            scope.calculateMetrics(graphData);
+          };
         });
       }
     };

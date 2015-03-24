@@ -253,6 +253,7 @@ main {
       background: #c5c5c5;
       color: #2d2d2d;
       display: inline-block;
+      white-space: nowrap;
 
       &:hover {
         cursor: pointer;

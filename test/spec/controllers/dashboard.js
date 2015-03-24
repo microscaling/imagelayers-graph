@@ -2,7 +2,7 @@ describe('DashboardCtrl', function() {
   // Load the module
   beforeEach(module('iLayers'));
 
-  var ctrl, scope, layers, registryService;
+  var ctrl, scope, layers, registryService, data;
 
   beforeEach(inject(function ($controller, $rootScope, _registryService_) {
     scope = $rootScope.$new();
@@ -93,6 +93,20 @@ describe('DashboardCtrl', function() {
       deferredSuccess.promise.then(function(){},function(){
         expect(scope.loading).toEqual(true);
       });
+    });
+  });
+
+  describe('applyFilters', function() {
+
+    beforeEach(function(){
+      data = [{ 'repo': { 'name': 'foo' } }, { 'repo': { 'name': 'bar' } }];
+    });
+
+    it('should remove repos with name matching filter', function() {
+      var result = scope.applyFilters(data, 'foo');
+
+      expect(result.length).toEqual(1);
+      expect(result[0].repo.name).toEqual('foo');
     });
   });
 });

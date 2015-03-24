@@ -72,7 +72,11 @@ angular.module('iLayers')
             }
           }, sanitizedList);
 
-          $location.search('images', self.buildQueryParams(sanitizedList));
+          if (sanitizedList.length > 0) {
+            $location.search('images', self.buildQueryParams(sanitizedList));
+          } else {
+            $location.url($location.path());
+          }
           $scope.closeDialog();
         };
 

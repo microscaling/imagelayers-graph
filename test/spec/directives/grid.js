@@ -12,6 +12,7 @@ var directive, scope, controller, layer, commandService, gridService;
     var elem = angular.element("<section grid graph='graph'></section>");
     scope = $rootScope.$new();
     scope.graph = [];
+    scope.applyFilters = function() { return [] };
     directive = $compile(elem)(scope);
     scope.$digest();
     controller = elem.controller('grid');

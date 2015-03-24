@@ -103,16 +103,6 @@ angular.module('iLayers')
           commandService.clear();
         };
 
-        scope.applyFilters = function(graphData, filter) {
-          var filteredData = [];
-          for (var i=0; i < graphData.length; i ++) {
-            if (graphData[i].repo.name.lastIndexOf(filter) !== -1) {
-              filteredData.push(graphData[i]);
-            }
-          }
-          return filteredData;
-        };
-
         scope.buildGrid = function(graph) {
           var gridData = gridService.buildGrid(graph);
 
@@ -126,7 +116,6 @@ angular.module('iLayers')
         });
 
         scope.$watch('filters.image', function(filter) {
-          //gridData = scope.applyFilters(graph);
           if (scope.graph !== undefined) {
             var graphData = scope.applyFilters(scope.graph, filter);
             scope.grid = scope.buildGrid(graphData);

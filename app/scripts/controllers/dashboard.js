@@ -49,6 +49,16 @@ angular.module('iLayers')
           'image': ''
         };
 
+        $scope.applyFilters = function(graphData, filter) {
+          var filteredData = [];
+          for (var i=0; i < graphData.length; i ++) {
+            if (graphData[i].repo.name.lastIndexOf(filter) !== -1) {
+              filteredData.push(graphData[i]);
+            }
+          }
+          return filteredData;
+        };
+
         // Load data from RouteParams
         self.searchImages($routeParams);
     }]);

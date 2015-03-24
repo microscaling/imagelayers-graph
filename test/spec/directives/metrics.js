@@ -7,9 +7,10 @@ describe('Metrics Directive', function() {
   var directive, scope, controller, layers;
 
   beforeEach(inject(function ($compile, $rootScope) {
-    var elem = angular.element("<section metrics graph='graph'></section>");
+    var elem = angular.element("<section metrics></section>");
     scope = $rootScope.$new();
     scope.graph = [];
+    scope.applyFilters = function() { return [] };
     directive = $compile(elem)(scope);
     scope.$digest();
     controller = elem.controller('metrics');
@@ -17,39 +18,40 @@ describe('Metrics Directive', function() {
 
   it('should initialize metrics', function() {
      expect(angular
-             .equals(directive.isolateScope().metrics, { count: 0, size: 0, ave: 0, largest:0 }))
+             .equals(scope.metrics, { count: 0, size: 0, ave: 0, largest:0 }))
              .toBeTruthy();
   });
 
   describe('calculateMetrics', function() {
     beforeEach(function() {
-      spyOn(controller, "sequential");
+      spyOn(scope, "sequential");
 
-      layers = [
-        { name: 'foo', Size: 300 },
-        { name: 'baz', Size: 200 },
-        { name: 'bar', Size: 1000 }
-      ]
+      layers = [{ layers: [
+        { id: 'foo', Size: 300 },
+        { id: 'baz', Size: 200 },
+        { id: 'bar', Size: 1000 }
+        ]}
+     ]
     });
 
-    it('should call sequential with the total image count', function() {
-      directive.isolateScope().calculateMetrics(layers, 2);
-      expect(controller.sequential).toHaveBeenCalledWith('count', 0, 2, 600);
+    it('should call sequential with the total layer count', function() {
+      scope.calculateMetrics(layers);
+      expect(scope.sequential).toHaveBeenCalledWith('count', 0, 3, 600);
     });
 
     it('should call sequential with the total layer size', function() {
-      directive.isolateScope().calculateMetrics(layers, 2);
-      expect(controller.sequential).toHaveBeenCalledWith('size', 0, 1500, 520);
+      scope.calculateMetrics(layers);
+      expect(scope.sequential).toHaveBeenCalledWith('size', 0, 1500, 520);
     });
 
     it('should call sequential with the layer average', function() {
-      directive.isolateScope().calculateMetrics(layers, 2);
-      expect(controller.sequential).toHaveBeenCalledWith('ave', 0, 750, 520);
+      scope.calculateMetrics(layers);
+      expect(scope.sequential).toHaveBeenCalledWith('ave', 0, 500, 520);
     });
 
     it('should call sequential with the largest layer size', function() {
-      directive.isolateScope().calculateMetrics(layers, 2);
-      expect(controller.sequential).toHaveBeenCalledWith('largest', 0, 1000, 520);
+      scope.calculateMetrics(layers);
+      expect(scope.sequential).toHaveBeenCalledWith('largest', 0, 1000, 520);
     });
   });
 });
