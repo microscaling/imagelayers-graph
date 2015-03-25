@@ -16,13 +16,14 @@ angular.module('iLayers')
 
       if (elements === undefined || phrase === '') {
        return elements;
-      };
+      }
 
       for (var i=0; i < elements.length; i++) {
         if (elements[i].name.lastIndexOf(phrase) !== -1) {
           results.push(elements[i]);
         }
-      };
+      }
+
       return results;
     };
   });

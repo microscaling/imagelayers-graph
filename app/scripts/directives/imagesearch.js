@@ -52,7 +52,7 @@ angular.module ('iLayers')
           'on_select': clearError
         };
 
-        scope.$watch('model', function(newValue, oldValue) {
+        scope.$watch('model', function(newValue) {
           clearError();
 
           if (newValue !== undefined && newValue.name !== '') {

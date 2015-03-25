@@ -39,7 +39,7 @@ describe('Service: gridService', function () {
         data = [
           { layers: [{id: 'baz', 'parent': 'bar' }, { id: 'bar', 'parent': 'foo' }, { id: 'foo', 'parent': '' }] },
           { layers: [{ id: 'bak', 'parent': 'foo' }, { id: 'foo', 'parent': '' }] },
-          { layers: [{ id: 'boo', 'parent': 'bar' }, { id: 'bar', 'parent': 'foo' }] }
+          { layers: [{ id: 'boo', 'parent': 'bar' }, { id: 'bar', 'parent': 'foo' }, { id: 'foo', 'parent': '' }] }
         ];
       });
 

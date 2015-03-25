@@ -23,7 +23,7 @@ angular.module('iLayers')
                searchList = [];
            if (terms.images) {
                var images = terms.images.split(',');
-               angular.forEach(images, function(value, idx) {
+               angular.forEach(images, function(value) {
                  var parts = value.split(':'),
                      tag = 'latest';
                  if (parts.length === 2) {
@@ -78,5 +78,5 @@ angular.module('iLayers')
 
         $scope.removeImage = function(index) {
           $scope.searchList.splice(index,1);
-        }
+        };
       }]);

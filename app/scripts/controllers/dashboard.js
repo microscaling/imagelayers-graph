@@ -37,7 +37,7 @@ angular.module('iLayers')
               $scope.graph = response.data;
               $scope.loading = false;
             },function(){
-              console.log("Error loading ImageLayers");
+              console.log('Error loading ImageLayers');
             });
           }
         };

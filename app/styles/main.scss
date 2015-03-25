@@ -237,10 +237,10 @@ main {
   }
 
   div.leaves {
-    width: 100%;
     height: 70px;
     margin-top: 28px;
     padding-left: 10px;
+    white-space: nowrap;
     border-bottom: 1px solid #b3b3b3;
 
     section {

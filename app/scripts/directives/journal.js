@@ -5,7 +5,7 @@ angular.module ('iLayers')
 
     return {
       restrict: 'A',
-      link: function(scope, element) {
+      link: function(scope) {
         scope.$on('command-change', function(event, data) {
           scope.commands = data.commands;
         });

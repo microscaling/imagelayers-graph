@@ -16,7 +16,6 @@ angular.module('iLayers')
 
         self.classifyLayer = function(layer, count) {
         var classes = ['box'],
-            sizeCls = constants.smallClass,
             cmd = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
 
           if (count === 0) {
@@ -77,17 +76,26 @@ angular.module('iLayers')
                             'layer': self.addDisplayProperties(layer) });
               }
             }
-          };
+          }
 
           return data;
         };
       },
       link: function(scope, element) {
         scope.highlightCommand = function(layerId) {
-          var item = gridService.inventory(layerId);
+          var item = gridService.inventory(layerId),
+              start = 0,
+              layers = [];
 
           if (item !== undefined) {
-            commandService.highlight(item.image.layers.slice(item.row, item.image.layers.length));
+            layers = item.image.layers;
+            // find start in layers //
+            for (var l=0; l < layers.length; l++) {
+              if (layerId === layers[l].id) {
+                start = l;
+              }
+            }
+            commandService.highlight(item.image.layers.slice(start, layers.length));
           }
         };
 
@@ -111,7 +119,7 @@ angular.module('iLayers')
           element.find('.matrix').css('width', (gridData.cols * constants.colWidth) + 'px');
           scope.leaves = gridService.findLeaves(gridData);
           return scope.unwrapGrid(gridData);
-        }
+        };
 
         scope.$watch('graph', function(graph) {
           scope.grid = scope.buildGrid(graph);
@@ -122,7 +130,7 @@ angular.module('iLayers')
           if (scope.graph !== undefined) {
             var graphData = scope.applyFilters(scope.graph, filter);
             scope.grid = scope.buildGrid(graphData);
-          };
+          }
         });
       }
     };

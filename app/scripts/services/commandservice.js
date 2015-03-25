@@ -8,7 +8,7 @@ angular.module('iLayers')
             var cmds = [],
                 nop = '#(nop) ',
                 startsWith = function(text, str) {
-                  return text.slice(0, str.length) === str
+                  return text.slice(0, str.length) === str;
                 };
 
             for(var i=0; i < layers.length; i++) {
@@ -16,12 +16,12 @@ angular.module('iLayers')
                 if (command !== null) {
                   var cmd = command[command.length -1];
                   if (startsWith(cmd, nop)) {
-                    cmd = cmd.split(nop)[1]
+                    cmd = cmd.split(nop)[1];
                     cmd = cmd.replace(/(map|\/tcp:{}|\[|\]'?|\))/g, '');
 
                     cmds.unshift(cmd);
                   } else {
-                    cmds.unshift("RUN " + cmd);
+                    cmds.unshift('RUN ' + cmd);
                   }
                 } else {
                   cmds.unshift('FROM scratch');
