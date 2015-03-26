@@ -50,9 +50,14 @@ angular.module('iLayers')
         };
 
         $scope.applyFilters = function(graphData, filter) {
-          var filteredData = [];
+          var filteredData = [],
+              element = {},
+              key = '';
+
           for (var i=0; i < graphData.length; i ++) {
-            if (graphData[i].repo.name.lastIndexOf(filter) !== -1) {
+            element = graphData[i].repo;
+            key = element.name + ':' + element.tag
+            if (key.lastIndexOf(filter) !== -1) {
               filteredData.push(graphData[i]);
             }
           }
