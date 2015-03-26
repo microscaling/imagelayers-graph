@@ -245,14 +245,19 @@ main {
     width: 100%;
     z-index: 10;
     background: #d8d8d8;
+    border-bottom: 1px solid #b3b3b3;
 
     &.sticky {
      position: fixed;
      top: 0;
 
-      ~ .graph {
+     div.leaves {
+       position: relative;
+     }
+
+     ~ .graph {
        padding-top: 158px;
-      }
+     }
     }
   }
 
@@ -261,7 +266,6 @@ main {
     margin-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
-    border-bottom: 1px solid #b3b3b3;
 
     section {
       width: 180px;
