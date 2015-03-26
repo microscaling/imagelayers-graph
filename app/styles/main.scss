@@ -247,7 +247,7 @@ main {
       width: 180px;
       margin-left: 20px;
       height: 100%;
-      padding: 16px;
+      padding: 8px;
       font-size: 0.85em;
       text-align: center;
       background: #c5c5c5;
@@ -264,6 +264,11 @@ main {
     .size {
       font-size: 1.3em;
       font-weight: bold;
+    }
+
+    .count {
+      color: #999;
+      font-size: 0.9em;
     }
   }
 
