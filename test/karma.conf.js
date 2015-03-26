@@ -28,6 +28,9 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/ngDialog/js/ngDialog.js',
       'bower_components/angular-scroll-glue/src/scrollglue.js',
+      'bower_components/jquery-mousewheel/jquery.mousewheel.js',
+      'bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
+      'bower_components/ng-scrollbars/dist/scrollbars.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/lib/**/*.js',

@@ -21,6 +21,16 @@ ul, li {
   list-style: none;
 }
 
+.mCSB_container_wrapper {
+  margin-right: 15px;
+}
+
+.mCSB_inside {
+  > .mCSB_container {
+    margin-right: 15px;
+  }
+}
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #d8d8d8;
@@ -228,7 +238,7 @@ main {
   left: 0;
   bottom: 122px;
   right: 0;
-  padding-bottom: 40px;
+  padding-bottom: 5px;
   overflow: auto;
 
   h2 {
@@ -241,18 +251,23 @@ main {
     display: block;
   }
 
-  > nav {
+  nav {
     width: 100%;
     z-index: 10;
     background: #d8d8d8;
+    border-bottom: 1px solid #b3b3b3;
 
     &.sticky {
      position: fixed;
      top: 0;
 
-      ~ .graph {
+     div.leaves {
+       position: relative;
+     }
+
+     ~ .graph {
        padding-top: 158px;
-      }
+     }
     }
   }
 
@@ -261,7 +276,6 @@ main {
     margin-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
-    border-bottom: 1px solid #b3b3b3;
 
     section {
       width: 180px;
