@@ -13,10 +13,8 @@ angular.module('iLayers')
       link: function postLink(scope, element, attrs) {
         var main = element.parent('main'),
             offset = (attrs.offset) ? attrs.offset : 0,
+            width = 0,
             locked = element.find('.lock-horizon');
-
-        console.log("locked ", locked);
-
 
         main.bind('scroll', function() {
           var top = main.scrollTop(),
@@ -27,8 +25,10 @@ angular.module('iLayers')
           }
 
           if (main.scrollTop() >= offset) {
+            element.css('width', (width -15) + 'px');
             element.addClass('sticky');
           } else {
+            element.css('width', '100%');
             element.removeClass('sticky');
           }
         });
