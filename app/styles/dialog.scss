@@ -164,8 +164,9 @@ body.ngdialog-open {
 
 .ngdialog.ngdialog-theme-layers main {
   padding: 20px;
-  overflow: visible;
+  overflow: auto;
   position: static;
+  max-height: 300px;
 }
 
 .ngdialog.ngdialog-theme-layers main section {
@@ -175,9 +176,9 @@ body.ngdialog-open {
 
 .ngdialog.ngdialog-theme-layers footer {
   border-top: 1px solid #d8d8d8;
-  height: 79px;
+  height: 70px;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 18px;
   position: static;
 }
 
@@ -187,6 +188,7 @@ body.ngdialog-open {
 
 .ngdialog.ngdialog-theme-layers .ngdialog-buttons {
   *zoom: 1;
+  padding: 0 20px;
 }
 
 .ngdialog.ngdialog-theme-layers .ngdialog-buttons:after {
