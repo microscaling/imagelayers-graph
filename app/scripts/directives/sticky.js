@@ -13,23 +13,28 @@ angular.module('iLayers')
       link: function postLink(scope, element, attrs) {
         var main = element.parent('main'),
             offset = (attrs.offset) ? attrs.offset : 0,
-            width = 0,
             locked = element.find('.lock-horizon');
+
+        var resize = function() {
+          element.css('width', (window.innerWidth - 15) + 'px');
+        };
 
         main.bind('scroll', function() {
           var top = main.scrollTop(),
               left = main.scrollLeft();
 
           if (locked) {
-            locked.css('left',  '-' + $(this).scrollLeft() + 'px');
+            locked.children().css('left',  '-' + $(this).scrollLeft() + 'px');
           }
 
           if (main.scrollTop() >= offset) {
-            element.css('width', (width -15) + 'px');
             element.addClass('sticky');
+            $(window).bind('resize', resize);
+            resize();
           } else {
             element.css('width', '100%');
             element.removeClass('sticky');
+            $(window).unbind('resize');
           }
         });
       }
