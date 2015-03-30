@@ -21,19 +21,9 @@ ul, li {
   list-style: none;
 }
 
-.mCSB_container_wrapper {
-  margin-right: 15px;
-}
-
-.mCSB_inside {
-  > .mCSB_container {
-    margin-right: 15px;
-  }
-}
-
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #d8d8d8;
+  background-color: #d8d8d8;
 }
 
 /* Header and Nav*/
@@ -215,7 +205,6 @@ section.search {
   height: 60px;
   min-width: 1032px;
   background: #fff;
-  box-shadow: 0 0 5px rgba(0,0,0,.4);
 
   h3 {
     float: left;
@@ -240,6 +229,8 @@ main {
   right: 0;
   padding-bottom: 5px;
   overflow: auto;
+  background: url(../images/body_bg.png) top left repeat-x;
+  background-attachment: local;
 
   h2 {
     margin-top: 0;
@@ -252,17 +243,27 @@ main {
   }
 
   nav {
-    width: 100%;
     z-index: 10;
-    background: #d8d8d8;
-    border-bottom: 1px solid #b3b3b3;
 
     &.sticky {
      position: fixed;
+     background: #d8d8d8;
+     overflow: hidden;
      top: 0;
+     left: 0;
 
      div.leaves {
        position: relative;
+       background: #d8d8d8;
+
+       > section {
+         position: relative;
+       }
+     }
+
+     section.search {
+       border-bottom: 1px solid #999;
+       box-shadow: 0 4px 5px -5px rgba(0,0,0,.4);
      }
 
      ~ .graph {
@@ -276,6 +277,8 @@ main {
     margin-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
+    overflow: hidden;
+    border-bottom: 1px solid #b3b3b3;
 
     section {
       width: 180px;
