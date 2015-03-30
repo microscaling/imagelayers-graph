@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('iLayers')
-  .controller('DashboardCtrl', ['$scope', '$routeParams', 'registryService',
-      function($scope, $routeParams, registryService) {
+  .controller('DashboardCtrl', ['$scope', '$routeParams', 'registryService', 'commandService',
+      function($scope, $routeParams, registryService, commandService) {
         var self = this;
         $scope.loading = false;
 
@@ -42,6 +42,10 @@ angular.module('iLayers')
           }
         };
 
+
+        // Load data from RouteParams
+        self.searchImages($routeParams);
+
         // public
         $scope.graph = [];
 
@@ -64,7 +68,15 @@ angular.module('iLayers')
           return filteredData;
         };
 
-        // Load data from RouteParams
-        self.searchImages($routeParams);
+        $scope.showCommands = function(repo) {
+          var data = $scope.graph;
+
+          for (var i=0; i < data.length; i++) {
+            if (data[i].repo.name === repo.name && data[i].repo.tag === repo.tag) {
+              commandService.highlight(data[i].layers);
+              break;
+            }
+          }
+        };
     }]);
 

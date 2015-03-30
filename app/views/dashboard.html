@@ -15,7 +15,7 @@
           <input type='text' ng-model="filters.image" placeholder='Filter by Layer...' >
         </section>
         <div class="leaves lock-horizon" ng-show="leaves.length > 0">
-            <section ng-repeat="repo in leaves">
+            <section ng-repeat="repo in leaves" ng-mouseenter="showCommands(repo)">
                 <div>{{ repo.name }}:{{ repo.tag }}</div>
                 <div class="size" ng-bind-html="repo.size | size "></div>
                 <div class="count">Layers: {{ repo.count }}</div>
