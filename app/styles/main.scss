@@ -229,8 +229,6 @@ main {
   right: 0;
   padding-bottom: 5px;
   overflow: auto;
-  background: url(../images/body_bg.png) top left repeat-x;
-  background-attachment: local;
 
   h2 {
     margin-top: 0;
@@ -246,29 +244,57 @@ main {
     z-index: 10;
 
     &.sticky {
-     position: fixed;
-     background: #d8d8d8;
-     overflow: hidden;
-     top: 0;
-     left: 0;
+      position: fixed;
+      background: #d8d8d8;
+      overflow: hidden;
+      top: 0;
+      left: 0;
 
-     div.leaves {
-       position: relative;
-       background: #d8d8d8;
+      div.leaves {
+        overflow: hidden;
+      }
+    }
 
-       > section {
-         position: relative;
-       }
-     }
+    section.search {
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid #999;
+    }
+  }
 
-     section.search {
-       border-bottom: 1px solid #999;
-       box-shadow: 0 4px 5px -5px rgba(0,0,0,.4);
-     }
+  section.metrics {
+    position: relative;
+    z-index: 11;
+  }
+  
+  nav:not(.sticky) {
+    position: relative;
+    z-index: 10;
+    div.leaves {
+      position: relative;
 
-     ~ .graph {
-       padding-top: 158px;
-     }
+      &:before,
+      &:after {
+        display: block;
+        content: '';
+        position: absolute;
+        right: -12px;
+        width: 100%;
+      }
+      //metrics
+      &:before {
+        height: 71px;
+        top: -159px;
+        background-color: #2d2d2d;
+      }
+      //search
+      &:after {
+        height: 59px;
+        top: -88px;
+        background-color: #ffffff;
+        border-bottom: 1px solid #999;
+        box-shadow: 0 4px 5px -5px rgba(0,0,0,.4);
+      }
     }
   }
 
@@ -277,8 +303,8 @@ main {
     margin-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
-    overflow: hidden;
     border-bottom: 1px solid #b3b3b3;
+
 
     section {
       width: 180px;

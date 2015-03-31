@@ -16,7 +16,7 @@ angular.module('iLayers')
             locked = element.find('.lock-horizon');
 
         var resize = function() {
-          element.css('width', (window.innerWidth - 15) + 'px');
+          element.css('width', (window.innerWidth) + 'px');
         };
 
         main.bind('scroll', function() {
