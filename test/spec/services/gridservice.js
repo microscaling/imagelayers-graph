@@ -43,6 +43,16 @@ describe('Service: gridService', function () {
         ];
       });
 
+      it('should eliminate images without layers', function() {
+        var res = '';
+
+        data.push({ layers: [] });
+
+        expect(data.length).toEqual(4);
+        res = gridService.buildGrid(data);
+        expect(res.cols).toEqual(3);
+      });
+
       it('should have rows = 3', function() {
         var res = gridService.buildGrid(data);
         expect(res.rows).toEqual(3);

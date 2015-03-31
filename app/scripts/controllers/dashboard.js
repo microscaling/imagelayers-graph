@@ -33,7 +33,7 @@ angular.module('iLayers')
             var searchTerms = self.buildTerms(route.images);
 
             // Load Data
-            registryService.inspect(searchTerms).then(function(response){
+            registryService.inspect(searchTerms).then(function(response) {
               $scope.graph = response.data;
               $scope.loading = false;
             },function(){

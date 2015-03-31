@@ -220,17 +220,24 @@ angular.module('iLayers')
       return {
         buildGrid: function(images) {
           var sortedImages = [],
+              sanitizedList = [],
               long = 0;
 
-          inventory = initializeInventory(images);
-          sortedImages = sortImages(images);
+          angular.forEach(images, function(image) {
+            if (image.layers.length > 0) {
+              sanitizedList.push(image);
+            }
+          });
+
+          inventory = initializeInventory(sanitizedList);
+          sortedImages = sortImages(sanitizedList);
 
           long = findLongest(sortedImages);
           matrix = zeroMatrix(long, sortedImages.length);
 
           return {
             rows: findLongest(sortedImages),
-            cols: images.length,
+            cols: sanitizedList.length,
             matrix: buildMatrix(sortedImages)
           };
         },

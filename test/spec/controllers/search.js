@@ -96,12 +96,19 @@ describe('Controller: SearchCtrl', function () {
     beforeEach(function() {
       spyOn(location, 'search');
       spyOn(scope, 'closeDialog');
-      scope.searchList = [{'name': 'foo', 'tag': 'latest'}];
+      scope.searchList = [{'name': 'foo', 'tag': 'latest', 'found': true }];
     });
 
     it('should remove empty image rows from list', function() {
       spyOn(location, 'url');
       scope.searchList = [{'name': '', 'tag': ''}];
+      scope.addImages();
+      expect(location.url).toHaveBeenCalled();
+    });
+
+    it('should remove any image not found', function() {
+      spyOn(location, 'url');
+      scope.searchList = [{'name': 'foo', 'tag': 'latest', 'found': false}];
       scope.addImages();
       expect(location.url).toHaveBeenCalled();
     });

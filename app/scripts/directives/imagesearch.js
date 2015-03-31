@@ -64,9 +64,11 @@ angular.module ('iLayers')
                 for (var i=0; i < data.length; i++) {
                   scope.tagList.push(data[i]);
                   clearError();
+                  newValue.found = true;
                 }
               } else {
                  element.find('.image-name').addClass('not-found');
+                 newValue.found = false;
               }
               element.find('.image-name').removeClass('searching');
             });

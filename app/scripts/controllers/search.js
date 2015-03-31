@@ -67,7 +67,7 @@ angular.module('iLayers')
           var sanitizedList = [];
 
           angular.forEach($scope.searchList, function(value) {
-            if (value.name !== '') {
+            if (value.name !== '' && value.found === true) {
               this.push(value);
             }
           }, sanitizedList);

@@ -25,10 +25,6 @@ describe('Directive: imageSearch', function () {
     controller = element.controller('imageSearch');
 
     registryService = _registryService_;
-    deferredTag = $q.defer();
-    spyOn(registryService, 'fetchTags').and.returnValue(deferredTag.promise);
-    deferredTag.resolve({});
-
     rootScope.model = {'name': 'foo', 'tag': '1.0.0'};
   }));
 
@@ -66,10 +62,42 @@ describe('Directive: imageSearch', function () {
   });
 
   describe('$watch model', function() {
-    it('should fetchTags when model changes', function() {
+    it('should fetchTags when model changes', inject(function($q) {
+      var deferredTag = $q.defer();
+      spyOn(registryService, 'fetchTags').and.returnValue(deferredTag.promise);
+      deferredTag.resolve({});
+
       scope.model = { name: 'blah' };
       scope.$digest();
       expect(registryService.fetchTags).toHaveBeenCalled();
+    }));
+
+    describe('when image is valid', function() {
+      beforeEach(inject(function($q) {
+        var deferredSuccess = $q.defer();
+        spyOn(registryService, 'fetchTags').and.returnValue(deferredSuccess.promise);
+        deferredSuccess.resolve({ data: { 'latest': 'latest' } });
+      }));
+
+      it('should set found to true', function() {
+        scope.model = { name: 'blah' };
+        scope.$digest();
+        expect(scope.model.found).toBeTruthy();
+      });
+    });
+
+    describe('when image is not valid', function() {
+      beforeEach(inject(function($q) {
+        var deferredSuccess = $q.defer();
+        spyOn(registryService, 'fetchTags').and.returnValue(deferredSuccess.promise);
+        deferredSuccess.resolve({ data: {} });
+      }));
+
+      it('should set found to false', function() {
+        scope.model = { name: 'blah' };
+        scope.$digest();
+        expect(scope.model.found).toBeFalsy();
+      });
     });
   });
 });
