@@ -229,8 +229,6 @@ main {
   right: 0;
   padding-bottom: 5px;
   overflow: auto;
-  background: url(../images/body_bg.png) top left repeat-x;
-  background-attachment: local;
 
   h2 {
     margin-top: 0;
@@ -244,31 +242,58 @@ main {
 
   nav {
     z-index: 10;
+    &:not(.sticky) {
+      div.leaves {
+        position: relative;
+        overflow: visible;
+        &:before,
+        &:after {
+          z-index: -1;
+          right: -20px;
+          width: 100%;
+          display: block;
+          content: '';
+          position: absolute;
+        }
+        &:before {
+          height: 71px;
+          top: -159px;
+          background-color: #2d2d2d;
+        }
+        //search
+        &:after {
+          height: 60px;
+          top: -88px;
+          background-color: #ffffff;
+        }
+      }
+    }
 
     &.sticky {
-     position: fixed;
-     background: #d8d8d8;
-     overflow: hidden;
-     top: 0;
-     left: 0;
+      position: fixed;
+      background: #d8d8d8;
+      overflow: hidden;
+      top: 0;
+      left: 0;
 
-     div.leaves {
-       position: relative;
-       background: #d8d8d8;
+      div.leaves {
+        position: relative;
+        background: #d8d8d8;
 
-       > section {
-         position: relative;
-       }
-     }
+        > section {
+          position: relative;
+        }
+      }
 
-     section.search {
-       border-bottom: 1px solid #999;
-       box-shadow: 0 4px 5px -5px rgba(0,0,0,.4);
-     }
+      section.search {
+        width: 100%;
+        border-bottom: 1px solid #999;
+        box-shadow: 0 4px 5px -5px rgba(0,0,0,.4);
+      }
 
-     ~ .graph {
-       padding-top: 158px;
-     }
+      ~ .graph {
+        padding-top: 158px;
+      }
     }
   }
 

@@ -15,10 +15,6 @@ angular.module('iLayers')
             offset = (attrs.offset) ? attrs.offset : 0,
             locked = element.find('.lock-horizon');
 
-        var resize = function() {
-          element.css('width', (window.innerWidth - 15) + 'px');
-        };
-
         main.bind('scroll', function() {
           var top = main.scrollTop(),
               left = main.scrollLeft();
@@ -29,12 +25,9 @@ angular.module('iLayers')
 
           if (main.scrollTop() >= offset) {
             element.addClass('sticky');
-            $(window).bind('resize', resize);
-            resize();
           } else {
             element.css('width', '100%');
             element.removeClass('sticky');
-            $(window).unbind('resize');
           }
         });
       }
