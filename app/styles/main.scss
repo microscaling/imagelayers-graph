@@ -272,7 +272,6 @@ main {
     &.sticky {
       position: fixed;
       background: #d8d8d8;
-      overflow: hidden;
       top: 0;
       left: 0;
 
@@ -302,7 +301,6 @@ main {
     margin-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
-    overflow: hidden;
     border-bottom: 1px solid #b3b3b3;
 
     section {
@@ -315,11 +313,41 @@ main {
       background: #c5c5c5;
       color: #2d2d2d;
       display: inline-block;
+      position: relative;
       white-space: nowrap;
+
+      .remove {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 24px;
+        height: 24px;
+        background: #d40101;
+        border-radius: 14px;
+        border: 1px solid #fff;
+        display: none;
+        z-index: 35;
+
+        &:after {
+          content: '';
+          @extend .icon-x;
+          @include icon-white;
+          display: block;
+          position: absolute;
+          top: 5.5px;
+          left: 5.5px;
+          width: 10px;
+          height: 10px;
+        }
+      }
 
       &:hover {
         cursor: pointer;
         background: #fff;
+
+        .remove {
+           display: block;
+        }
       }
     }
 
