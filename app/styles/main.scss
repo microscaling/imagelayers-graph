@@ -392,6 +392,11 @@ main {
           font-weight: bold;
           margin-top: 2px;
         }
+        &.command {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
   }

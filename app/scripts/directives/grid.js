@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('iLayers')
-  .directive('grid', ['$timeout', 'commandService', 'gridService', function($timeout, commandService, gridService) {
+  .directive('grid', ['$timeout', '$sce', 'commandService', 'gridService', function($timeout, $sce, commandService, gridService) {
     var constants = {
       colWidth: 210,
       boxWidth: 180
@@ -16,25 +16,25 @@ angular.module('iLayers')
 
         self.classifyLayer = function(layer, count) {
         var classes = ['box'],
-            cmd = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
+            cmd = self.getCommand(layer);
 
           if (count === 0) {
             return 'noop';
           }
 
-          if (cmd.lastIndexOf(' curl ') !== -1) {
+          if (cmd.lastIndexOf('curl') !== -1) {
             classes.push('curl');
           }
 
-          if (cmd.lastIndexOf(' install') !== -1 || cmd.lastIndexOf(' ADD ') !== -1) {
+          if (cmd.lastIndexOf('install') !== -1 || cmd.lastIndexOf('ADD') !== -1) {
             classes.push('add');
           }
 
-          if (cmd.lastIndexOf(' ENV ') !== -1) {
+          if (cmd.lastIndexOf('ENV') !== -1) {
             classes.push('env');
           }
 
-          if ( cmd.lastIndexOf(' CMD ') !== -1) {
+          if ( cmd.lastIndexOf('CMD') !== -1) {
             classes.push('cmd');
           }
 
@@ -48,8 +48,13 @@ angular.module('iLayers')
           return count * constants.boxWidth + (count-1)*20;
         };
 
+        self.getCommand = function(layer) {
+          var command = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
+          return commandService.constructCommand(command);
+        };
+
         self.addDisplayProperties = function(layer) {
-          layer.displayId = layer.id.substr(0, 11);
+          layer.cmd = $sce.trustAsHtml(self.getCommand(layer));
           return layer;
         };
 
@@ -71,8 +76,8 @@ angular.module('iLayers')
                   grid.matrix.inventory[layer.id].count = 0;
                 }
 
-                data.push({ 'type': self.classifyLayer(layer, count),
-                            'width':  self.findWidth(count),
+                data.push({ 'type':  self.classifyLayer(layer, count),
+                            'width': self.findWidth(count),
                             'layer': self.addDisplayProperties(layer) });
               }
             }

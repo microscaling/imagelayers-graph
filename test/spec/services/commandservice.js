@@ -10,24 +10,37 @@ describe('Command Service', function() {
     spyOn(rootScope, '$broadcast');
   }));
 
-  describe('highlight', function() {
-    it('should broadcast "command-change" event with commands', function() {
-      service.highlight([{container_config: { Cmd: ['one', 'two']}}]);
-      expect(rootScope.$broadcast)
-        .toHaveBeenCalledWith('command-change', {'commands': ['RUN two']});
-    });
-
+  describe('constructCommand', function (){
     it('should transform port mappings', function() {
-      service.highlight([{container_config: { Cmd: ['run', '#(nop) Expose map[9090/tcp:{}]']}}]);
-      expect(rootScope.$broadcast)
-        .toHaveBeenCalledWith('command-change', {'commands': ['Expose 9090']});
+      var result = service.constructCommand('#(nop) EXPOSE map[9292/tcp:{}]');
+      expect(result)
+        .toEqual('EXPOSE 9292');
     });
 
     it('should transform command brackets', function() {
-      service.highlight([{container_config: { Cmd: ['run', '#(nop) cmd [testing]']}}]);
-      expect(rootScope.$broadcast)
-        .toHaveBeenCalledWith('command-change', {'commands': ['cmd testing']});
+      var result = service.constructCommand('#(nop) CMD [test]');
+      expect(result)
+        .toEqual('CMD test');
     });
+    it('should set an undefined command to empty string', function() {
+      var result = service.constructCommand(undefined);
+      expect(result)
+        .toEqual('');
+    });
+    it('should set a null command to FROM scratch', function() {
+      var result = service.constructCommand(null);
+      expect(result)
+        .toEqual('FROM scratch');
+    });
+  });
+
+  describe('highlight', function() {
+    it('should broadcast "command-change" event with commands', function() {
+      service.highlight([{cmd: 'RUN this thing'}]);
+      expect(rootScope.$broadcast)
+        .toHaveBeenCalledWith('command-change', {'commands': ['RUN this thing']});
+    });
+
   });
 
   describe('clear', function() {

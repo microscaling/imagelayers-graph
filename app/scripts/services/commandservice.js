@@ -5,30 +5,33 @@ angular.module('iLayers')
     function($rootScope) {
       return {
           highlight: function (layers) {
-            var cmds = [],
-                nop = '#(nop) ',
-                startsWith = function(text, str) {
-                  return text.slice(0, str.length) === str;
-                };
-
+            var cmds = []
             for(var i=0; i < layers.length; i++) {
-              var command = layers[i].container_config.Cmd;
-                if (command !== null) {
-                  var cmd = command[command.length -1];
-                  if (startsWith(cmd, nop)) {
-                    cmd = cmd.split(nop)[1];
-                    cmd = cmd.replace(/(map|\/tcp:{}|\[|\]'?|\))/g, '');
-
-                    cmds.unshift(cmd);
-                  } else {
-                    cmds.unshift('RUN ' + cmd);
-                  }
-                } else {
-                  cmds.unshift('FROM scratch');
-                }
+              var command = layers[i].cmd;
+              cmds.unshift(command);
             }
 
             $rootScope.$broadcast('command-change', { 'commands': cmds });
+          },
+
+          constructCommand: function (cmd) {
+            var nop = '(nop) ';
+
+            if (cmd === null) cmd = 'FROM scratch';
+
+            if (cmd !== undefined) {
+              if (cmd.lastIndexOf(nop) > 0) {
+                cmd = cmd.split(nop)[1];
+              }
+              else {
+                cmd = cmd.replace(/\/bin\/sh\/*\s-c/g, 'RUN');
+              }
+              cmd = cmd.replace(/(map|\/tcp:{}|\[|\]'?|\))/g, '').trim();
+            }
+            else {
+              cmd = '';
+            }
+            return cmd;
           },
 
           clear: function() {

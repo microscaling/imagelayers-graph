@@ -13,11 +13,9 @@
 
     <div class="box empty" ng-switch-when="empty"></div>
     <div ng-switch-default style="width: {{ box.width }}px" ng-class="box.type" ng-mouseenter="highlightCommand(box.layer.id)">
-        <span class="id">
-          {{ box.layer.displayId }}
-        </span>
-        <span ng-bind-html='box.layer.Size | size' class="size">
-      </span>
+      <span ng-bind-html='box.layer.cmd' class="command"></span>
+      <span ng-bind-html='box.layer.Size | size' class="size"></span>
+
     </div>
       <div style="clear:both;" ng-show="($index + 1) % leaves.length == 0"></div>
   </div>
