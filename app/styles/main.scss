@@ -316,38 +316,9 @@ main {
       position: relative;
       white-space: nowrap;
 
-      .remove {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        width: 24px;
-        height: 24px;
-        background: #d40101;
-        border-radius: 14px;
-        border: 1px solid #fff;
-        display: none;
-        z-index: 35;
-
-        &:after {
-          content: '';
-          @extend .icon-x;
-          @include icon-white;
-          display: block;
-          position: absolute;
-          top: 5.5px;
-          left: 5.5px;
-          width: 10px;
-          height: 10px;
-        }
-      }
-
       &:hover {
         cursor: pointer;
         background: #fff;
-
-        .remove {
-           display: block;
-        }
       }
     }
 

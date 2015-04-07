@@ -23,20 +23,6 @@ angular.module('iLayers')
             }
           }
         };
-        scope.removeImage = function(repo) {
-          var search = $location.search()['images'],
-              params = search.split(','),
-              newParams = [],
-              remove = repo.name + ':' + repo.tag;
-
-          angular.forEach(params, function(param) {
-            if (param !== remove) {
-             newParams.push(param);
-            }
-          });
-
-          $location.search('images', newParams.join(','));
-        };
       }
     };
   }]);

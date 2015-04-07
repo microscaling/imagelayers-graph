@@ -38,22 +38,4 @@ describe('Directive: leaf', function () {
       expect(commandService.highlight).not.toHaveBeenCalled();
     });
   });
-
-  describe('removeImage', function() {
-    beforeEach(function(){
-      spyOn(location, 'search').and.returnValue({ 'images': 'foo:foo,bar:bar' });
-    });
-
-    it('should do nothing if the repository is not found', function() {
-      scope.removeImage({ 'name': 'foo', 'tag': 'none' });
-
-      expect(location.search).toHaveBeenCalledWith('images', 'foo:foo,bar:bar');
-    });
-
-    it('should remove the found image form the list', function() {
-      scope.removeImage({ 'name': 'foo', 'tag': 'foo' });
-
-      expect(location.search).toHaveBeenCalledWith('images', 'bar:bar');
-    });
-  });
 });
