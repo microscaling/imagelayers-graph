@@ -19,11 +19,12 @@ angular.module('iLayers')
           var top = main.scrollTop(),
               left = main.scrollLeft();
 
+          if (locked) {
+            locked.children().css('left',  '-' + $(this).scrollLeft() + 'px');
+          }
+
           if (main.scrollTop() >= offset) {
             element.addClass('sticky');
-             if (locked) {
-              locked.children().css('left',  '-' + $(this).scrollLeft() + 'px');
-             }
           } else {
             element.css('width', '100%');
             element.removeClass('sticky');
