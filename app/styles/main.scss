@@ -205,6 +205,7 @@ section.search {
   height: 60px;
   min-width: 1032px;
   background: #fff;
+  position: relative;
 
   h3 {
     float: left;
@@ -214,6 +215,39 @@ section.search {
 
   .plus-button {
     margin-left: 15px;
+  }
+
+  input[reset-field] {
+    padding-right: 19px;
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+
+    ~ .reset-icon {
+      display: block;
+      position: absolute;
+      right: 45px;
+      top: 25px;
+      cursor: default;
+      width: 15px;
+      height: 15px;
+      @include icon-grey;
+      @extend .icon-x;
+      cursor: pointer;
+
+      &:hover {
+        @include icon-red;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
   }
 }
 

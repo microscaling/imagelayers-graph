@@ -12,7 +12,7 @@
         <section class="search" ng-controller="SearchCtrl as search">
           <h3>Docker Images</h3>
             <div class="plus-button" ng-click="showSearch()">Add Images</div>
-          <input type='text' ng-model="filters.image" placeholder='Filter by Layer...' >
+            <input type='text' ng-model="filters.image" placeholder='Filter images...' reset-field>
         </section>
         <div class="leaves lock-horizon" ng-show="leaves.length > 0" style="width: {{ leaves.length * 210 }}px;">
             <section ng-repeat="repo in leaves" ng-mouseenter="showCommands(repo)">
