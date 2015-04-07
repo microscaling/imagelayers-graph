@@ -1,0 +1,6 @@
+<section ng-mouseenter="showCommands(leaf)">
+    <div class="remove" ng-click="removeImage(leaf)"></div>
+    <div>{{ leaf.name }}:{{ leaf.tag }}</div>
+    <div class="size" ng-bind-html="leaf.size | size "></div>
+    <div class="count">Layers: {{ leaf.count }}</div>
+</section>
