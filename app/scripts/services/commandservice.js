@@ -17,7 +17,7 @@ angular.module('iLayers')
           constructCommand: function (cmd) {
             var nop = '(nop) ';
 
-            if (cmd === null) cmd = 'FROM scratch';
+            if (cmd === null || cmd == '') cmd = 'FROM scratch';
 
             if (cmd !== undefined) {
               if (cmd.lastIndexOf(nop) > 0) {
