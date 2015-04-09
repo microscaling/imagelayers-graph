@@ -332,7 +332,6 @@ main {
   }
 
   div.leaves {
-    height: 70px;
     margin-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
@@ -342,7 +341,6 @@ main {
     section {
       width: 180px;
       margin-left: 20px;
-      height: 100%;
       padding: 8px;
       font-size: 0.85em;
       text-align: center;
@@ -355,16 +353,23 @@ main {
         cursor: pointer;
         background: #fff;
       }
-    }
 
-    .size {
-      font-size: 1.3em;
-      font-weight: bold;
-    }
+      .name {
+        white-space: normal;
+        word-wrap: break-word;
+        max-height: 2.5em;
+        overflow: hidden;
+      }
 
-    .count {
-      color: #999;
-      font-size: 0.9em;
+      .size {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+
+      .count {
+        color: #999;
+        font-size: 0.9em;
+      }
     }
   }
 
