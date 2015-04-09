@@ -67,16 +67,5 @@ angular.module('iLayers')
           }
           return filteredData;
         };
-
-        $scope.showCommands = function(repo) {
-          var data = $scope.graph;
-
-          for (var i=0; i < data.length; i++) {
-            if (data[i].repo.name === repo.name && data[i].repo.tag === repo.tag) {
-              commandService.highlight(data[i].layers);
-              break;
-            }
-          }
-        };
     }]);
 

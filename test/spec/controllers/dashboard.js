@@ -110,23 +110,4 @@ describe('DashboardCtrl', function() {
       expect(result[0].repo.name).toEqual('foo');
     });
   });
-
-  describe('showCommands', function() {
-    beforeEach(function() {
-      scope.graph = [{ 'repo': { 'name': 'foo', 'tag': 'do'}, layers: ['one', 'two'] }];
-      spyOn(commandService, 'highlight');
-    });
-
-    it('should send all layers to commandService.highlight', function() {
-      var repo = { 'name': 'foo', 'tag': 'do'};
-      scope.showCommands(repo);
-      expect(commandService.highlight).toHaveBeenCalledWith(['one','two']);
-    });
-
-    it('should not call commandService if no image matches', function() {
-      var repo = { 'name': 'boo', 'tag': 'hoo'};
-      scope.showCommands(repo);
-      expect(commandService.highlight).not.toHaveBeenCalled();
-    });
-  });
 });

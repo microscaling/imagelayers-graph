@@ -7,34 +7,36 @@
  * # draggable
  */
 angular.module('iLayers')
-  .directive('draggable', function () {
+  .directive('draggable', [ '$window', function ($window) {
     return {
-      template: '<div class="draggable"></div>',
+      template: '<div class="draggable"><div class="drag-handle"></div></div>',
       restrict: 'E',
-      scope: true,
+      scope: {},
       replace: true,
       link: function postLink(scope, element, attrs) {
-        var dragging = false;
-        element.bind('mousedown', function() {
-          dragging = true;
+        var handle = element.find('.drag-handle');
+
+        scope.updatePosition = function(pos) {
+            $('main').css('bottom', pos + 'px');
+            $('footer').css('height', pos + 'px');
+        };
+
+        handle.bind('mousedown', function() {
+          element.addClass('dragging');
 
         });
         $('body').bind('mouseup', function() {
-          dragging = false;
+          element.removeClass('dragging');
         });
 
         $('body').bind('mousemove', function(e) {
-          var height = window.innerHeight,
-              bottom = height - e.clientY;
+          var height = $window.innerHeight,
+              bottom = height - e.pageY;
 
-          console.log(e.clientY);
-          console.log('h: ', height);
-          if (dragging) {
-            console.log("event ", bottom);
-            $('main').css('bottom', bottom + 'px');
-            $('footer').css('height', bottom + 'px');
+          if (element.hasClass('dragging')) {
+            scope.updatePosition(bottom);
           }
         });
       }
     };
-  });
+  }]);
