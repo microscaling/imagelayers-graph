@@ -154,14 +154,11 @@ svg {
 @-webkit-keyframes stack {
   0% {
     transform: translateY(0px);
-    opacity: .75;
+    -webkit-transform: translateY(0px);
   }
   25% {
     transform: translateY(20px);
-    opacity: .9;
-  }
-  100% {
-    opacity: .75;
+    -webkit-transform: translateY(20px);
   }
 }
 
