@@ -24,7 +24,7 @@
   position: fixed;
   background: rgba(0, 0, 0, 0.6);
   top: 0;
-  right: 0;
+  right: 15px;
   bottom: 0;
   left: 0;
   -webkit-backface-visibility: hidden;
@@ -164,9 +164,8 @@ body.ngdialog-open {
 
 .ngdialog.ngdialog-theme-layers main {
   padding: 20px;
-  overflow: auto;
   position: static;
-  max-height: 300px;
+  overflow: visible;
 }
 
 .ngdialog.ngdialog-theme-layers main section {
@@ -333,9 +332,20 @@ body.ngdialog-open {
   border: 1px solid #c5c5c5;
   position: relative;
 
+  &:after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    @include icon-grey;
+    @extend .icon-thick-arrow-down;
+  }
+
   select {
     background: transparent;
-    width: 190px;
+    width: 200px;
     margin: 10px 0 0 10px;
     font-size: 15px;
     font-style: italic;
@@ -344,5 +354,8 @@ body.ngdialog-open {
     border-radius: 0;
     outline: none;
     text-indent: 1px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
   }
 }

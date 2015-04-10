@@ -200,6 +200,11 @@ angular.module('MassAutoComplete', [])
       // When selecting from the menu directly (using click or touch) the
       // selection is directly applied.
       $scope.apply_selection = function (i) {
+        if (current_element === undefined) {
+          $scope.show_autocomplete = false;
+          return;
+        }
+
         current_element[0].focus();
         if (!$scope.show_autocomplete || i > $scope.results.length || i < 0)
           return;
