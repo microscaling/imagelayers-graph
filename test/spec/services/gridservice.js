@@ -72,13 +72,13 @@ describe('Service: gridService', function () {
       it('should return a bar location data', function() {
         var res = gridService.buildGrid(data);
         expect(res.matrix.inventory.bar.row).toEqual(1);
-        expect(res.matrix.inventory.bar.count).toEqual(2);
+        expect(res.matrix.inventory.bar.count).toEqual(1);
       });
 
       it('should return a baz location data', function() {
         var res = gridService.buildGrid(data);
         expect(res.matrix.inventory.baz.row).toEqual(0);
-        expect(res.matrix.inventory.baz.count).toEqual(1);
+        expect(res.matrix.inventory.baz.count).toEqual(0);
       });
 
       it('should return a boo location data', function() {

@@ -100,7 +100,8 @@ angular.module('iLayers')
                 start = l;
               }
             }
-            commandService.highlight(item.image.layers.slice(start, layers.length));
+
+            commandService.highlight(item.image.layers.slice(0,start+1));
           }
         };
 

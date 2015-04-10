@@ -7,8 +7,8 @@ angular.module('iLayers')
           highlight: function (layers) {
             var cmds = []
             for(var i=0; i < layers.length; i++) {
-              var command = layers[i].cmd;
-              cmds.unshift(command);
+              var command = layers[i].cmd || 'FROM scratch';
+              cmds.push(command);
             }
 
             $rootScope.$broadcast('command-change', { 'commands': cmds });

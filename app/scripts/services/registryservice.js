@@ -6,7 +6,17 @@ angular.module('iLayers')
 
       return {
           inspect: function (list) {
-            return $http.post(ENV.apiEndpoint + '/registry/analyze', { 'repos': list });
+            var promise = $http.post(ENV.apiEndpoint + '/registry/analyze', { 'repos': list }).then(function(response) {
+              var images = response.data;
+              angular.forEach(images, function(image) {
+                image.layers = image.layers.reverse();
+              });
+
+              response.data = images;
+              return response;
+            });
+
+            return promise;
           },
           search: function(name) {
             return $http.get(ENV.apiEndpoint + '/registry/search?name='+name);

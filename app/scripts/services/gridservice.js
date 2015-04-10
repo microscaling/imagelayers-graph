@@ -45,7 +45,7 @@ angular.module('iLayers')
 
       var changeInventoryCounts = function(images, layer, col) {
         var location = inventory[layer.id],
-            pIdx = findLayerIndex(layer.id, location.image.layers);
+            pIdx = findLayerIndex(layer.id, location.image.layers),
             parent = (pIdx !== -1) ? location.image.layers[pIdx].parent : '';
 
         location.count = location.count + 1;
@@ -104,10 +104,10 @@ angular.module('iLayers')
             rows = group[0].length - 1,
             compare = function(a,b) {
               if (a.str < b.str) {
-                   return 1;
+                   return -1;
                 }
                 if (a.str > b.str) {
-                  return -1;
+                  return 1;
                 }
               return 0;
             };
@@ -127,10 +127,10 @@ angular.module('iLayers')
               }
             });
 
-            subject = tmp.column[rows - r];
+            subject = tmp.column[r];
             if (subject.layer.id !== 'empty') {
               angular.forEach(copy, function(col) {
-                if (col.column[rows-r].layer.id === subject.layer.id) {
+                if (col.column[r].layer.id === subject.layer.id) {
                   cohesion[c].str = r;
                 }
               });
@@ -197,7 +197,7 @@ angular.module('iLayers')
 
       var buildMatrix = function(sortedImages) {
         for (var i=0; i < sortedImages.length; i++) {
-          for (var j=0; j < sortedImages[i].layers.length; j++) {
+          for (var j= sortedImages[i].layers.length-1; j >= 0; j--) {
             var layer = sortedImages[i].layers[j];
 
             if (inventory[layer.id].count > 0) {
@@ -254,7 +254,7 @@ angular.module('iLayers')
           var leaves = [];
 
           for (var c=0; c < grid.cols; c++) {
-            for (var l=0; l < grid.rows; l++) {
+            for (var l=grid.rows -1; l >= 0; l--) {
               var id = grid.matrix.map[c][l].layer.id,
                   repo = {};
 
