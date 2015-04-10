@@ -7,6 +7,17 @@ angular.module('iLayers')
       boxWidth: 180
     };
 
+    var startsWith = function(str, text) {
+      var list = text.split(' '),
+          retval = false;
+
+      angular.forEach(list, function(item) {
+        retval = retval || (str.indexOf(item) === 0);
+      });
+
+      return retval
+    };
+
     return {
       templateUrl: 'views/grid.html',
       restrict: 'A',
@@ -22,20 +33,24 @@ angular.module('iLayers')
             return 'noop';
           }
 
-          if (cmd.lastIndexOf('curl') !== -1) {
-            classes.push('curl');
+          if (startsWith(cmd, 'RUN')) {
+            classes.push('cat1');
           }
 
-          if (cmd.lastIndexOf('install') !== -1 || cmd.lastIndexOf('ADD') !== -1) {
-            classes.push('add');
+          if (startsWith(cmd, 'ADD COPY')) {
+            classes.push('cat2');
           }
 
-          if (cmd.lastIndexOf('ENV') !== -1) {
-            classes.push('env');
+          if (startsWith(cmd, 'VOLUME ENV USER WORKDIR')) {
+            classes.push('cat3');
           }
 
-          if ( cmd.lastIndexOf('CMD') !== -1) {
-            classes.push('cmd');
+          if (startsWith(cmd, 'ENTRYPOINT CMD')) {
+            classes.push('cat4');
+          }
+
+          if (startsWith(cmd, 'FROM MAINTAINER EXPOSE ONBUILD')) {
+            classes.push('cat5');
           }
 
           return classes.join(' ');

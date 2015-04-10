@@ -404,23 +404,28 @@ main {
       position: relative;
       font-size: 0.9em;
 
-      &.env {
-        background: #a0a0a0;
+      &.cat5 {
+        background: #aaa;
+        color: #444;
+      }
+
+      &.cat4 {
+        background: #fff;
+        color: #444;
+      }
+
+      &.cat3 {
+        background: #699C48;
         color: #fff;
       }
 
-      &.cmd {
-        background: #17628A;
+      &.cat2 {
+        background: #229FE5;
         color: #fff;
       }
 
-      &.add {
-        background: #5E913F;
-        color: #fff;
-      }
-
-      &.curl {
-        background: #E8581E;
+      &.cat1 {
+        background: #186D95;
         color: #fff;
       }
 
