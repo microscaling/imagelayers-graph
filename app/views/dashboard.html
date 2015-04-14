@@ -31,7 +31,7 @@
 </main>
 <footer custom-scroller>
     <draggable></draggable>
-    <section class="journal" journal scroll-glue>
+    <section class="journal" scroll-glue ng-controller="JournalCtrl">
         <ul>
             <li ng-repeat='command in commands track by $index'>{{ command }}</li>
         </ul>

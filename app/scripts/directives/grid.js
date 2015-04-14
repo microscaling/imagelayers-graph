@@ -4,7 +4,7 @@ angular.module('iLayers')
   .directive('grid', ['$timeout', '$sce', 'commandService', 'gridService', function($timeout, $sce, commandService, gridService) {
     var constants = {
       colWidth: 210,
-      boxWidth: 180
+      boxWidth: 160
     };
 
     var startsWith = function(str, text) {
@@ -60,7 +60,7 @@ angular.module('iLayers')
           if (count === 0) {
             return 0;
           }
-          return count * constants.boxWidth + (count-1)*20;
+          return count * constants.boxWidth + (count-1)*40;
         };
 
         self.getCommand = function(layer) {
@@ -141,6 +141,32 @@ angular.module('iLayers')
             var graphData = scope.applyFilters(scope.graph, filter);
             scope.grid = scope.buildGrid(graphData);
           }
+        });
+        
+        scope.$on('lock-image', function(evt, data) {
+          var graph = scope.graph,
+              lockedLayers = {};
+          if (data.image) {
+            for (var i=0; i < graph.length; i++) {
+              if (data.image.name === graph[i].repo.name && data.image.tag === graph[i].repo.tag) {
+                var layers = graph[i].layers;
+                for (var l=0; l < layers.length; l++) {
+                  lockedLayers[layers[l].id] = layers[l].id;
+                }
+                break;
+              }
+            }
+          }
+          
+          angular.forEach(scope.grid, function(panel) {
+            var layer = panel.layer;
+
+            if (lockedLayers[layer.id] !== undefined) {
+              panel.type = panel.type + ' locked';
+            } else {
+              panel.type = panel.type.replace('locked', '');
+            }
+          });
         });
       }
     };

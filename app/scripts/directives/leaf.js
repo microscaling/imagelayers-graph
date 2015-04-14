@@ -12,7 +12,7 @@ angular.module('iLayers')
       templateUrl:'views/leaf.html',
       restrict: 'E',
       replace: true,
-      link: function(scope) {
+      link: function(scope, element) { 
         scope.showCommands = function(repo) {
           var data = scope.graph;
 
@@ -23,6 +23,21 @@ angular.module('iLayers')
             }
           }
         };
+        
+        scope.applyLock = function(repo) { 
+          var lock = commandService.lock();
+          
+          $('div.leaves section').removeClass('locked');
+          
+          if (lock !== undefined && lock.identity === repo.identity) {
+            commandService.release();
+          } else {
+            element.addClass('locked');
+            commandService.release();
+            scope.showCommands(repo);
+            commandService.lock(repo);
+          }
+        }
       }
     };
   }]);

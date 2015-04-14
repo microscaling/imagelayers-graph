@@ -11,6 +11,7 @@ angular.module('iLayers')
         if (sortedImages.length === 0) {
           return 0;
         }
+        
         return sortedImages[0].layers.length;
       };
 
@@ -22,7 +23,7 @@ angular.module('iLayers')
             idx = i;
           }
         }
-
+        
         return idx;
       };
 
@@ -94,107 +95,64 @@ angular.module('iLayers')
           return images;
         }
       };
-
-      var sortGroupCohesion = function(group) {
-        var cohesion = [],
-            result = [],
-            subject = {},
-            copy = [],
-            tmp = {},
-            rows = group[0].length - 1,
-            compare = function(a,b) {
-              if (a.str < b.str) {
-                   return -1;
-                }
-                if (a.str > b.str) {
-                  return 1;
-                }
-              return 0;
-            };
-
-        angular.forEach(group, function(col) {
-          cohesion.push({ 'column' : col, 'str': 0});
-        });
-
-        for (var r = 0; r < rows; r++) {
-          for (var c=0; c < cohesion.length; c++) {
-            copy = [];
-            angular.forEach(cohesion, function(col, idx) {
-              if (idx === c) {
-                tmp = col;
+     
+      var sortByLayerCohesion = function(groups, row) {
+        var retval = [];
+        
+        angular.forEach(groups, function(group) {
+          var set = [];
+          
+          angular.forEach(group, function(image) {
+            // Go through all the columns in the group //
+            for (var g=0; g < image.length; g++) {
+              var col = image[g],
+                  subject = {},
+                  found = false;  
+              
+              if (set.length === 0) {
+                set.push([col]);
               } else {
-                copy.push(col);
-              }
-            });
-
-            subject = tmp.column[r];
-            if (subject.layer.id !== 'empty') {
-              angular.forEach(copy, function(col) {
-                if (col.column[r].layer.id === subject.layer.id) {
-                  cohesion[c].str = r;
+                subject = col[row];
+                // look for match in temporary set
+                for (var i=0; i < set.length; i++) {
+                  if (subject.layer.id !== 'empty' 
+                    && subject.layer.id === set[i][0][row].layer.id) 
+                  {
+                    set[i].push(col);
+                    found = true;
+                  }
                 }
-              });
-            }
-          }
-        }
-        cohesion = cohesion.sort(compare);
-
-        angular.forEach(cohesion, function(col) {
-          result.push(col.column);
-        });
-
-        return result;
-      };
-
-      var groupShuffle = function(groups, column) {
-        var group = {},
-            found = false,
-            subject = {};
-
-        if (groups.length === 0) {
-          groups.push([column]);
-        } else {
-          for (var g =0; g < groups.length; g++) {
-            found = false;
-            group = groups[g];
-
-            for (var row = 0; row < column.length; row++) {
-              subject = column[row];
-
-              if (subject.layer.id !== 'empty' && subject.layer.id === group[0][row].layer.id) {
-                group.push(column);
-                found = true;
-                break;
+                if (!found) {
+                  set.push([col]);
+                }
               }
             }
-
-            if (found) {
-              break;
-            } else {
-              groups.push([column]);
-            }
-          }
-        }
-      };
-
+          });     
+          retval.push(set);
+        });
+        return retval;
+      }
+      
       var groupDependent = function(matrix) {
         var groups = [],
-            merged = [];
-
-        angular.forEach(matrix, function(column) {
-          groupShuffle(groups, column);
-        });
-
-        for(var g=0; g < groups.length; g++) {
-          groups[g] = sortGroupCohesion(groups[g]);
+            merged = [],
+            sets = [],
+            rows = (groups.length >0) ? groups[0].length : 0;
+        
+        groups.push([]);
+        groups[0].push(matrix);
+        
+        for (var row=0; row < 2; row++) {
+          groups = sortByLayerCohesion(groups, row);
         }
-
+        
         // merge groups
-        merged = merged.concat.apply(merged, groups);
+        sets = sets.concat.apply(sets, groups);
+        merged = merged.concat.apply(merged, sets);
+        
         return merged;
-
-      };
-
+      }
+      
       var buildMatrix = function(sortedImages) {
         for (var i=0; i < sortedImages.length; i++) {
           for (var j= sortedImages[i].layers.length-1; j >= 0; j--) {

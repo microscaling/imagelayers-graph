@@ -47,7 +47,8 @@ angular.module('iLayers')
 
         // public
         $scope.graph = [];
-
+        $scope.lockedImage = undefined;
+        
         $scope.filters =  {
           'image': ''
         };

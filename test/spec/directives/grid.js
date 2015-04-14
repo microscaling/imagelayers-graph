@@ -40,6 +40,24 @@ var directive, scope, controller, layer, commandService, gridService;
       expect(controller.classifyLayer(layer, 1)).toEqual('box cat5');
     });
   });
+  
+  describe('scope.$on("lock-image")', function() {
+    beforeEach(function() {
+      scope.graph = [{ repo: { name: 'foo', tag: 'foo' }, layers: [{ id: '1' }] }];
+      scope.grid = [{type: '', layer: { id: '1' } }];
+    });
+    
+    it('should lock layers', function() {
+      scope.$broadcast('lock-image', { image: { name: 'foo', tag: 'foo' } });
+      expect(scope.grid[0].type).toEqual(' locked');
+    });
+    
+    it('should unlock layers when already locked', function() {
+      scope.grid[0].type = 'locked';
+      scope.$broadcast('lock-image', {});
+      expect(scope.grid[0].type).toEqual('');
+    });
+  });
 
   describe('findWidth', function() {
     it('should return 0 when count = 0', function() {
@@ -47,11 +65,11 @@ var directive, scope, controller, layer, commandService, gridService;
     });
 
     it('should return box width when count is 1', function() {
-      expect(controller.findWidth(1)).toEqual(180);
+      expect(controller.findWidth(1)).toEqual(160);
     });
 
     it('should return box width + 20 padding', function() {
-      expect(controller.findWidth(2)).toEqual(380);
+      expect(controller.findWidth(2)).toEqual(360);
     });
   });
 
@@ -66,10 +84,13 @@ var directive, scope, controller, layer, commandService, gridService;
   });
 
   describe('scope.highlightCommand', function() {
-
   });
 
   describe('scope.clearCommand', function() {
-
+    it('should call commandService.clear()', function() {
+      spyOn(commandService, 'clear');
+      scope.clearCommands();
+      expect(commandService.clear).toHaveBeenCalled();
+    });
   });
 });
