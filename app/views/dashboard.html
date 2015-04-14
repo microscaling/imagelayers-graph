@@ -11,7 +11,15 @@
     <nav sticky offset='134'>
         <section class="search" ng-controller="SearchCtrl as search">
           <h3>Docker Images</h3>
-            <div class="plus-button" ng-click="showSearch()">Manage Images</div>
+            <div class="icon-button plus" ng-click="showSearch()">Add Images</div>
+
+            <div class="icon-button copy" ng-class="{ copied: copied }"  ui-zeroclip zeroclip-copied="copied=true"
+                 zeroclip-text="{{ URL }}">
+              <span ng-hide="copied">Copy URL</span>
+              <span ng-show="copied">Copied!</span>
+
+            </div>
+
             <input type='text' ng-model="filters.image" placeholder='Filter images...' reset-field>
         </section>
         <div class="leaves lock-horizon" ng-show="leaves.length > 0" style="width: {{ leaves.length * 210 }}px;">

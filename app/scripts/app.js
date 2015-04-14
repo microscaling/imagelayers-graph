@@ -7,10 +7,11 @@ angular
     'ngDialog',
     'MassAutoComplete',
     'luegg.directives',
-    'config'
+    'config',
+    'zeroclipboard'
   ])
-  .config(['$httpProvider', '$locationProvider', '$routeProvider',
-    function($httpProvider, $locationProvider, $routeProvider) {
+  .config(['$httpProvider', '$locationProvider', '$routeProvider', 'uiZeroclipConfigProvider',
+    function($httpProvider, $locationProvider, $routeProvider, uiZeroclipConfigProvider) {
 
       var errorInterceptor = function($q) {
         return {
@@ -37,6 +38,10 @@ angular
       })
       .otherwise ({
         redirectTo: '/'
+      });
+
+      uiZeroclipConfigProvider.setZcConf({
+        swfPath: '../bower_components/zeroclipboard/dist/ZeroClipboard.swf'
       });
 
   }]);

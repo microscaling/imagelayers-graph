@@ -28,6 +28,8 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/ngDialog/js/ngDialog.js',
       'bower_components/angular-scroll-glue/src/scrollglue.js',
+      'bower_components/zeroclipboard/dist/ZeroClipboard.js',
+      'bower_components/angular-zeroclipboard/src/angular-zeroclipboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/lib/**/*.js',

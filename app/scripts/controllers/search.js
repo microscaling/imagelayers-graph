@@ -5,6 +5,8 @@ angular.module('iLayers')
       function($scope, $location, ngDialog) {
         var self = this;
 
+        $scope.URL = $location.absUrl();
+
         self.buildQueryParams = function(list) {
           var params = [];
           for (var i=0; i < list.length; i++) {

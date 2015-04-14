@@ -107,40 +107,63 @@ header {
   }
 }
 
-.plus-button {
+.icon-button {
   margin-top: 21px;
   float: left;
   position: relative;
   text-decoration: underline;
   padding-left: 30px;
-
+  margin-left: 20px;
   &:hover {
     text-decoration: none;
     cursor: pointer;
   }
 
-  &:before {
+  &:before, &:after {
     content: '';
     width: 20px;
     height: 20px;
-    border-radius: 10px;
-    background: #91B748;
     position: absolute;
     display: block;
+    left: 5px;
     top: 0;
-    left: 0;
+  }
+
+  &:before {
+    border-radius: 10px;
   }
 
   &:after {
-    content: '';
-    background: url(../images/plus-white.svg) 50% 50% no-repeat;
     background-size: 10px 10px;
-    display: block;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    left: 0;
-    top: 0;
+  }
+
+  &.plus {
+    &:before {
+      background: #91B748;
+    }
+    &:after {
+     background: url(../images/plus-white.svg) 50% 50% no-repeat;
+    }
+  }
+
+  &.copy {
+    cursor: pointer;
+    &:before {
+      background: #CCCCCC;
+    }
+    &:after {
+      top: 4px;
+      left: 8px;
+      height: 13px;
+      width: 13px;
+      background-size: 13px 1300px;
+      background-position: 0 -130px;
+      @extend .icon-checkmark;
+      @include icon-white;
+    }
+  }
+  &.copied:before {
+    background: #91B748;
   }
 }
 
@@ -449,6 +472,7 @@ main {
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
+          font-size: 12px;
         }
       }
     }
