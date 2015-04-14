@@ -28,16 +28,16 @@ var directive, scope, controller, layer, commandService, gridService;
     });
 
     it('should return command classes', function() {
-      layer.container_config.Cmd = [' curl '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box curl');
-      layer.container_config.Cmd = [' ADD '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box add');
-      layer.container_config.Cmd = [' ENV '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box env');
-      layer.container_config.Cmd = [' install '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box add');
-      layer.container_config.Cmd = [' CMD '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box cmd');
+      layer.container_config.Cmd = ['RUN '];
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cat1');
+      layer.container_config.Cmd = ['ADD '];
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cat2');
+      layer.container_config.Cmd = ['VOLUME '];
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cat3');
+      layer.container_config.Cmd = ['CMD '];
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cat4');
+      layer.container_config.Cmd = ['FROM '];
+      expect(controller.classifyLayer(layer, 1)).toEqual('box cat5');
     });
   });
 
