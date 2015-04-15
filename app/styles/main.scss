@@ -314,6 +314,7 @@ main {
       position: fixed;
       background: #d8d8d8;
       overflow: hidden;
+      width: calc(100% - 15px);
       top: 0;
       left: 0;
 
@@ -343,6 +344,7 @@ main {
     padding-left: 10px;
     white-space: nowrap;
     overflow: hidden;
+    box-sizing: content-box;
     border-bottom: 1px solid #b3b3b3;
 
     section {

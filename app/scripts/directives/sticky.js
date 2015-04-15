@@ -26,7 +26,6 @@ angular.module('iLayers')
           if (main.scrollTop() >= offset) {
             element.addClass('sticky');
           } else {
-            element.css('width', '100%');
             element.removeClass('sticky');
           }
         });
