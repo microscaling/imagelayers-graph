@@ -26,7 +26,17 @@ body {
   background-color: #d8d8d8;
 }
 
+<<<<<<< HEAD
 .clear { clear: both; }
+=======
+#error {
+  background: rgb(217,0,0);
+  margin: 10px 2%;
+  color: #fff;
+  padding: 10px;
+  width: 95%;
+}
+>>>>>>> f0bf63a... initial error interception
 
 /* Header and Nav*/
 header {

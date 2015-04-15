@@ -22,6 +22,7 @@
 
             <input type='text' ng-model="filters.image" placeholder='Filter images...' reset-field>
         </section>
+        <notification></notification>
         <div class="leaves lock-horizon" ng-show="leaves.length > 0" style="width: {{ leaves.length * 210 }}px;">
             <leaf ng-repeat="leaf in leaves" ng-mouseenter="showCommands(leaf)"></leaf>
         </div>
@@ -29,7 +30,7 @@
     <section class="graph" grid>
     </section>
 </main>
-<footer custom-scroller>
+<footer>
     <draggable></draggable>
     <section class="journal" scroll-glue ng-controller="JournalCtrl">
         <ul>
