@@ -181,8 +181,41 @@ body.ngdialog-open {
   position: static;
 }
 
-.ngdialog.ngdialog-theme-layers .plus-button {
-  padding-bottom: 20px;
+.ngdialog.ngdialog-theme-layers { 
+  .plus-button {
+    float: left;
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 25px;
+    text-decoration: underline;
+    
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    &:before {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background-color: #91B748;
+    }
+    
+    &:after {
+      content: ' ';
+      position: absolute;
+      left: 2px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      @extend .icon-plus-medium;
+      @include icon-white;
+    }
+  } 
 }
 
 .ngdialog.ngdialog-theme-layers .ngdialog-buttons {
