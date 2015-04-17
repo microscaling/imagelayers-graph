@@ -509,6 +509,19 @@ main {
   }
 }
 
+body.error{
+  &:not(.sticky) {
+    div.leaves {
+      &:before {
+        top: -207px;
+      }
+      //search
+      &:after {
+        top: -136px;
+      }
+    }
+  }
+}
 /* Footer */
 footer {
   width: 100%;

@@ -21,8 +21,8 @@ angular.module('iLayers')
           element.fadeIn();
           scope.message = data.msg;
           scope.loading = false;
+          $('body').addClass('error');
         });
-        
       }
     };
   });
