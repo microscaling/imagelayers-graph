@@ -4,14 +4,17 @@ angular.module('iLayers')
   .factory('commandService', ['$rootScope',
     function($rootScope) {
       var locked = undefined;
-      
+    
       return {
           highlight: function (layers) {
             var cmds = []
             for(var i=0; i < layers.length; i++) {
-              var command = layers[i].cmd || 'FROM scratch';
-              cmds.push(command);
+              var cmd = layers[i].container_config.Cmd,
+                  txt = (cmd) ? cmd[cmd.length-1] : null;
+              
+                cmds.push(this.constructCommand(txt));
             }
+              
             if (locked === undefined) {
               $rootScope.$broadcast('command-change', { 'commands': cmds });
             }
@@ -20,7 +23,9 @@ angular.module('iLayers')
           constructCommand: function (cmd) {
             var nop = '(nop) ';
 
-            if (cmd === null || cmd == '') cmd = 'FROM scratch';
+            if (cmd === null || cmd == '') {
+              cmd = 'FROM scratch';
+            }
 
             if (cmd !== undefined) {
               if (cmd.lastIndexOf(nop) > 0) {

@@ -36,7 +36,7 @@ describe('Command Service', function() {
 
   describe('highlight', function() {
     it('should broadcast "command-change" event with commands', function() {
-      service.highlight([{cmd: 'RUN this thing'}]);
+      service.highlight([{ container_config: { Cmd: ['RUN this thing'] } }]);
       expect(rootScope.$broadcast)
         .toHaveBeenCalledWith('command-change', {'commands': ['RUN this thing']});
     });
