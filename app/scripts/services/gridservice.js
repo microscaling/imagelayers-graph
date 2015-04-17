@@ -98,7 +98,7 @@ angular.module('iLayers')
      
       var sortByLayerCohesion = function(groups, row) {
         var retval = [];
-        
+
         angular.forEach(groups, function(group) {
           var set = [];
           
@@ -130,6 +130,7 @@ angular.module('iLayers')
           });     
           retval.push(set);
         });
+        
         return retval;
       }
       
@@ -137,12 +138,12 @@ angular.module('iLayers')
         var groups = [],
             merged = [],
             sets = [],
-            rows = (groups.length >0) ? groups[0].length : 0;
+            rows = (matrix.length) ? matrix[0].length : 0;
         
         groups.push([]);
         groups[0].push(matrix);
         
-        for (var row=0; row < 2; row++) {
+        for (var row=0; row < rows; row++) {
           groups = sortByLayerCohesion(groups, row);
         }
         
