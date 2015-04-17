@@ -41,7 +41,6 @@ angular
       });
 
       uiZeroclipConfigProvider.setZcConf({
-        swfPath: '../bower_components/zeroclipboard/dist/ZeroClipboard.swf'
+        swfPath: 'vendor/ZeroClipboard.swf'
       });
-
   }]);
