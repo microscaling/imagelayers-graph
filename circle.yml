@@ -21,7 +21,7 @@ deployment:
   hub:
     branch: master
     commands:
-      - grunt build
+      - IMAGE_LAYERS_API=$QA_API_IP && grunt build
       - docker build -t centurylink/imagelayers-ui:qa .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:qa
