@@ -112,31 +112,38 @@ header {
   }
 
   nav {
-    background: #555;
     width: 100%;
     display: block;
     padding-left: 190px;
     margin-bottom: 0;
+    padding-top: 20px;
 
     ul li {
-      text-transform: uppercase;
-      font-weight: 400;
+      color: #9c9c9c;
+      font-size: 0.8em;
+      font-weight: normal;
       float: left;
-
-      a {
-        color: #FFF;
-        text-decoration: none;
-        padding: 20px 15px;
-        font-size: 12px;
-        letter-spacing: 2px;
+      position: relative;
+      padding-right: 20px;
+      
+      &:after {
+        content: ' ';
         display: block;
-        width: 100%;
-        text-align: center;
-
-        &:hover {
-          color: #FFF;
-          background-color: rgb(132, 188, 57);
-          transition: background-color 0.25s ease;
+        position: absolute;
+        top: 3px;
+        right: -5px;
+        width: 16px;
+        height: 16px;
+        @extend .icon-thin-arrow-down;
+        @include icon-light-grey;
+      }
+      
+      &:hover {
+        color: #666;
+        cursor: pointer;
+        
+        &:after {
+         @include icon-grey; 
         }
       }
     }
