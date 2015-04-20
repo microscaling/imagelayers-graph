@@ -56,16 +56,16 @@ angular.module('iLayers')
           return classes.join(' ');
         };
 
+        self.getCommand = function(layer) {
+          var command = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
+          return commandService.constructCommand(command);
+        };
+
         self.findWidth = function(count) {
           if (count === 0) {
             return 0;
           }
           return count * constants.boxWidth + (count-1)*40;
-        };
-
-        self.getCommand = function(layer) {
-          var command = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
-          return commandService.constructCommand(command);
         };
 
         self.addDisplayProperties = function(layer) {

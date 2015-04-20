@@ -32,7 +32,7 @@ var directive, scope, route, controller, layer, commandService, gridService;
       layer.container_config.Cmd = ['RUN '];
       expect(controller.classifyLayer(layer, 1)).toEqual('box cat1');
       layer.container_config.Cmd = ['ADD '];
-      expect(controller.classifyLayer(layer, 1)).toEqual('box cat2');
+      expect(controller.classifyLayer(layer, 2)).toEqual('box cat2');
       layer.container_config.Cmd = ['VOLUME '];
       expect(controller.classifyLayer(layer, 1)).toEqual('box cat3');
       layer.container_config.Cmd = ['CMD '];

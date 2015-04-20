@@ -24,6 +24,7 @@ ul, li {
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #d8d8d8;
+  overflow-x: hidden;
 }
 
 .clear { clear: both; }
@@ -218,6 +219,8 @@ section.metrics {
   min-width: 1032px;
   background: #2d2d2d;
   padding: 10px 20px;
+  position: relative;
+  z-index: 99;
 
   li {
     display: inline-block;
@@ -264,6 +267,7 @@ section.search {
   min-width: 1032px;
   background: #fff;
   position: relative;
+  z-index: 99;
 
   h3 {
     float: left;
@@ -347,7 +351,7 @@ main {
         overflow: visible;
         &:before,
         &:after {
-          z-index: -1;
+          z-index: -9;
           right: -20px;
           width: 100%;
           display: block;
@@ -404,6 +408,9 @@ main {
     overflow: hidden;
     box-sizing: content-box;
     border-bottom: 1px solid #b3b3b3;
+    position: relative;
+    z-index: 9;
+    min-width: 100%;
 
     section {
       width: 180px;
@@ -445,9 +452,7 @@ main {
   }
 
   .matrix {
-    background: url(../images/grid_line.png) 1px 0;
     margin-left: 20px;
-    border-left: 1px solid #b2b2b2;
   }
 
   section.graph {
@@ -504,7 +509,7 @@ main {
         width: 160px;
       }
 
-      & > span {
+      > span {
         display: block;
         margin: 0 auto;
         text-align: center;
@@ -520,6 +525,21 @@ main {
           font-size: 12px;
         }
       }
+
+      &:not(.empty):before {
+        content: '';
+        display: block;
+        height: 20px;
+        width: 100%;
+        position: absolute;
+        left: -10px;
+        top: -20px;
+        background-image: url(../images/grid_line.png);
+      }
+    }
+
+    @for $i from 1 through 50 {
+      .box-#{$i} { width: 160px * $i + ($i - 1) *40; }
     }
   }
 
@@ -600,3 +620,4 @@ footer {
     }
   }
 }
+
