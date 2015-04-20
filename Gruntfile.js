@@ -397,6 +397,14 @@ module.exports = function (grunt) {
 
     // Copies remaining files to places other tasks can use
     copy: {
+      vendor: {
+        files: [{
+          expand: true,
+          cwd: 'bower_components/zeroclipboard/dist',
+          dest: '<%= yeoman.app %>/vendor',
+          src: ['ZeroClipboard.swf']
+        }]
+      },
       dist: {
         files: [{
           expand: true,
@@ -465,6 +473,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'copy:vendor',
       'ngconstant:development',
       'concurrent:server',
       'autoprefixer:server',
@@ -498,6 +507,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'copy:vendor',
     'cdnify',
     'cssmin',
     'uglify',

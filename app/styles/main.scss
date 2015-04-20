@@ -184,7 +184,7 @@ section input[type="text"] {
 /* Metrics */
 section.metrics {
   width: 100%;
-  min-width: 1032px;
+  min-width: 1225px;
   background: #2d2d2d;
   padding: 10px 20px;
   position: relative;
@@ -201,6 +201,29 @@ section.metrics {
     }
   }
 
+  div.badge {
+    padding-top: 3px;
+    float: right;
+    
+    button {
+      display: block;
+      margin-bottom: 5px;
+      border: none;
+      outline: none;
+      font-size: 12px;
+      width: 215px;
+      margin-top: 2px;
+      padding: 2px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #777;
+      color: #ffffff;
+      &:hover {
+        background-color: #229fe5;
+      }
+    }
+  }
+  
   dl {
     margin: 0;
     padding: 5px 20px;
@@ -225,6 +248,10 @@ section.metrics {
     span {
       color: #6c6c6c;
     }
+  }
+  
+  button.badge {
+   float: right; 
   }
 }
 

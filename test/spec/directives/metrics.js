@@ -7,7 +7,7 @@ describe('Metrics Directive', function() {
   var directive, scope, controller, layers;
 
   beforeEach(inject(function ($compile, $rootScope) {
-    var elem = angular.element("<section metrics></section>");
+    var elem = angular.element("<metrics></metrics>");
     scope = $rootScope.$new();
     scope.graph = [];
     scope.applyFilters = function() { return [] };

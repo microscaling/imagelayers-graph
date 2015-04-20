@@ -5,7 +5,7 @@ angular.module('iLayers')
 
     return {
       templateUrl: 'views/metrics.html',
-      restrict: 'A',
+      restrict: 'E',
       controller: function($scope) {
         $scope.metrics = {
           count: 0,

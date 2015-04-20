@@ -1,0 +1,38 @@
+<header>
+    Get an Image Badge
+</header>
+<aside>
+     Create a badge to place on your [TBD]<br>
+     You can select an image from ImageLayers
+</aside>
+<main>  
+    <label>Select your image</label>
+      <select ng-options="image.name for image in imageList() | orderBy:'name'" ng-model="selectedImage" class="styled-select"></select>
+    <section ng-show="selectedImage">
+      <div class="preview">
+        <label>Badge Preview</label>
+        <img ng-src="https://badge.imagelayers.io/{{ selectedImage.name }}.svg">
+      </div>
+      <ul>
+        <li>
+          <label>HTML</label>
+          <input type="text" value="{{ badgeAsHtml() }}"/>
+          <div class="icon-button copy" ng-class="{ copied: htmlCopied }"  ui-zeroclip zeroclip-copied="htmlCopied=true"
+               zeroclip-text="{{  badgeAsHtml() }}">
+            <span ng-hide="htmlCopied">Copy to Clipboard</span>
+            <span ng-show="htmlCopied">Copied to Clipboard</span>
+          </div>
+        </li>
+        <li>
+          <label>Markdown</label>
+          <input type="text" value="{{ badgeAsMarkdown() }}"/>
+          <div class="icon-button copy" ng-class="{ copied: markdownCopied }"  ui-zeroclip zeroclip-copied="markdownCopied=true"
+               zeroclip-text="{{  badgeAsMarkdown() }}">
+            <span ng-hide="markdownCopied">Copy to Clipboard</span>
+            <span ng-show="markdownCopied">Copied to Clipboard</span>
+
+          </div>
+        </li>
+      </ul>
+    </section>
+</main>

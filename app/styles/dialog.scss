@@ -314,6 +314,58 @@ body.ngdialog-open {
   }
 }
 
+.ngdialog.ngdialog-theme-layers.badge-dialog {
+  main {
+    overflow: hidden;
+    select {
+      z-index: +1;
+      margin-bottom: 30px;
+    }
+
+    label {
+      margin: 18px 7px 0 0;
+      float: left;
+    }
+    div.preview {
+      clear: both;
+      padding: 20px 0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      label {
+        margin-top: 0;
+      }
+      img {
+        position: relative;
+        top: 3px;
+      }
+    }
+  }
+  
+  ul {
+    margin-top: 10px;
+    clear: both;
+    li {
+      display: block;
+      width: 100%;
+
+      label {
+        width: 90px;
+      }
+      input[type=text] {
+        float: none;
+        display: inline-block;
+        width: calc(95% - 280px);
+        margin-right: 0;
+      }
+      div.copy {
+        display: inline-block;
+        float: right;
+        width: 190px;
+      }
+    }
+  }
+}
+
 .ac-container {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
