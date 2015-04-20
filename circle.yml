@@ -29,7 +29,7 @@ deployment:
   Production:
     branch: release
     commands:
-      - grunt build
+      - export IMAGE_LAYERS_API=$PRO_API_IP1 && grunt build
       - docker build -t centurylink/imagelayers-ui:latest .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:latest
