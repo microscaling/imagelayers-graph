@@ -586,9 +586,10 @@ footer {
     width: 100%;
     height: 100%;
     overflow: auto;
-
+    font-family: monospace;
     padding: 10px 20px;
-    font-size: 0.8em;
+    font-size: 0.95em;
+    line-height: 1.35em;
     color: #a0a0a0;
 
     li {

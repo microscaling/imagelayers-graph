@@ -12,32 +12,46 @@ angular.module('iLayers')
       templateUrl:'views/leaf.html',
       restrict: 'E',
       replace: true,
+      controller: function($scope) {
+        var locked = commandService.locked(),
+            leaf = $scope.leaf;
+
+        if (locked !== undefined && leaf.name === locked.name && leaf.tag === locked.tag) {
+          $scope.lockParam = true;         
+        } 
+      },
       link: function(scope, element) { 
-        scope.showCommands = function(repo) {
+                
+        scope.showCommands = function(repo, force) {
           var data = scope.graph;
 
-          for (var i=0; i < data.length; i++) {
-            if (data[i].repo.name === repo.name && data[i].repo.tag === repo.tag) {
-              commandService.highlight(data[i].layers);
-              break;
+          if (repo) {
+            for (var i=0; i < data.length; i++) {
+              if (data[i].repo.name === repo.name && data[i].repo.tag === repo.tag) {
+                commandService.highlight(data[i].layers, force);
+                break;
+              }
             }
           }
         };
         
         scope.applyLock = function(repo) { 
-          var lock = commandService.lock();
+          var lock = commandService.locked();
           
           $('div.leaves section').removeClass('locked');
           
-          if (lock !== undefined && lock.identity === repo.identity) {
-            commandService.release();
+          commandService.release();
+          
+          if (lock !== undefined && lock.name === repo.name && lock.tag === repo.tag) {
+            scope.lockParam = false;
           } else {
-            element.addClass('locked');
-            commandService.release();
+            scope.lockParam = true;
             scope.showCommands(repo);
             commandService.lock(repo);
           }
-        }
+        };
+        
+        scope.showCommands(commandService.locked(), scope.lockParam);
       }
     };
   }]);

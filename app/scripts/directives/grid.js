@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('iLayers')
-  .directive('grid', ['$timeout', '$sce', 'commandService', 'gridService', function($timeout, $sce, commandService, gridService) {
+  .directive('grid', ['$timeout', '$sce', '$routeParams', 'commandService', 'gridService', function($timeout, $sce, $routeParams, commandService, gridService) {
     var constants = {
       colWidth: 210,
       boxWidth: 160
@@ -72,6 +72,14 @@ angular.module('iLayers')
           layer.cmd = $sce.trustAsHtml(self.getCommand(layer));
           return layer;
         };
+        
+        $scope.checkLockParam =function() {
+          if ($routeParams.lock) {
+            var lock = $routeParams.lock.split(':'),
+                tag = (lock.length > 1) ? lock[1] : 'latest';
+            commandService.lock({ name: lock[0], tag: tag });
+          }
+        };
 
         $scope.unwrapGrid = function(grid) {
           var data = [],
@@ -132,8 +140,11 @@ angular.module('iLayers')
           return scope.unwrapGrid(gridData);
         };
 
-        scope.$watch('graph', function(graph) {
+        scope.$watch('graph', function(graph, oldGraph) {
           scope.grid = scope.buildGrid(graph);
+          if (oldGraph.length === 0) {
+            scope.$evalAsync(scope.checkLockParam);
+          }
         });
 
         scope.$watch('filters.image', function(filter) {
@@ -143,7 +154,7 @@ angular.module('iLayers')
           }
         });
         
-        scope.$on('lock-image', function(evt, data) {
+        scope.$on('lock-image', function(evt, data) {   
           var graph = scope.graph,
               lockedLayers = {};
           if (data.image) {
@@ -160,7 +171,7 @@ angular.module('iLayers')
           
           angular.forEach(scope.grid, function(panel) {
             var layer = panel.layer;
-
+            
             if (lockedLayers[layer.id] !== undefined) {
               panel.type = panel.type + ' locked';
             } else {

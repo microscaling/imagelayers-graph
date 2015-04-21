@@ -52,7 +52,6 @@ describe('DashboardCtrl', function() {
     beforeEach(inject(function($q) {
       deferredSuccess = $q.defer();
       spyOn(registryService, 'inspect').and.returnValue(deferredSuccess.promise);
-      //deferredSuccess.resolve({data: {'repo': {}, 'layers': []}});
     }));
 
     it('should do nothing when no images provided', function() {
@@ -108,6 +107,20 @@ describe('DashboardCtrl', function() {
 
       expect(result.length).toEqual(1);
       expect(result[0].repo.name).toEqual('foo');
+    });
+    
+    it('should call commandService.release()', function() {
+      spyOn(commandService,'release');
+      scope.applyFilters(data, 'foo');
+      scope.$digest();
+      expect(commandService.release).toHaveBeenCalled();
+    });
+    
+    it('should call commandService.lock()', function() {
+      spyOn(commandService,'lock');
+      scope.applyFilters(data, 'foo');
+      scope.$digest();
+      expect(commandService.lock).toHaveBeenCalledWith(undefined);
     });
   });
 });

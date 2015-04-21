@@ -68,6 +68,8 @@ angular.module('iLayers')
         $scope.addImages = function() {
           var sanitizedList = [];
 
+          $location.search('lock', null);
+          
           angular.forEach($scope.searchList, function(value) {
             if (value.name !== '' && value.found === true) {
               this.push(value);

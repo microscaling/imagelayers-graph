@@ -29,7 +29,7 @@ describe('Directive: leaf', function () {
     it('should send all layers to commandService.highlight', function() {
       repo = { 'name': 'foo', 'tag': 'do'};
       scope.showCommands(repo);
-      expect(commandService.highlight).toHaveBeenCalledWith(['one','two']);
+      expect(commandService.highlight).toHaveBeenCalledWith(['one','two'], undefined);
     });
 
     it('should not call commandService if no image matches', function() {
@@ -50,9 +50,9 @@ describe('Directive: leaf', function () {
         spyOn(commandService, 'lock').and.returnValue(undefined);
       });
       
-      it('adds locked class to element', function() {
+      it('sets lockParam', function() {
         scope.applyLock(repo);
-        expect(elem.hasClass('locked')).toBeTruthy();
+        expect(scope.lockParam).toBeTruthy();
       });
       
       it('calls release on commandService', function() {

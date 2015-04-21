@@ -27,10 +27,11 @@ angular.module('iLayers')
         };
 
         self.searchImages = function(route) {
-
+          var searchTerms;
+          
           if (route.images !== undefined) {
             $scope.loading = true;
-            var searchTerms = self.buildTerms(route.images);
+            searchTerms = self.buildTerms(route.images);
 
             // Load Data
             registryService.inspect(searchTerms).then(function(response) {
@@ -47,7 +48,6 @@ angular.module('iLayers')
 
         // public
         $scope.graph = [];
-        $scope.lockedImage = undefined;
         
         $scope.filters =  {
           'image': ''
@@ -56,7 +56,8 @@ angular.module('iLayers')
         $scope.applyFilters = function(graphData, filter) {
           var filteredData = [],
               element = {},
-              key = '';
+              key = '',
+              locked = commandService.locked();
 
           for (var i=0; i < graphData.length; i ++) {
             element = graphData[i].repo;
@@ -65,6 +66,12 @@ angular.module('iLayers')
               filteredData.push(graphData[i]);
             }
           }
+          
+          $scope.$evalAsync(function() { 
+            commandService.release();
+            commandService.lock(locked) 
+          });
+          
           return filteredData;
         };
 

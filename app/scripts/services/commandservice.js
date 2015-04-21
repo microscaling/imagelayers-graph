@@ -6,7 +6,7 @@ angular.module('iLayers')
       var locked = undefined;
     
       return {
-          highlight: function (layers) {
+          highlight: function (layers, force) {
             var cmds = []
             for(var i=0; i < layers.length; i++) {
               var cmd = layers[i].container_config.Cmd,
@@ -14,8 +14,8 @@ angular.module('iLayers')
               
                 cmds.push(this.constructCommand(txt));
             }
-              
-            if (locked === undefined) {
+            
+            if (locked === undefined || force === true) {
               $rootScope.$broadcast('command-change', { 'commands': cmds });
             }
           },
@@ -45,18 +45,23 @@ angular.module('iLayers')
           clear: function() {
             $rootScope.$broadcast('command-change', { 'commands': [] });
           },
+          
+          locked: function() {
+            return locked;
+          },
         
           lock: function(image) {
             if (image !== undefined) {
               locked = image;
             }
             
-            $rootScope.$broadcast('lock-image', { 'image': image });
+            $rootScope.$broadcast('lock-image', { 'image': locked });
             return locked; 
           },
         
           release: function() {
             locked = undefined;
+            $rootScope.$broadcast('lock-image', { 'image': locked });
           }
       };
   }]);

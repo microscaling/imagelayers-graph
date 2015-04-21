@@ -6,9 +6,9 @@ describe('Directive: grid', function () {
   // Load the templates
   beforeEach(module('views/grid.html'));
 
-var directive, scope, controller, layer, commandService, gridService;
+var directive, scope, route, controller, layer, commandService, gridService;
 
-  beforeEach(inject(function ($compile, $rootScope, _commandService_, _gridService_) {
+  beforeEach(inject(function ($compile, $rootScope, $routeParams, _commandService_, _gridService_) {
     var elem = angular.element("<section grid graph='graph'></section>");
     scope = $rootScope.$new();
     scope.graph = [];
@@ -19,6 +19,7 @@ var directive, scope, controller, layer, commandService, gridService;
     layer = { Size: 0, container_config: { Cmd: [] } };
     commandService = _commandService_;
     gridService = _gridService_;
+    route = $routeParams;
   }));
 
   describe('classifyLayer', function() {
@@ -38,6 +39,33 @@ var directive, scope, controller, layer, commandService, gridService;
       expect(controller.classifyLayer(layer, 1)).toEqual('box cat4');
       layer.container_config.Cmd = ['FROM '];
       expect(controller.classifyLayer(layer, 1)).toEqual('box cat5');
+    });
+  });
+  
+  describe('$scope.checkLockParam', function() {
+    beforeEach(function() {
+      spyOn(commandService, 'lock');
+    });
+    
+    describe('when route has lock', function() {
+      it('should call commandService.lock', function() {
+        route.lock = 'test:foo';
+        scope.checkLockParam();
+        expect(commandService.lock).toHaveBeenCalledWith({ name: 'test', tag: 'foo' });
+      });
+      
+      it('should add latest tag if not provided', function() {
+        route.lock = 'test';
+        scope.checkLockParam();
+        expect(commandService.lock).toHaveBeenCalledWith({ name: 'test', tag: 'latest' });
+      });
+    });
+    
+    describe('when route has no lock', function() {
+      it('should not call commandService.lock', function() {
+        scope.checkLockParam();
+        expect(commandService.lock).not.toHaveBeenCalled();
+      });
     });
   });
   
