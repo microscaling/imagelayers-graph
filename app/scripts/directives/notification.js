@@ -9,7 +9,7 @@
 angular.module('iLayers')
   .directive('notification', function () {
     return {
-      template: '<div id="error">{{ message }}</div>',
+      template: '<div id="error">{{ message }} <div class="dismiss" ng-click="dismiss()"></div></div>',
       restrict: 'E',
       replace: true,
       link: function postLink(scope, element, attrs) {
@@ -23,6 +23,12 @@ angular.module('iLayers')
           scope.loading = false;
           $('body').addClass('error');
         });
+        
+        scope.dismiss = function() {
+          element.fadeOut(400, function() {
+            $('body').removeClass('error');
+          });
+        }
       }
     };
   });

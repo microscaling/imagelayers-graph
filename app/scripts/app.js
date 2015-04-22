@@ -11,8 +11,8 @@ angular
     'zeroclipboard'
   ])
 
-  .config(['$httpProvider', '$locationProvider', '$routeProvider',
-    function($httpProvider, $locationProvider, $routeProvider) {
+  .config(['$httpProvider', '$locationProvider', '$routeProvider', 'uiZeroclipConfigProvider',
+    function($httpProvider, $locationProvider, $routeProvider, uiZeroclipConfigProvider) {
       $httpProvider.interceptors.push('errorInterceptor');
       $httpProvider.defaults.withCredentials = false;
 
