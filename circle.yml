@@ -6,6 +6,7 @@ machine:
 
 dependencies:
   pre:
+    - npm install -g npm@2.6.0
     - npm install -g karma
     - npm install -g bower
     - npm install -g grunt-cli
