@@ -16,7 +16,7 @@ angular
       $httpProvider.interceptors.push('errorInterceptor');
       $httpProvider.defaults.withCredentials = false;
 
-      $locationProvider.html5Mode(false);
+      $locationProvider.html5Mode(true);
 
       $routeProvider
       .when ('/', {
