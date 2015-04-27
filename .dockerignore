@@ -1,0 +1,12 @@
+app/
+bin/
+bower_components/
+node_modules/
+.sass-cache/
+test/
+.tmp/
+bower.json
+circle.yml
+Gruntfile.js
+package.json
+README.md
