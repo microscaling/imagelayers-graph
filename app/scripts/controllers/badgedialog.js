@@ -22,7 +22,11 @@ angular.module('iLayers')
 
         return Object.keys(images).map(function(key){return images[key]})
       };
-    
+
+      $scope.$watch('selectedWorkflow', function() {
+        $scope.selectedImage = '';
+      });
+
       $scope.$watch('selectedImage', function() {
         $scope.htmlCopied = false;
         $scope.markdownCopied = false;

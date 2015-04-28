@@ -160,6 +160,18 @@ body.ngdialog-open {
   width: 100%;
   border-bottom: 1px solid #d8d8d8;
   padding: 20px;
+  &.workflow {
+    input[type=radio] {
+      display: none;
+    }
+    label {
+      text-decoration: underline;
+      cursor: pointer;
+      &:hover {
+        color: #186D95;
+      }
+    }
+  }
 }
 
 .ngdialog.ngdialog-theme-layers main {
@@ -316,7 +328,10 @@ body.ngdialog-open {
 
 .ngdialog.ngdialog-theme-layers.badge-dialog {
   main {
-    overflow: hidden;
+    section {
+      display: inline-block;
+      width: 100%;
+    }
     select {
       z-index: +1;
       margin-bottom: 30px;
@@ -341,7 +356,7 @@ body.ngdialog-open {
     }
   }
   
-  ul {
+  ul:not(.ac-menu) {
     margin-top: 10px;
     clear: both;
     li {

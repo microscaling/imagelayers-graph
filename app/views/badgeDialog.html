@@ -1,13 +1,31 @@
 <header>
     Get an Image Badge
 </header>
-<aside>
-     Create a badge to place on your [TBD]<br>
-     You can select an image from ImageLayers
+<aside class="workflow">
+     <p>Create a badge to place on your image's Docker Hub page.</p>
+     <p>You can select an image from
+       <span>
+        <input type="radio" ng-model="selectedWorkflow" id="imagelayers" value="imagelayers"/>
+        <label for="imagelayers">ImageLayers</label>
+        or
+      </span>
+      <span>
+        the
+        <input type="radio" ng-model="selectedWorkflow" id="hub" value="hub"/>
+        <label for="hub">Docker Hub</label>
+      </span>
+     </p>
 </aside>
-<main>  
-    <label>Select your image</label>
+<main>
+    <section ng-show="selectedWorkflow == 'imagelayers'">
+      <label>Select your image</label>
       <select ng-options="image.name for image in imageList() | orderBy:'name'" ng-model="selectedImage" class="styled-select"></select>
+    </section>
+    <section ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
+      Search for an image below
+      <div image-search data-model="item"></div>
+    </section>
+
     <section ng-show="selectedImage">
       <div class="preview">
         <label>Badge Preview</label>
@@ -30,7 +48,6 @@
                zeroclip-text="{{  badgeAsMarkdown() }}">
             <span ng-hide="markdownCopied">Copy to Clipboard</span>
             <span ng-show="markdownCopied">Copied to Clipboard</span>
-
           </div>
         </li>
       </ul>
