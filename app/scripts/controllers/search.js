@@ -65,6 +65,11 @@ angular.module('iLayers')
           ngDialog.closeAll();
         };
 
+        $scope.showExampleSearch = function () {
+          $scope.searchList = [{name: 'debian', tag:'latest', found: true}];
+          $scope.addImages();
+        };
+
         $scope.addImages = function() {
           var sanitizedList = [];
 

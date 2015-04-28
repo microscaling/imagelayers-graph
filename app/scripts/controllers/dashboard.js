@@ -5,6 +5,7 @@ angular.module('iLayers')
       function($scope, $routeParams, registryService, commandService) {
         var self = this;
         $scope.loading = false;
+        $scope.empty = true;
 
         //private
         self.buildTerms = function(data) {
@@ -31,6 +32,7 @@ angular.module('iLayers')
           
           if (route.images !== undefined) {
             $scope.loading = true;
+            $scope.empty = false;
             searchTerms = self.buildTerms(route.images);
 
             // Load Data
@@ -61,7 +63,7 @@ angular.module('iLayers')
 
           for (var i=0; i < graphData.length; i ++) {
             element = graphData[i].repo;
-            key = element.name + ':' + element.tag
+            key = element.name + ':' + element.tag;
             if (key.lastIndexOf(filter) !== -1) {
               filteredData.push(graphData[i]);
             }

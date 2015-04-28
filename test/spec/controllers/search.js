@@ -92,6 +92,18 @@ describe('Controller: SearchCtrl', function () {
     });
   });
 
+  describe('$scope.showExampleSearch', function () {
+    it('should add example images to $scope.selectedImages', function () {
+      scope.showExampleSearch();
+      expect(scope.searchList.length).toEqual(1);
+    });
+    it('should call addImages() for the searchList', function () {
+      spyOn(scope, 'addImages');
+      scope.showExampleSearch();
+      expect(scope.addImages).toHaveBeenCalled();
+    });
+  });
+
   describe('$scope.addImages', function() {
     beforeEach(function() {
       spyOn(location, 'search');

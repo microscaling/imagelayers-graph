@@ -369,6 +369,30 @@ main {
     }
   }
 
+  div.landing {
+    width: 90%;
+    margin: 50px auto 0;
+    text-align: center;
+    p {
+      max-width: 500px;
+      margin: 40px auto;
+    }
+    .button {
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 15px;
+      width: 310px;
+      background-color: #777777;
+      display: inline-block;
+      margin: 10px 20px;
+      cursor: pointer;
+      &.action {
+        background-color: #91B748;
+      }
+    }
+  }
+
   div.leaves {
     margin-top: 28px;
     padding-left: 10px;
