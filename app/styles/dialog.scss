@@ -287,6 +287,14 @@ body.ngdialog-open {
   }
 }
 
+.ngdialog.ngdialog-theme-layers .styled-select.searching {
+  background: url('../images/loading.gif') no-repeat 98% center;
+  
+  &:after {
+   display: none; 
+  }
+}
+
 .ngdialog.ngdialog-theme-layers .image-name {
   counter-increment: autocomplete;
   width: 438px;

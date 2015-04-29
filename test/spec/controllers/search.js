@@ -108,7 +108,7 @@ describe('Controller: SearchCtrl', function () {
 
     it('should remove any image not found', function() {
       spyOn(location, 'url');
-      scope.searchList = [{'name': 'foo', 'tag': 'latest', 'found': false}];
+      scope.searchList = [{'name': 'foo', 'tag': 'latest', 'missing': true}];
       scope.addImages();
       expect(location.url).toHaveBeenCalled();
     });

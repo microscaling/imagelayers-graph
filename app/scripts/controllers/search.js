@@ -71,7 +71,7 @@ angular.module('iLayers')
           $location.search('lock', null);
           
           angular.forEach($scope.searchList, function(value) {
-            if (value.name !== '' && value.found === true) {
+            if (value.name !== '' && value.missing !== true) {
               this.push(value);
             }
           }, sanitizedList);

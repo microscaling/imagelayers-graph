@@ -12,7 +12,8 @@ angular.module ('iLayers')
       templateUrl: 'views/imageSearch.html',
       link: function(scope, element) {
         var constants = {
-              offset: 41
+              offset: 41,
+              termLimit: 2
             };
 
         var attached = function(element) {
@@ -20,21 +21,52 @@ angular.module ('iLayers')
         };
 
         var clearError = function() {
-          element.find('.image-name').removeClass('not-found');
+          delete scope.model.missing;
+        };
+        
+        var loadTags = function() {
+          clearError();
+          element.find('.styled-select').addClass('searching');
+          registryService.fetchTags(scope.model.name).then(function(response) {
+            scope.tagList = [];
+
+            if (response.data) {
+              var data = Object.keys(response.data);
+              for (var i=0; i < data.length; i++) {
+                scope.tagList.push(data[i]);
+                clearError();
+                element.find('.styled-select').removeClass('searching');
+              }
+            } else {
+               scope.model.missing = true;
+            }
+          });
         };
 
         scope.suggestImages = function(term) {
-          if (term.length > 2) {
+          if (term.length > constants.termLimit) {
             element.find('.image-name').addClass('searching');
 
-            return registryService.search(term).then(function(response){
+            return registryService.search(term).then(function(response) {
               var data = response.data.results,
-                  list = [];
-
+                  list = [],
+                  found = false;
+    
               for (var i=0; i < data.length; i++) {
                 list.push({ 'label': $sce.trustAsHtml(data[i].name), 'value': data[i].name});
+                if (term === data[i].name) {
+                  found = true; 
+                }
+                clearError();
               }
-
+              
+              if (list.length === 0) {
+                scope.model.missing = true;
+              } else {
+                scope.model.missing = !found; 
+              }
+              
+              element.find('.image-name').removeClass('searching');
               return list;
             });
           } else {
@@ -49,31 +81,14 @@ angular.module ('iLayers')
           'suggest': scope.suggestImages,
           'on_error': console.log,
           'on_attach': attached,
-          'on_select': clearError
+          'on_select': loadTags
         };
-
-        scope.$watch('model', function(newValue) {
-          clearError();
-
-          if (newValue !== undefined && newValue.name !== '') {
-            registryService.fetchTags(newValue.name).then(function(response) {
-              scope.tagList = [];
-
-              if (response.data) {
-                var data = Object.keys(response.data);
-                for (var i=0; i < data.length; i++) {
-                  scope.tagList.push(data[i]);
-                  clearError();
-                  newValue.found = true;
-                }
-              } else {
-                 element.find('.image-name').addClass('not-found');
-                 newValue.found = false;
-              }
-              element.find('.image-name').removeClass('searching');
-            });
+        
+        scope.$watch('model', function(newValue, oldValue) {
+          if (newValue !== undefined && angular.equals(newValue, oldValue) && newValue.name.length > constants.termLimit) {
+            loadTags();
           }
-        }, true);
+        });
       }
     };
   }]);

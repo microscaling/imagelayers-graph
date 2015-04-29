@@ -11,6 +11,7 @@ describe('Directive: imageSearch', function () {
       directive,
       registryService,
       deferredTag,
+      deferredSuccess,
       scope;
 
   beforeEach(inject(function ($q, $compile, $rootScope, _registryService_) {
@@ -45,9 +46,9 @@ describe('Directive: imageSearch', function () {
 
   describe('suggestImages', function() {
     beforeEach(inject(function($q) {
-      var deferredSuccess = $q.defer();
+      deferredSuccess = $q.defer();
       spyOn(registryService, 'search').and.returnValue(deferredSuccess.promise);
-      deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
+      scope.model = { name: 'test' };
     }));
 
     it('should return empty array when term size < 3', function() {
@@ -56,48 +57,42 @@ describe('Directive: imageSearch', function () {
     });
 
     it('calls registryService.search when term > 2', function() {
+      deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
+      
       var list = scope.suggestImages('term');
       expect(registryService.search).toHaveBeenCalledWith('term');
     });
+    
+    describe('when image is valid', function() {
+      it('should remove missing', function() {
+        deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
+        
+        var list = scope.suggestImages('term');
+        expect(scope.model.missing === undefined).toBeTruthy();
+      });
+    });
+    
+    describe('when image is not in results', function() {
+      it('should set missing flag', function() {
+             deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
+        
+        var list = scope.suggestImages('term');
+        expect(scope.model.missing === undefined).toBeTruthy();
+      });
+    });
   });
-
+  
   describe('$watch model', function() {
-    it('should fetchTags when model changes', inject(function($q) {
+    it('should fetchTags when model intially loaded', inject(function($q) {
       var deferredTag = $q.defer();
       spyOn(registryService, 'fetchTags').and.returnValue(deferredTag.promise);
       deferredTag.resolve({});
 
       scope.model = { name: 'blah' };
       scope.$digest();
+      scope.model = { name: 'blah' };
+      scope.$digest();
       expect(registryService.fetchTags).toHaveBeenCalled();
     }));
-
-    describe('when image is valid', function() {
-      beforeEach(inject(function($q) {
-        var deferredSuccess = $q.defer();
-        spyOn(registryService, 'fetchTags').and.returnValue(deferredSuccess.promise);
-        deferredSuccess.resolve({ data: { 'latest': 'latest' } });
-      }));
-
-      it('should set found to true', function() {
-        scope.model = { name: 'blah' };
-        scope.$digest();
-        expect(scope.model.found).toBeTruthy();
-      });
-    });
-
-    describe('when image is not valid', function() {
-      beforeEach(inject(function($q) {
-        var deferredSuccess = $q.defer();
-        spyOn(registryService, 'fetchTags').and.returnValue(deferredSuccess.promise);
-        deferredSuccess.resolve({ data: {} });
-      }));
-
-      it('should set found to false', function() {
-        scope.model = { name: 'blah' };
-        scope.$digest();
-        expect(scope.model.found).toBeFalsy();
-      });
-    });
   });
 });
