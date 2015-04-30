@@ -12,11 +12,13 @@ describe('Directive: imageSearch', function () {
       registryService,
       deferredTag,
       deferredSuccess,
+      rootScope,
       scope;
 
   beforeEach(inject(function ($q, $compile, $rootScope, _registryService_) {
-    var rootScope = $rootScope.$new(),
-       autoElem = angular.element("<div mass-autocomplete><section image-search model='model'></section></div>");
+    var autoElem = angular.element("<div mass-autocomplete><section image-search model='model'></section></div>");
+    
+    rootScope = $rootScope.$new();
 
     directive = $compile(autoElem)(rootScope);
     rootScope.$digest();
@@ -50,6 +52,10 @@ describe('Directive: imageSearch', function () {
       spyOn(registryService, 'search').and.returnValue(deferredSuccess.promise);
       scope.model = { name: 'test' };
     }));
+    
+    afterEach(function() {
+      rootScope.$digest();
+    });
 
     it('should return empty array when term size < 3', function() {
       var list = scope.suggestImages('me');
@@ -69,15 +75,16 @@ describe('Directive: imageSearch', function () {
         
         var list = scope.suggestImages('term');
         expect(scope.model.missing === undefined).toBeTruthy();
+      
       });
     });
     
     describe('when image is not in results', function() {
       it('should set missing flag', function() {
-             deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
+        deferredSuccess.resolve({ data: { results: [{ name: 'term/bar' },{ name: 'bar' }] } });
         
         var list = scope.suggestImages('term');
-        expect(scope.model.missing === undefined).toBeTruthy();
+        expect(scope.model.missing).toBeFalsy();
       });
     });
   });

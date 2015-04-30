@@ -62,9 +62,9 @@ angular.module ('iLayers')
               
               if (list.length === 0) {
                 scope.model.missing = true;
-              } else {
-                scope.model.missing = !found; 
-              }
+              } 
+              
+              scope.model.missing = !found; 
               
               element.find('.image-name').removeClass('searching');
               return list;
