@@ -7,7 +7,7 @@ nav.ctl {
   margin-bottom: 0;
   padding-top: 20px;
 
-  > ul > li {
+  ul > li {
     font-size: 0.8em;
     font-weight: normal;
     float: left;
@@ -36,123 +36,115 @@ nav.ctl {
       @extend .icon-thin-arrow-down;
       @include icon-light-grey;
     }
+  }
+}
 
-    &:hover {
-      &:after {
-       @include icon-grey; 
-      }
+ul.about {
+  z-index: 300;
+  display: none;
+  font-size: 0.8em;
+  font-weight: normal;
+  position: absolute;
+  top: 100px;
+  left: 190px;
+  opacity: 1;
+  width: 722px;
+  margin: 0;
+  padding: 0;
+  
+  .logo {
+    width: 190px;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
 
-      > a {
-        color: #666;
-      }
+  li {
+    padding: 20px;
+    background: #fff;
+    overflow: auto;
+    border: 1px solid #999;
+    border-top: none;
+    color: #777;
 
-      > ul {
-        display: block;
-        top: 100%;
-        opacity: 1;
-        z-index: 100;
-        transition: opacity 0.4s, top 0.4s;
-      }
+    .strong {
+      font-weight: bold; 
     }
+  } 
 
+  p {
+    padding-top: 20px;
+    line-height: 1.25em;
+    
     > a {
       color: #9c9c9c;
       text-decoration: none;
     }
+  }
 
-    > ul {
-      transition: opacity 0.3s, top 0.4s;
-      position: absolute;
-      z-index:-1;
-      top: 170%;
-      opacity: 0;
-      width: 722px;
-      margin: 0;
-      padding: 0;
+  hr {
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1.1em 0; 
+    padding: 0;
+  } 
 
-      li {
-        padding: 20px;
-        background: #fff;
-        overflow: auto;
-        border: 1px solid #999;
-        border-top: none;
-        color: #777;
+  a.project {
+    display: inline-block;
+    background: #f1f1f1;
+    margin-right: 10px;
+    color: inherit;
+    text-decoration: none;
+    float: left;
 
-        .strong {
-          font-weight: bold; 
-        }
-      } 
+    &:hover {
+      background: #e1e1e1;
+
+      mark {
+        text-decoration: none;  
+      }
+    }
+
+    &:nth-last-of-type(1) {
+      margin-right: 0;
+    }
+    article {
+      width: 220px;
+      padding: 20px;
 
       p {
-        padding-top: 20px;
-        line-height: 1.25em;
+        font-size: 0.9em; 
+        padding: 0;
       }
 
-      hr {
-        display: block; height: 1px;
-        border: 0; border-top: 1px solid #ccc;
-        margin: 1.1em 0; 
+      mark {
+        background: none;
+        text-decoration: underline;
+      }
+
+      h4 {
+       margin: 20px 0 0 0;
+       color: #444;
+      }
+
+      .pmx-logo {
+        background: url(../images/panamax_id_02.svg) -125px -290px no-repeat;
+        background-size: 245%;
         padding: 0;
-      } 
-        
-      a.project {
-        display: inline-block;
-        background: #f1f1f1;
-        margin-right: 10px;
-        color: inherit;
-        text-decoration: none;
-        float: left;
-        
-        &:hover {
-          background: #e1e1e1;
-          
-          mark {
-            text-decoration: none;  
-          }
-        }
-        
-        &:nth-last-of-type(1) {
-          margin-right: 0;
-        }
-        article {
-          width: 220px;
-          padding: 20px;
-          
-          p {
-            font-size: 0.9em; 
-            padding: 0;
-          }
-          
-          mark {
-            background: none;
-            text-decoration: underline;
-          }
-          
-          h4 {
-           margin: 20px 0 0 0;
-           color: #444;
-          }
+        padding-bottom: 50px;
+      }
 
-          .pmx-logo {
-            background: url(../images/panamax_id_02.svg) -125px -290px no-repeat;
-            background-size: 245%;
-            padding: 0;
-            padding-bottom: 50px;
-          }
+      .lorry-logo {
+        background: url(../images/logo_lorry.svg) -5px -5px no-repeat;
+        padding: 0;
+        padding-bottom: 50px; 
+      }
 
-          .lorry-logo {
-            background: url(../images/logo_lorry.svg) -5px -5px no-repeat;
-            padding: 0;
-            padding-bottom: 50px; 
-          }
-
-          .dray-logo {
-            background: url(../images/logo_dray_long.svg) -190px -285px no-repeat;
-            background-size: 260%;
-            padding: 0;
-            padding-bottom: 50px;
-          }
-        }
+      .dray-logo {
+        background: url(../images/logo_dray_long.svg) -190px -285px no-repeat;
+        background-size: 260%;
+        padding: 0;
+        padding-bottom: 50px;
       }
     }
   }
