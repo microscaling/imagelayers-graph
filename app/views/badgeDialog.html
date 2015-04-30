@@ -4,7 +4,7 @@
 <aside class="workflow">
      <p>Create a badge to place on your image's Docker Hub page.</p>
      <p>You can select an image from
-       <span>
+       <span ng-show="imageList().length > 0">
         <input type="radio" ng-model="selectedWorkflow" id="imagelayers" value="imagelayers"/>
         <label for="imagelayers">ImageLayers</label>
         or
@@ -21,9 +21,9 @@
       <label>Select your image</label>
       <select ng-options="image.name for image in imageList() | orderBy:'name'" ng-model="selectedImage" class="styled-select"></select>
     </section>
-    <section ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
-      Search for an image below
-      <div image-search data-model="item"></div>
+    <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
+      <label>Search for an image below</label>
+      <input type="text" class="image-name" ng-model="selectedImage" ng-class='{"not-found": selectedImage.missing}' mass-autocomplete-item="autocomplete_options"></input>
     </section>
 
     <section ng-show="selectedImage">

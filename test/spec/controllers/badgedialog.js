@@ -7,11 +7,15 @@ describe('Controller: BadgedialogCtrl', function () {
 
   var controller,
     scope,
-    graph;
+    graph,
+    deferredSuccess,
+    registryService;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+
+    // Initialize the controller and a mock scope
+  beforeEach(inject(function ($controller, $rootScope, _registryService_) {
     scope = $rootScope.$new();
+    registryService = _registryService_;
     controller = $controller('BadgeDialogCtrl', {
       $scope: scope
     });
@@ -35,6 +39,39 @@ describe('Controller: BadgedialogCtrl', function () {
       expect(list[0].name).toEqual('myRepo');
       expect(list[1].name).toEqual('myOtherRepo');
     });
+  });
+
+  describe('suggestImages', function() {
+    beforeEach(inject(function($q) {
+      deferredSuccess = $q.defer();
+      spyOn(registryService, 'search').and.returnValue(deferredSuccess.promise);
+      scope.model = { name: 'test' };
+    }));
+
+    it('should return empty array when term size < 3', function() {
+      var list = scope.suggestImages('me');
+      expect(list.length).toEqual(0);
+    });
+
+    it('calls registryService.search when term > 2', function() {
+      deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
+
+      var list = scope.suggestImages('term');
+      expect(registryService.search).toHaveBeenCalledWith('term');
+    });
+
+    //describe('when image is not in results', function() {
+    //  it('should set missing flag', function() {
+    //    expect(scope.model.missing).toBeFalsy();
+    //    deferredSuccess.resolve({ data: { results: [{ name: 'term/bar' },{ name: 'bar' }] } });
+    //
+    //    scope.suggestImages('term');
+    //
+    //    scope.$apply();
+    //
+    //    expect(scope.model.missing).toBeTruthy();
+    //  });
+    //});
   });
 
   describe('$scope.badgeAsHtml', function  () {

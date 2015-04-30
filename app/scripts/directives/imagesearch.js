@@ -67,7 +67,6 @@ angular.module ('iLayers')
           } else {
              return [];
           }
-
         };
 
         scope.tagList = [];

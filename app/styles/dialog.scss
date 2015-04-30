@@ -331,6 +331,12 @@ body.ngdialog-open {
     section {
       display: inline-block;
       width: 100%;
+      &.hub {
+        label + input {
+          clear: both;
+          margin-bottom: 30px;
+        }
+      }
     }
     select {
       z-index: +1;
