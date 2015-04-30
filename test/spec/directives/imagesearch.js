@@ -17,7 +17,7 @@ describe('Directive: imageSearch', function () {
 
   beforeEach(inject(function ($q, $compile, $rootScope, _registryService_) {
     var autoElem = angular.element("<div mass-autocomplete><section image-search model='model'></section></div>");
-    
+
     rootScope = $rootScope.$new();
 
     directive = $compile(autoElem)(rootScope);
@@ -28,7 +28,6 @@ describe('Directive: imageSearch', function () {
     controller = element.controller('imageSearch');
 
     registryService = _registryService_;
-    rootScope.model = {'name': 'foo', 'tag': '1.0.0'};
   }));
 
   it('should initialize tagList', function() {
@@ -52,10 +51,6 @@ describe('Directive: imageSearch', function () {
       spyOn(registryService, 'search').and.returnValue(deferredSuccess.promise);
       scope.model = { name: 'test' };
     }));
-    
-    afterEach(function() {
-      rootScope.$digest();
-    });
 
     it('should return empty array when term size < 3', function() {
       var list = scope.suggestImages('me');
@@ -64,31 +59,37 @@ describe('Directive: imageSearch', function () {
 
     it('calls registryService.search when term > 2', function() {
       deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
-      
+
       var list = scope.suggestImages('term');
       expect(registryService.search).toHaveBeenCalledWith('term');
     });
-    
+
     describe('when image is valid', function() {
       it('should remove missing', function() {
         deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
-        
-        var list = scope.suggestImages('term');
-        expect(scope.model.missing === undefined).toBeTruthy();
-      
+
+        scope.suggestImages('xtermx');
+
+        scope.$apply();
+
+        expect(scope.model.missing).toBe(true);
       });
     });
-    
+
     describe('when image is not in results', function() {
       it('should set missing flag', function() {
-        deferredSuccess.resolve({ data: { results: [{ name: 'term/bar' },{ name: 'bar' }] } });
-        
-        var list = scope.suggestImages('term');
         expect(scope.model.missing).toBeFalsy();
+        deferredSuccess.resolve({ data: { results: [{ name: 'term/bar' },{ name: 'bar' }] } });
+
+        scope.suggestImages('term');
+
+        scope.$apply();
+
+        expect(scope.model.missing).toBeTruthy();
       });
     });
   });
-  
+
   describe('$watch model', function() {
     it('should fetchTags when model intially loaded', inject(function($q) {
       var deferredTag = $q.defer();

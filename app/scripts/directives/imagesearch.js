@@ -23,7 +23,7 @@ angular.module ('iLayers')
         var clearError = function() {
           delete scope.model.missing;
         };
-        
+
         var loadTags = function() {
           clearError();
           element.find('.styled-select').addClass('searching');
@@ -51,21 +51,16 @@ angular.module ('iLayers')
               var data = response.data.results,
                   list = [],
                   found = false;
-    
+
               for (var i=0; i < data.length; i++) {
                 list.push({ 'label': $sce.trustAsHtml(data[i].name), 'value': data[i].name});
                 if (term === data[i].name) {
-                  found = true; 
+                  found = true;
                 }
-                clearError();
               }
-              
-              if (list.length === 0) {
-                scope.model.missing = true;
-              } 
-              
-              scope.model.missing = !found; 
-              
+
+              scope.model.missing = !found;
+
               element.find('.image-name').removeClass('searching');
               return list;
             });
@@ -83,7 +78,7 @@ angular.module ('iLayers')
           'on_attach': attached,
           'on_select': loadTags
         };
-        
+
         scope.$watch('model', function(newValue, oldValue) {
           if (newValue !== undefined && angular.equals(newValue, oldValue) && newValue.name.length > constants.termLimit) {
             loadTags();
