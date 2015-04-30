@@ -26,7 +26,6 @@ deployment:
       - docker build -t centurylink/imagelayers-ui:qa .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push centurylink/imagelayers-ui:qa
-      - ssh root@$QA_SERVER_IP "./imagelayers_ui.sh"
   Production:
     branch: release
     commands:
