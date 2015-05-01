@@ -44,14 +44,14 @@ angular.module('iLayers')
 
     $scope.badgeAsHtml = function () {
       if ($scope.selectedImage == undefined) return "";
-      return $sce.trustAsHtml("<a href='https://imagelayers.io/#/?images=" + $scope.selectedImage.name + ":latest' title='Get your own badge on imagelayers.io'>" +
+      return $sce.trustAsHtml("<a href='https://imagelayers.io/?images=" + $scope.selectedImage.name + ":latest' title='Get your own badge on imagelayers.io'>" +
       "<img src='https://badge.imagelayers.io/" + $scope.selectedImage.name + ".svg'></a>")
     };
 
     $scope.badgeAsMarkdown = function () {
       if ($scope.selectedImage == undefined) return "";
       return "[![](https://badge.imagelayers.io/" + $scope.selectedImage.name + ".svg)]" +
-        "(https://imagelayers.io/#/?images=" + $scope.selectedImage.name + ":latest) 'Get your own badge on imagelayers.io'";
+        "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":latest 'Get your own badge on imagelayers.io')";
     };
 
   }]);

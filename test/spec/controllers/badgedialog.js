@@ -101,7 +101,7 @@ describe('Controller: BadgedialogCtrl', function () {
     it('should return an HTML embed code', function () {
       scope.selectedImage = { name: 'node' };
       var embedCode = scope.badgeAsHtml();
-      expect(embedCode.$$unwrapTrustedValue()).toEqual("<a href='https://imagelayers.io/#/?images=node:latest' title='Get your own badge on imagelayers.io'><img src='https://badge.imagelayers.io/node.svg'></a>")
+      expect(embedCode.$$unwrapTrustedValue()).toEqual("<a href='https://imagelayers.io/?images=node:latest' title='Get your own badge on imagelayers.io'><img src='https://badge.imagelayers.io/node.svg'></a>")
     });
   });
 
@@ -109,7 +109,7 @@ describe('Controller: BadgedialogCtrl', function () {
     it('should return an HTML embed code', function () {
       scope.selectedImage = { name: 'node' };
       var embedCode = scope.badgeAsMarkdown();
-      expect(embedCode).toEqual("[![](https://badge.imagelayers.io/node.svg)](https://imagelayers.io/#/?images=node:latest) 'Get your own badge on imagelayers.io'")
+      expect(embedCode).toEqual("[![](https://badge.imagelayers.io/node.svg)](https://imagelayers.io/?images=node:latest 'Get your own badge on imagelayers.io')")
     });
   });
 });
