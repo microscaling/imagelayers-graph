@@ -23,10 +23,10 @@
     </section>
     <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
       <label>Search for an image below</label>
-      <input type="text" class="image-name" ng-model="selectedImage" ng-class='{"not-found": selectedImage.missing}' mass-autocomplete-item="autocomplete_options"></input>
+      <div image-search data-model="selectedImage"></div>
     </section>
 
-    <section ng-show="selectedImage">
+    <section ng-if="selectedImage.selected">
       <div class="preview">
         <label>Badge Preview</label>
         <img ng-src="https://badge.imagelayers.io/{{ selectedImage.name }}.svg">

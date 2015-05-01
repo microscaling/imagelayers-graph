@@ -332,7 +332,7 @@ body.ngdialog-open {
       display: inline-block;
       width: 100%;
       &.hub {
-        label + input {
+        .image-name {
           clear: both;
           margin-bottom: 30px;
         }

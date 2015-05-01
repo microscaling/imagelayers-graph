@@ -7,21 +7,37 @@ angular.module ('iLayers')
     return {
       restrict: 'A',
       scope: {
-        model: '='
+        model: '=',
       },
       templateUrl: 'views/imageSearch.html',
-      link: function(scope, element) {
+      link: function(scope, element, attrs) {
         var constants = {
               offset: 41,
               termLimit: 2
             };
-
+            
         var attached = function(element) {
           $('.ac-container').css('top', (element[0].offsetTop + constants.offset) + 'px');
         };
 
         var clearError = function() {
           delete scope.model.missing;
+        };
+        
+        var selected = function(item) {
+          if (scope.withTags) {
+            loadTags();
+          } else {
+            clearError();
+            scope.model.selected = true;
+            scope.model.name = item.value; 
+          }
+        }
+        
+        var initialValue = function(newValue, oldValue) {
+          return newValue !== undefined 
+            && angular.equals(newValue, oldValue) 
+            && newValue.name.length > constants.termLimit;
         };
 
         var loadTags = function() {
@@ -42,6 +58,8 @@ angular.module ('iLayers')
             }
           });
         };
+
+        scope.withTags = (attrs.withTags === undefined) ? false : true;
 
         scope.suggestImages = function(term) {
           if (term.length > constants.termLimit) {
@@ -75,11 +93,11 @@ angular.module ('iLayers')
           'suggest': scope.suggestImages,
           'on_error': console.log,
           'on_attach': attached,
-          'on_select': loadTags
+          'on_select': selected
         };
 
         scope.$watch('model', function(newValue, oldValue) {
-          if (newValue !== undefined && angular.equals(newValue, oldValue) && newValue.name.length > constants.termLimit) {
+          if (scope.withTags && initialValue(newValue, oldValue)) {
             loadTags();
           }
         });

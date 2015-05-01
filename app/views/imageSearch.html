@@ -1,5 +1,5 @@
 <input type="text" class="image-name" ng-class='{"not-found": model.missing}' ng-model="model.name" mass-autocomplete-item="autocomplete_options"></input>
-<div class="styled-select">
+<div class="styled-select" ng-show="withTags">
    <select ng-options="label for label in tagList track by label" ng-model="model.tag"></select>
 </div>
 

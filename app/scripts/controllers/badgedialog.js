@@ -8,12 +8,8 @@
  * Controller of the iLayers
  */
 angular.module('iLayers')
-  .controller('BadgeDialogCtrl', ['$scope', '$sce', 'registryService', function ($scope, $sce, registryService) {
-    var constants = {
-      termLimit: 2
-    };
-
-    $scope.selectedImage;
+  .controller('BadgeDialogCtrl', ['$scope', '$sce', function ($scope, $sce, registryService) {
+    $scope.selectedImage = {};
 
     $scope.imageList = function() {
       var data = $scope.graph,
@@ -27,54 +23,24 @@ angular.module('iLayers')
     };
 
     $scope.$watch('selectedWorkflow', function() {
-      $scope.selectedImage = '';
+      $scope.selectedImage = {};
     });
 
     $scope.$watch('selectedImage', function() {
+      var image = $scope.selectedImage;
+      
+      if ($scope.selectedWorkflow === 'imagelayers' && image.name) {
+        $scope.selectedImage.selected = true; 
+      }
+      
+      if ($scope.selectedWorkflow === 'hub' 
+          && (image.missing || (image.name && image.name.length < 3))) {
+         $scope.selectedImage.selected = false; 
+      }
+      
       $scope.htmlCopied = false;
       $scope.markdownCopied = false;
-    });
-
-    $scope.suggestImages = function(term) {
-      if (term.length > constants.termLimit) {
-        $('.image-name').addClass('searching');
-
-        return registryService.search(term).then(function(response) {
-          var data = response.data.results,
-            list = [],
-            found = false;
-
-          for (var i=0; i < data.length; i++) {
-            list.push({ 'label': $sce.trustAsHtml(data[i].name), 'value': data[i].name});
-            if (term === data[i].name) {
-              found = true;
-            }
-          }
-
-          $('.image-name').removeClass('searching');
-          return list;
-        });
-      } else {
-        return [];
-      }
-    };
-
-    var attached = function() {
-      $('.ac-container').css('top', '94px');
-    };
-
-    var selected = function(item) {
-      console.log(item);
-      $scope.selectedImage = {name: item.value};
-      console.log($scope.selectedImage);
-    };
-
-    $scope.autocomplete_options = {
-      'suggest': $scope.suggestImages,
-      'on_error': console.log,
-      'on_attach': attached,
-      'on_select': selected
-    };
+    }, true);
 
     $scope.badgeAsHtml = function () {
       if ($scope.selectedImage == undefined) return "";

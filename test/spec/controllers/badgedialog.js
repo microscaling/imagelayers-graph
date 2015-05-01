@@ -20,6 +20,62 @@ describe('Controller: BadgedialogCtrl', function () {
       $scope: scope
     });
   }));
+  
+  describe('$watch selectedWorkflow', function() {
+    it('should initialze selectedImage to empty object', function() {
+      scope.selectedImage = { name: 'boo' };
+      scope.$digest();
+      
+      expect(scope.selectedImage.name).toEqual(undefined);
+    });
+  });
+  
+  describe('$watch selectedImage', function() {
+    it('should set htmlCopied to false', function() {
+      scope.htmlCopied = true;
+      scope.selectedImage = { name: 'foo' };
+      scope.$digest();
+      
+      expect(scope.htmlCopied).toBeFalsy();
+    });
+    
+    it('should set markdownCopied to false', function() {
+      scope.markdownCopied = true;
+      scope.selectedImage = { name: 'foo' };
+      
+      expect(scope.markdownCopied).toBeTruthy();
+      scope.$digest();
+      
+      expect(scope.markdownCopied).toBeFalsy();
+    });
+    
+    describe('when workflow is imagelayers', function() {
+      it('set selectedImage.selected = true', function() {
+        scope.selectedWorkflow = 'imagelayers';
+        scope.$digest();
+        scope.selectedImage = { name: 'foo' };
+        
+        expect(scope.selectedImage.selected).toBeFalsy();
+        scope.$digest();
+        
+        expect(scope.selectedImage.selected).toBeTruthy();
+      })
+    });
+    
+    describe('when workflow is hub', function() {
+      it('set selectedImage.selected = false when missing', function() {
+        scope.selectedWorkflow = 'hub';
+        scope.$digest();
+                
+        scope.selectedImage = { name: 'foo', missing: true, selected: true };
+        
+        expect(scope.selectedImage.selected).toBeTruthy();
+        scope.$digest();
+        
+        expect(scope.selectedImage.selected).toBeFalsy();
+      })
+    });
+  });
 
   describe('$scope.imageList', function () {
     beforeEach(function () {
@@ -39,39 +95,6 @@ describe('Controller: BadgedialogCtrl', function () {
       expect(list[0].name).toEqual('myRepo');
       expect(list[1].name).toEqual('myOtherRepo');
     });
-  });
-
-  describe('suggestImages', function() {
-    beforeEach(inject(function($q) {
-      deferredSuccess = $q.defer();
-      spyOn(registryService, 'search').and.returnValue(deferredSuccess.promise);
-      scope.model = { name: 'test' };
-    }));
-
-    it('should return empty array when term size < 3', function() {
-      var list = scope.suggestImages('me');
-      expect(list.length).toEqual(0);
-    });
-
-    it('calls registryService.search when term > 2', function() {
-      deferredSuccess.resolve({ data: { results: [{ name: 'foo' },{ name: 'bar' }] } });
-
-      var list = scope.suggestImages('term');
-      expect(registryService.search).toHaveBeenCalledWith('term');
-    });
-
-    //describe('when image is not in results', function() {
-    //  it('should set missing flag', function() {
-    //    expect(scope.model.missing).toBeFalsy();
-    //    deferredSuccess.resolve({ data: { results: [{ name: 'term/bar' },{ name: 'bar' }] } });
-    //
-    //    scope.suggestImages('term');
-    //
-    //    scope.$apply();
-    //
-    //    expect(scope.model.missing).toBeTruthy();
-    //  });
-    //});
   });
 
   describe('$scope.badgeAsHtml', function  () {
