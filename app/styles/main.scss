@@ -102,11 +102,33 @@ header {
     }
   }
 
-  cite.logo {
+  cite {
     float: right;
-    a {
-      background: url("../images/ctl_logo_base_grey.svg") 0 15px no-repeat;
-      background-size: 140px 30px;
+    &.cloud {
+      width: 150px;
+      padding-left: 20px;
+      border-left: 1px solid #a0a0a0;
+      margin: 10px 10px 0 20px;
+      a {
+        text-decoration: none;
+        font-style: normal;
+        color: #a0a0a0;
+        font-size: 14px;
+        span {
+          position: relative;
+          top: -2px;
+          display: inline-block;
+          color: #777;
+        }
+      }
+    }
+    &.logo {
+      float: right;
+      width: 140px;
+      a {
+        background: url("../images/ctl_logo_base_grey.svg") 0 15px no-repeat;
+        background-size: 140px 30px;
+      }
     }
   }
 }
@@ -429,7 +451,8 @@ main {
     border-bottom: 1px solid #b3b3b3;
     position: relative;
     z-index: 9;
-    min-width: 100%;
+    min-width: 96.5%;
+    margin-right: 0;
 
     section {
       width: 180px;
