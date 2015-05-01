@@ -1,18 +1,21 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular
-  .module('iLayers', [
-    'ngRoute',
-    'ngAnimate',
-    'ngDialog',
-    'MassAutoComplete',
-    'luegg.directives',
-    'config',
-    'zeroclipboard'
-  ])
+  angular
+    .module('iLayers', [
+      'ngRoute',
+      'ngAnimate',
+      'ngDialog',
+      'MassAutoComplete',
+      'luegg.directives',
+      'config',
+      'zeroclipboard'
+    ])
+    .config(configure);
+  
+    configure.$inject = ['$httpProvider', '$locationProvider', '$routeProvider', 'uiZeroclipConfigProvider'];
 
-  .config(['$httpProvider', '$locationProvider', '$routeProvider', 'uiZeroclipConfigProvider',
-    function($httpProvider, $locationProvider, $routeProvider, uiZeroclipConfigProvider) {
+    function configure($httpProvider, $locationProvider, $routeProvider, uiZeroclipConfigProvider) {
       $httpProvider.interceptors.push('errorInterceptor');
       $httpProvider.defaults.withCredentials = false;
 
@@ -31,4 +34,5 @@ angular
       uiZeroclipConfigProvider.setZcConf({
         swfPath: 'vendor/ZeroClipboard.swf'
       });
-  }]);
+    };
+})();

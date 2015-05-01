@@ -7,28 +7,30 @@
  * # sticky
  */
 angular.module('iLayers')
-  .directive('sticky', function () {
-    return {
-      restrict: 'A',
-      link: function postLink(scope, element, attrs) {
-        var main = element.parent('main'),
-            offset = (attrs.offset) ? attrs.offset : 0,
-            locked = element.find('.lock-horizon');
+  .directive('sticky', Sticky); 
 
-        main.bind('scroll', function() {
-          var top = main.scrollTop(),
-              left = main.scrollLeft();
+function Sticky() {
+  return {
+    restrict: 'A',
+    link: function postLink(scope, element, attrs) {
+      var main = element.parent('main'),
+          offset = (attrs.offset) ? attrs.offset : 0,
+          locked = element.find('.lock-horizon');
 
-          if (locked) {
-            locked.children().css('left',  '-' + $(this).scrollLeft() + 'px');
-          }
+      main.bind('scroll', function() {
+        var top = main.scrollTop(),
+            left = main.scrollLeft();
 
-          if (main.scrollTop() >= offset) {
-            element.addClass('sticky');
-          } else {
-            element.removeClass('sticky');
-          }
-        });
-      }
-    };
-  });
+        if (locked) {
+          locked.children().css('left',  '-' + $(this).scrollLeft() + 'px');
+        }
+
+        if (main.scrollTop() >= offset) {
+          element.addClass('sticky');
+        } else {
+          element.removeClass('sticky');
+        }
+      });
+    }
+  };
+};

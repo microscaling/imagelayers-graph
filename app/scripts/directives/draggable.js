@@ -7,40 +7,44 @@
  * # draggable
  */
 angular.module('iLayers')
-  .directive('draggable', [ '$window', function ($window) {
-    return {
-      template: '<div class="draggable"><div class="drag-handle"></div></div>',
-      restrict: 'E',
-      scope: {},
-      replace: true,
-      link: function postLink(scope, element, attrs) {
-        var handle = element.find('.drag-handle'),
-            offset = 0;
+  .directive('draggable', Draggable);
 
-        scope.updatePosition = function(pos) {
-            $('main').css('bottom', pos + 'px');
-            $('footer').css('height', pos + 'px');
-        };
+Draggable.$inject = ['$window'];
 
-        handle.bind('mousedown', function(e) {
-          var $elem = $(e.currentTarget);
+function Draggable($window) {
+  return {
+    template: '<div class="draggable"><div class="drag-handle"></div></div>',
+    restrict: 'E',
+    scope: {},
+    replace: true,
+    link: function postLink(scope, element, attrs) {
+      var handle = element.find('.drag-handle'),
+          offset = 0;
 
-          element.addClass('dragging');
-          offset = e.pageY - $elem.offset().top;
-        });
+      scope.updatePosition = function(pos) {
+          $('main').css('bottom', pos + 'px');
+          $('footer').css('height', pos + 'px');
+      };
 
-        $('body').bind('mouseup', function() {
-          element.removeClass('dragging');
-        });
+      handle.bind('mousedown', function(e) {
+        var $elem = $(e.currentTarget);
 
-        $('body').bind('mousemove', function(e) {
-          var height = $window.innerHeight,
-              bottom = height - (e.pageY - offset);
+        element.addClass('dragging');
+        offset = e.pageY - $elem.offset().top;
+      });
 
-          if (element.hasClass('dragging')) {
-            scope.updatePosition(bottom);
-          }
-        });
-      }
-    };
-  }]);
+      $('body').bind('mouseup', function() {
+        element.removeClass('dragging');
+      });
+
+      $('body').bind('mousemove', function(e) {
+        var height = $window.innerHeight,
+            bottom = height - (e.pageY - offset);
+
+        if (element.hasClass('dragging')) {
+          scope.updatePosition(bottom);
+        }
+      });
+    }
+  };
+};

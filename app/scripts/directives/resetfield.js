@@ -7,33 +7,37 @@
  * # resetField
  */
 angular.module('iLayers')
-  .directive('resetField', ['$timeout', function ($timeout) {
-    return {
-      restrict: 'A',
-      scope: {},
-      require: 'ngModel',
-      link: function postLink(scope, element, attrs, ctrl) {
-        var resetElement = angular.element('<span ng-mousedown="reset()" class="reset-icon hidden"></span>');
+  .directive('resetField', ResetField);
 
-        element.after(resetElement);
+ResetField.$inject = ['$timeout'];
 
-        resetElement.bind('click', function() {
-          ctrl.$setViewValue('');
-          ctrl.$render();
+function ResetField($timeout) {
+  return {
+    restrict: 'A',
+    scope: {},
+    require: 'ngModel',
+    link: function postLink(scope, element, attrs, ctrl) {
+      var resetElement = angular.element('<span ng-mousedown="reset()" class="reset-icon hidden"></span>');
 
-          $timeout(function() {
-            element[0].focus();
-          }, 0, false);
-        });
+      element.after(resetElement);
 
-        element.bind('input focus', function() {
-          if (!ctrl.$isEmpty(element.val())) {
-            resetElement.removeClass('hidden');
-          } else {
-            resetElement.addClass('hidden');
-          }
-          scope.$apply();
-        });
-      }
-    };
-  }]);
+      resetElement.bind('click', function() {
+        ctrl.$setViewValue('');
+        ctrl.$render();
+
+        $timeout(function() {
+          element[0].focus();
+        }, 0, false);
+      });
+
+      element.bind('input focus', function() {
+        if (!ctrl.$isEmpty(element.val())) {
+          resetElement.removeClass('hidden');
+        } else {
+          resetElement.addClass('hidden');
+        }
+        scope.$apply();
+      });
+    }
+  };
+};

@@ -6,7 +6,11 @@
  * @description
  * # badge
  */
-angular.module('iLayers').directive('badge', ['ngDialog', function (ngDialog) {
+angular.module('iLayers').directive('badge', Badge);
+                                    
+Badge.$inject = ['ngDialog']; 
+                                            
+function Badge(ngDialog) {
   return {
     templateUrl: 'views/badge.html',
     restrict: 'E',
@@ -24,4 +28,4 @@ angular.module('iLayers').directive('badge', ['ngDialog', function (ngDialog) {
       };
     }
   }
-}]);
+};
