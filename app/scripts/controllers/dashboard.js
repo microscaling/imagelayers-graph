@@ -39,8 +39,6 @@ angular.module('iLayers')
             registryService.inspect(searchTerms).then(function(response) {
               $scope.graph = response.data;
               $scope.loading = false;
-            },function(){
-              console.log('Error loading ImageLayers');
             });
           }
         };

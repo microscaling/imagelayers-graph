@@ -14,7 +14,12 @@ angular.module('iLayers')
         return response;
       },
       responseError: function(response) {
-        errorService.error('Unable to communicate to ImageLayers Services');
+        var msg = 'Unable to communicate to ImageLayers Services';
+        
+        if (response.data) {
+          msg = response.data; 
+        }
+        errorService.error(msg);
         return $q.reject(response);
       }
     };
