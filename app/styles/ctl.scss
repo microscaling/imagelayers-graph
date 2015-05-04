@@ -39,7 +39,11 @@ nav.ctl {
     }
   }
 }
-
+a.github {
+  padding-right: 8px;
+  border-right: 1px solid #ccc;
+  margin-right: 5px;
+}
 ul.about {
   z-index: 300;
   display: none;
