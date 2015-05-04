@@ -84,6 +84,11 @@ ul.about {
     > a {
       color: #9c9c9c;
       text-decoration: none;
+      
+      &:hover {
+        color: #666;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -128,8 +133,8 @@ ul.about {
       }
 
       h4 {
-       margin: 20px 0 0 0;
-       color: #444;
+        margin: 20px 0 0 0;
+        color: #444;
       }
 
       .pmx-logo {
@@ -152,5 +157,24 @@ ul.about {
         padding-bottom: 50px;
       }
     }
+  }
+  
+  footer { 
+    display: block;
+    position: static;
+    height: auto;
+    background: none;
+    font-weight: bold;
+    font-size: 1.0em;
+    padding-bottom: 0;
+    
+    a {
+      color: #666;
+      text-decoration: none;
+      &:hover {
+        color: #333;
+        text-decoration: underline;
+      }
+    } 
   }
 }
