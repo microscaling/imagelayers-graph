@@ -34,5 +34,5 @@
       uiZeroclipConfigProvider.setZcConf({
         swfPath: 'vendor/ZeroClipboard.swf'
       });
-    };
+    }
 })();
