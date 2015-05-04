@@ -418,17 +418,23 @@ main {
     }
   }
 
-  div.landing {
+  div.info {
     width: 90%;
     margin: 50px auto 0;
     text-align: center;
+    color: #999;
+    font-weight: bold;
+    h3 {
+      font-size: 24px;
+      color: #333;
+    }
     p {
       max-width: 500px;
       margin: 40px auto;
+      color: #666;
     }
     .button {
       color: white;
-      font-weight: bold;
       font-size: 14px;
       padding: 15px;
       width: 310px;

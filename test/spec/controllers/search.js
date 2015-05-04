@@ -95,7 +95,7 @@ describe('Controller: SearchCtrl', function () {
   describe('$scope.showExampleSearch', function () {
     it('should add example images to $scope.selectedImages', function () {
       scope.showExampleSearch();
-      expect(scope.searchList.length).toEqual(1);
+      expect(scope.searchList.length).toEqual(6);
     });
     it('should call addImages() for the searchList', function () {
       spyOn(scope, 'addImages');
