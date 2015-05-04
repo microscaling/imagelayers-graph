@@ -14,7 +14,7 @@ function CommandService($rootScope) {
         for(var i=0; i < layers.length; i++) {
           var cmd = layers[i].container_config.Cmd,
               size = layers[i].Size || 0,
-              txt = (cmd) ? cmd[cmd.length-1] : null;
+              txt = (cmd) ? cmd.join(' ') : null;
             cmds.push(this.constructCommand(txt, size));
         }
 
