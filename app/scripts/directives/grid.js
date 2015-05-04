@@ -62,7 +62,7 @@ function Grid($timeout, $sce, $routeParams, commandService, gridService) {
 
       self.getCommand = function(layer) {
         var command = (layer.container_config === undefined) ? [] : (layer.container_config.Cmd !== null) ? layer.container_config.Cmd.join(' ') : '';
-        return commandService.constructCommand(command);
+        return commandService.constructCommand(command, layer.Size);
       };
 
       self.findWidth = function(count) {

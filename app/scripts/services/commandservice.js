@@ -13,9 +13,9 @@ function CommandService($rootScope) {
         var cmds = []
         for(var i=0; i < layers.length; i++) {
           var cmd = layers[i].container_config.Cmd,
+              size = layers[i].Size || 0,
               txt = (cmd) ? cmd[cmd.length-1] : null;
-
-            cmds.push(this.constructCommand(txt));
+            cmds.push(this.constructCommand(txt, size));
         }
 
         if (locked === undefined || force === true) {
@@ -23,11 +23,15 @@ function CommandService($rootScope) {
         }
       },
 
-      constructCommand: function (cmd) {
+      constructCommand: function (cmd, size) {
         var nop = '(nop) ';
-
         if (cmd === null || cmd == '') {
-          cmd = 'FROM scratch';
+          if (size > 0) {
+            cmd = 'FROM custom scratch';
+
+          } else {
+            cmd = 'FROM scratch';
+          }
         }
 
         if (cmd !== undefined) {
