@@ -90,7 +90,7 @@ function SearchCtrl($window, $scope, $location, ngDialog) {
         this.push(value);
         // GA Event
         if (undefined !== $window.ga) {
-          $window.ga('send', 'event', 'image', 'analyze', value , 1);
+          $window.ga('send', 'event', 'image', 'analyze', value.name, 1);
         }
       }
     }, sanitizedList);
