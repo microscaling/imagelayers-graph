@@ -671,3 +671,20 @@ footer {
   }
 }
 
+@media only screen and (max-device-width:600px) {
+  footer,
+  .search,
+  nav.ctl {
+    display: none;
+  }
+  main nav {
+    &:not(.sticky) {
+      div.leaves {
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
