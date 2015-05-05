@@ -337,7 +337,6 @@ main {
   margin: 0;
   height: auto;
   position: absolute;
-  min-width: 1000px;
   top: 0;
   left: 0;
   bottom: 122px;
@@ -677,12 +676,16 @@ footer {
   nav.ctl {
     display: none;
   }
-  main nav {
-    &:not(.sticky) {
-      div.leaves {
-        &:before,
-        &:after {
-          display: none;
+  main {
+    min-width: 1000px;
+    bottom: 0;
+      nav {
+      &:not(.sticky) {
+        div.leaves {
+          &:before,
+          &:after {
+            display: none;
+          }
         }
       }
     }
