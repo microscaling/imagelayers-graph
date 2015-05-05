@@ -8,6 +8,7 @@ describe('Controller: SearchCtrl', function () {
   var SearchCtrl,
       location,
       dialog,
+      ga,
       scope;
 
   // Initialize the controller and a mock scope

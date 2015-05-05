@@ -3,9 +3,9 @@
 angular.module('iLayers')
   .controller('SearchCtrl', SearchCtrl);
               
-SearchCtrl.$inject = ['$scope', '$location', 'ngDialog'];
+SearchCtrl.$inject = ['$window', '$scope', '$location', 'ngDialog'];
       
-function SearchCtrl($scope, $location, ngDialog) {
+function SearchCtrl($window, $scope, $location, ngDialog) {
   var self = this;
 
   $scope.URL = $location.absUrl();
@@ -88,6 +88,10 @@ function SearchCtrl($scope, $location, ngDialog) {
     angular.forEach($scope.searchList, function(value) {
       if (value.name !== '' && value.missing !== true) {
         this.push(value);
+        // GA Event
+        if (undefined !== $window.ga) {
+          $window.ga('send', 'event', 'image', 'analyze', value , 1);
+        }
       }
     }, sanitizedList);
 
