@@ -10,7 +10,7 @@ function CommandService($rootScope) {
 
   return {
       highlight: function (layers, force) {
-        var cmds = []
+        var cmds = [];
         for(var i=0; i < layers.length; i++) {
           var cmd = layers[i].container_config.Cmd,
               size = layers[i].Size || 0,
@@ -27,7 +27,7 @@ function CommandService($rootScope) {
         var nop = '(nop) ';
         if (cmd === null || cmd == '') {
           if (size > 0) {
-            cmd = 'FROM custom scratch';
+            cmd = 'unknown instruction';
 
           } else {
             cmd = 'FROM scratch';
@@ -71,4 +71,4 @@ function CommandService($rootScope) {
         $rootScope.$broadcast('lock-image', { 'image': locked });
       }
   };
-};
+}

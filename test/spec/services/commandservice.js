@@ -32,10 +32,10 @@ describe('Command Service', function() {
       expect(result)
         .toEqual('FROM scratch');
     });
-    it('should set a null command on an image with a size greater than 0 to FROM custom scratch', function() {
+    it('should set a null command on an image with a size greater than 0 to unknown instruction', function() {
       var result = service.constructCommand(null, 1);
       expect(result)
-        .toEqual('FROM custom scratch');
+        .toEqual('unknown instruction');
     });
   });
 

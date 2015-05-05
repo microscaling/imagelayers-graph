@@ -10,6 +10,7 @@ table, thead, tbody, tfoot, tr, td {
 
 body, html {
   width: 100%;
+  min-width: 1000px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -336,6 +337,7 @@ main {
   margin: 0;
   height: auto;
   position: absolute;
+  min-width: 1000px;
   top: 0;
   left: 0;
   bottom: 122px;
