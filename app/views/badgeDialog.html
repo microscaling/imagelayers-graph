@@ -3,8 +3,8 @@
 </header>
 <aside class="workflow">
      <p>Create a badge to place on your image's Docker Hub page. The ImageLayers badge provides information about the size of an image, and how many layers it is composed of.</p>
-     <p>You can select an image from
-       <span ng-show="imageList().length > 0">
+     <p ng-show="imageList().length > 0">You can select an image from
+       <span>
         <input type="radio" ng-model="selectedWorkflow" id="imagelayers" value="imagelayers"/>
         <label for="imagelayers">ImageLayers</label>
         or
@@ -21,8 +21,8 @@
       <label>Select your image</label>
       <select ng-options="image.name for image in imageList() | orderBy:'name'" ng-model="selectedImage" class="styled-select"></select>
     </section>
-    <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
-      <label>Search for an image below</label>
+    <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub' || imageList().length < 1" mass-autocomplete>
+      <label>Search for an image on the Docker Hub</label>
       <div image-search data-model="selectedImage"></div>
     </section>
 
