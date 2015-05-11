@@ -13,24 +13,41 @@ angular.module('iLayers')
 BadgeDialogCtrl.$inject = ['$scope', '$sce']; 
                                   
 function BadgeDialogCtrl($scope, $sce, registryService) {
+  
+  var nameChanged = function(current, previous) {
+    var newName = current.name,
+        oldName = previous.name;
+    
+    return (newName !== undefined && 
+        newName !== oldName &&
+        newName.length < 3);
+  };
+  
   $scope.selectedImage = {};
 
   $scope.imageList = function() {
     var data = $scope.graph,
-        images = {};
+        images = {},
+        list = [];
 
     angular.forEach(data, function(image) {
       images[image.repo.name] = image.repo;
     });
 
-    return Object.keys(images).map(function(key){return images[key]})
+    list = Object.keys(images).map(function(key){return images[key]});
+
+    if (list.length < 1) {
+      $scope.selectedWorkflow = 'hub'; 
+    }
+    
+    return list;
   };
 
   $scope.$watch('selectedWorkflow', function() {
     $scope.selectedImage = {};
   });
 
-  $scope.$watch('selectedImage', function() {
+  $scope.$watch('selectedImage', function(newValue, oldValue) {
     var image = $scope.selectedImage;
 
     if ($scope.selectedWorkflow === 'imagelayers' && image.name) {
@@ -38,7 +55,7 @@ function BadgeDialogCtrl($scope, $sce, registryService) {
     }
 
     if ($scope.selectedWorkflow === 'hub' 
-        && (image.missing || (image.name && image.name.length < 3))) {
+        && (image.missing || nameChanged(newValue, oldValue))) {
        $scope.selectedImage.selected = false; 
     }
 

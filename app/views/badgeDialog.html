@@ -21,7 +21,7 @@
       <label>Select your image</label>
       <select ng-options="image.name for image in imageList() | orderBy:'name'" ng-model="selectedImage" class="styled-select"></select>
     </section>
-    <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub' || imageList().length < 1" mass-autocomplete>
+    <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
       <label>Search for an image on the Docker Hub</label>
       <div image-search data-model="selectedImage"></div>
     </section>
