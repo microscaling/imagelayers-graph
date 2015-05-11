@@ -51,6 +51,10 @@ function SearchCtrl($window, $scope, $location, ngDialog) {
   };
 
   $scope.searchList = self.populateSearch();
+  
+  $scope.removeAll = function() {
+    $scope.searchList = [{ name: '', tag: 'latest' }];
+  };
 
   $scope.showSearch = function() {
     ngDialog.open({

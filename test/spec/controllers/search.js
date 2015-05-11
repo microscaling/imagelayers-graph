@@ -75,6 +75,21 @@ describe('Controller: SearchCtrl', function () {
       expect(dialog.open).toHaveBeenCalledWith(options);
     });
   });
+  
+  describe('$scope.removeAll', function() {
+    it('should set searchList to single empty image', function() {
+      scope.searchList = [{ name: 'one', tag: 'oneTag' },
+                          { name: 'two', tag: 'twoTag' }];
+      
+      expect(scope.searchList.length).toEqual(2);
+      
+      scope.removeAll();
+      
+      expect(scope.searchList.length).toEqual(1);
+      expect(scope.searchList[0].name).toEqual('');
+      expect(scope.searchList[0].tag).toEqual('latest');
+    });
+  });
 
   describe('$scope.addRow', function() {
     it('should add blank row to searchList', function() {

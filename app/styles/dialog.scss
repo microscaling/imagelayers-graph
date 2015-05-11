@@ -160,6 +160,18 @@ body.ngdialog-open {
   width: 100%;
   border-bottom: 1px solid #d8d8d8;
   padding: 20px;
+  
+  .remove {
+    font-size: 0.9em;
+    text-decoration: underline;
+    float: right;
+    cursor: pointer;
+    
+    &:hover {
+      text-decoration: none; 
+    }
+  }
+  
   &.workflow {
     input[type=radio] {
       display: none;
