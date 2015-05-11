@@ -4,7 +4,7 @@ describe('DashboardCtrl', function() {
 
   var ctrl, scope, layers, registryService, commandService, data;
 
-  beforeEach(inject(function ($controller, $rootScope, _registryService_, _commandService_) {
+  beforeEach(inject(function ($controller, $rootScope, $window, _registryService_, _commandService_) {
     scope = $rootScope.$new();
 
     registryService = _registryService_;
@@ -13,6 +13,8 @@ describe('DashboardCtrl', function() {
     ctrl = $controller('DashboardCtrl', {
       $scope: scope
     });
+
+    var window = $window;
   }));
 
   it('should initialize graph', function() {
@@ -44,6 +46,40 @@ describe('DashboardCtrl', function() {
       expect(angular
                .equals(data[1], { "name": "baz", "tag": "2.0.0" }))
                .toBeTruthy();
+    });
+  });
+
+  describe('detectMobile', function() {
+
+    var setUserAgent = function(window, userAgent) {
+      if (window.navigator.userAgent != userAgent) {
+        var userAgentProp = { get: function () { return userAgent; } };
+        window.navigator = Object.create(navigator, {
+          userAgent: userAgentProp
+        });
+      }
+    };
+
+    afterEach(inject(function ($window){
+      setUserAgent(window, $window.navigator.userAgent);
+    }));
+
+    it('should set $scope.mobile to false if the user agent string does not have mobile keywords', function (){
+      setUserAgent(window, 'desktop');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(false);
+    });
+
+    it('should set $scope.mobile to true if the user agent is has the iPhone keyword', function (){
+      setUserAgent(window, 'iPhone');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(true);
+    });
+
+    it('should set $scope.mobile to true if the user agent is has the android keyword', function (){
+      setUserAgent(window, 'android');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(true);
     });
   });
 

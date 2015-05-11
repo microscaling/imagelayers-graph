@@ -3,9 +3,9 @@
 angular.module('iLayers')
   .controller('DashboardCtrl', DashboardCtrl);
               
-DashboardCtrl.$inject = ['$scope', '$routeParams', 'registryService', 'commandService'];
+DashboardCtrl.$inject = ['$scope', '$routeParams', '$window','registryService', 'commandService'];
               
-function DashboardCtrl($scope, $routeParams, registryService, commandService) {
+function DashboardCtrl($scope, $routeParams, $window, registryService, commandService) {
   var self = this;
   $scope.loading = false;
   $scope.empty = true;
@@ -48,6 +48,14 @@ function DashboardCtrl($scope, $routeParams, registryService, commandService) {
 
   // Load data from RouteParams
   self.searchImages($routeParams);
+
+  //mobile device check
+  self.detectMobile = function(){
+    var userAgent = $window.navigator.userAgent;
+    var mobileRegex = new RegExp('/webOS|iphone|ipad|android|windows|iemobile/', 'i');
+    $scope.mobile = mobileRegex.test(userAgent);
+  };
+  self.detectMobile();
 
   // public
   $scope.graph = [];
