@@ -708,25 +708,3 @@ footer {
     }
   }
 }
-
-@media only screen and (max-device-width:600px) {
-  footer,
-  .search,
-  nav.ctl {
-    display: none;
-  }
-  main {
-    min-width: 1000px;
-    bottom: 0;
-      nav {
-      &:not(.sticky) {
-        div.leaves {
-          &:before,
-          &:after {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-}

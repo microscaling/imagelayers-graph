@@ -1,0 +1,57 @@
+body.mobile-device {
+  footer,
+  .badge,
+  .search,
+  nav.ctl,
+  cite.cloud {
+    display: none;
+  }
+
+  main {
+    bottom: 0;
+    cite.logo {
+      margin-right: 10px;
+    }
+    section.metrics {
+      width: 100%;
+      min-width: 300px;
+      overflow: hidden;
+      li {
+        width: 50%;
+        float: left;
+        border-right: none;
+        dl {
+          padding: 5px;
+        }
+      }
+    }
+
+    nav {
+      &.sticky {
+        width: 100%;
+      }
+
+      &:not(.sticky) {
+        div.leaves {
+          &:before,
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .blog-link {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    background-color: #ffffff;
+    color: #333;
+    font-weight: bold;
+    &:visited {
+      color: #333;
+    }
+  }
+}

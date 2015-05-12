@@ -24,13 +24,16 @@
     <link rel="stylesheet" type="text/css" href="styles/ctl.css">
     <link rel="stylesheet" type="text/css" href="styles/animations.css">
     <link rel="stylesheet" type="text/css" href="styles/dialog.css">
-     <!-- endbuild -->
+    <link rel="stylesheet" type="text/css" href="styles/mobile.css">
+    <!-- endbuild -->
     <base href="/index.html" />
   </head>
-  <body ng-app="iLayers">
+  <body ng-app="iLayers" ng-class="{ 'mobile-device': mobile }">
   <mobile></mobile>
   <div ng-view>
   </div>
+
+  <a class="blog-link" ng-show="mobile" href="http://www.centurylinklabs.com/imagelayers-io-docker-visualization-and-badges/" target="_blank">Learn more about ImageLayers</a>
 
     <!-- build:js({.,app}) scripts/vendor.js -->
     <!-- bower:js -->
