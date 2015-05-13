@@ -52,7 +52,7 @@ function DashboardCtrl($scope, $routeParams, $window, registryService, commandSe
   //mobile device check
   self.detectMobile = function(){
     var userAgent = $window.navigator.userAgent;
-    var mobileRegex = new RegExp('/webOS|iphone|ipad|android|windows|iemobile/', 'i');
+    var mobileRegex = new RegExp('/webOS|iphone|ipad|android|iemobile/', 'i');
     $scope.mobile = mobileRegex.test(userAgent);
   };
   self.detectMobile();

@@ -27,7 +27,7 @@ $icons: (
   sad-face: 23,
   copy: 24,
   twitter: 25,
-  linked-in: 26,
+  linkedin: 26,
   facebook: 27,
   link: 28,
   docker-blocks: 29,
@@ -39,7 +39,8 @@ $icons: (
   thick-arrow-left: 35,
   thin-arrow-up: 36,
   thick-arrow-up: 37,
-  github: 38
+  github: 38,
+  google_plus: 39
 );
 
 
@@ -49,6 +50,12 @@ $icons: (
   width: 10px;
   height: 10px;
   @include background-size(10px, 1000px);
+}
+
+@mixin icon-xlarge {
+  width: 25px;
+  height: 25px;
+  @include background-size(25px, 2500px);
 }
 
 @mixin icon-large {
@@ -95,6 +102,12 @@ $icons: (
     @include icon-base;
     @include icon-large;
     background-position: 0 -#{($position * 40)}px;
+  }
+
+  .icon-#{$icon}-xlarge {
+    @include icon-base;
+    @include icon-xlarge;
+    background-position: 0 -#{($position * 50)}px;
   }
 
   .icon-#{$icon}-for-button {

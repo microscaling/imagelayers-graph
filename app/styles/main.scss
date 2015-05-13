@@ -290,47 +290,107 @@ section.search {
   position: relative;
   z-index: 99;
 
-  h3 {
+  .manage-images {
     float: left;
-    margin-top: 18px;
-    margin-left: 40px;
-  }
-
-  .plus-button {
-    margin-left: 15px;
-  }
-
-  input[reset-field] {
-    padding-right: 19px;
-
-    &::-ms-clear {
-      display: none;
+    h3 {
+      float: left;
+      margin-top: 18px;
+      margin-left: 40px;
     }
 
-    &::-webkit-search-cancel-button {
-      -webkit-appearance: none;
+    .plus-button {
+      margin-left: 15px;
     }
 
-    ~ .reset-icon {
-      display: block;
-      position: absolute;
-      right: 45px;
-      top: 25px;
-      cursor: default;
-      width: 15px;
-      height: 15px;
-      @include icon-grey;
-      @extend .icon-x;
-      cursor: pointer;
+    input[reset-field] {
+      float: none;
+      margin: 10px 0 0 25px;
+      width: 300px;
+      padding-right: 19px;
 
-      &:hover {
-        @include icon-red;
+      &::-ms-clear {
+        display: none;
       }
 
-      &.hidden {
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+
+      ~ .reset-icon {
+        display: block;
+        position: absolute;
+        right: 45px;
+        top: 25px;
+        width: 15px;
+        height: 15px;
+        @include icon-grey;
+        @extend .icon-x;
+        cursor: pointer;
+
+        &:hover {
+          @include icon-red;
+        }
+
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+  .sharing {
+    float: right;
+    padding-right: 40px;
+    span, div {
+      display: inline-block;
+    }
+    > span {
+      position: relative;
+      top: -8px;
+      margin-right: 8px;
+    }
+    .addthis-icons {
+      padding-right: 15px;
+      border-right: 1px solid #ccc;
+      margin-right: 8px;
+      margin-top: 12px;
+      a[class*=at-svc] {
+        float: left;
+        position: relative;
+        &:after {
+          height: 25px;
+          width: 25px;
+          content: '';
+          display: block;
+          top: 5px;
+          left: 5px;
+          position: absolute;
+          cursor: pointer;
+        }
+      }
+
+      $sharing-icons: (facebook, twitter, linkedin, google_plus);
+      @each $icon in $sharing-icons {
+        a[class*=#{$icon}]:after {
+          @extend .icon-#{$icon}-xlarge
+        }
+      }
+
+      .at-circular {
+        background-color: transparent;
+      }
+
+      span[class*=aticon] {
         display: none;
       }
     }
+    .icon-button.copy {
+      float: none;
+      margin-left: 0;
+      margin-top: 10px;
+      position: relative;
+      top: -8px;
+    }
+
   }
 }
 
