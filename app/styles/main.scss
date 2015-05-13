@@ -64,9 +64,11 @@ body {
 }
 
 /* Header and Nav*/
+main > header {
+  min-width: 1000px;
+}
 header {
   width: 100%;
-  min-width: 1000px;
   background: #d8d8d8;
   height: 60px;
   top: 0;
