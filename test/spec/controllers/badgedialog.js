@@ -22,11 +22,12 @@ describe('Controller: BadgedialogCtrl', function () {
   }));
   
   describe('$watch selectedWorkflow', function() {
-    it('should initialze selectedImage to empty object', function() {
+    it('should initialze selectedImage to empty image', function() {
       scope.selectedImage = { name: 'boo' };
       scope.$digest();
       
-      expect(scope.selectedImage.name).toEqual(undefined);
+      expect(scope.selectedImage.name).toEqual('');
+      expect(scope.selectedImage.tag).toEqual('latest');
     });
   });
   
@@ -99,17 +100,17 @@ describe('Controller: BadgedialogCtrl', function () {
 
   describe('$scope.badgeAsHtml', function  () {
     it('should return an HTML embed code', function () {
-      scope.selectedImage = { name: 'node' };
+      scope.selectedImage = { name: 'node', tag: 'latest', selected: true };
       var embedCode = scope.badgeAsHtml();
-      expect(embedCode.$$unwrapTrustedValue()).toEqual("<a href='https://imagelayers.io/?images=node:latest' title='Get your own badge on imagelayers.io'><img src='https://badge.imagelayers.io/node.svg'></a>")
+      expect(embedCode.$$unwrapTrustedValue()).toEqual("<a href='https://imagelayers.io/?images=node:latest' title='Get your own badge on imagelayers.io'><img src='https://badge.imagelayers.io/node:latest.svg'></a>")
     });
   });
 
   describe('$scope.badgeAsMarkdown', function  () {
     it('should return an HTML embed code', function () {
-      scope.selectedImage = { name: 'node' };
+      scope.selectedImage = { name: 'node', tag: 'latest', selected: true };
       var embedCode = scope.badgeAsMarkdown();
-      expect(embedCode).toEqual("[![](https://badge.imagelayers.io/node.svg)](https://imagelayers.io/?images=node:latest 'Get your own badge on imagelayers.io')")
+      expect(embedCode).toEqual("[![](https://badge.imagelayers.io/node:latest.svg)](https://imagelayers.io/?images=node:latest 'Get your own badge on imagelayers.io')")
     });
   });
 });

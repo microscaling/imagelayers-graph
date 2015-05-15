@@ -54,6 +54,7 @@ function ImageSearch($sce, registryService) {
               scope.tagList.push(data[i]);
               clearError();
               element.find('.styled-select').removeClass('searching');
+              scope.model.selected = true;
             }
           } else {
              scope.model.missing = true;

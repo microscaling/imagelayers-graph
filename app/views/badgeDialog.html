@@ -19,17 +19,17 @@
 <main>
     <section ng-show="selectedWorkflow == 'imagelayers'">
       <label>Select your image</label>
-      <select ng-options="image.name for image in imageList() | orderBy:'name'" ng-model="selectedImage" class="styled-select"></select>
+      <select ng-options="image.label for image in imageList() | orderBy:'label'" ng-model="selectedImage" class="styled-select"></select>
     </section>
     <section ng-class="selectedWorkflow" ng-show="selectedWorkflow == 'hub'" mass-autocomplete>
       <label>Search for an image on the Docker Hub</label>
-      <div image-search data-model="selectedImage"></div>
+      <div image-search data-model="selectedImage" with-tags></div>
     </section>
 
     <section ng-if="selectedImage.selected">
       <div class="preview">
         <label>Badge Preview</label>
-        <img loading-src="https://badge.imagelayers.io/{{ selectedImage.name }}.svg">
+        <img loading-src="https://badge.imagelayers.io/{{ selectedImage.name }}:{{ selectedImage.tag }}.svg">
       </div>
       <ul>
         <li>

@@ -16,18 +16,20 @@ function LoadingSrc(errorService) {
     restrict: 'A',
     link: function postLink(scope, element, attrs) {
       var img = new Image();
+      
+      attrs.$observe('loadingSrc', function(val) {
+        element[0].src = (attrs.loading) ? attrs.loading : '/images/loading.gif';
 
-      element[0].src = (attrs.loading) ? attrs.loading : '/images/loading.gif';
+        img.onload = function() { 
+          element[0].src = img.src;
+        };
 
-      img.onload = function() { 
-        element[0].src = img.src;
-      };
+        img.onerror = function(e) {
+          errorService.notification('Unable to load badge.');
+        };
 
-      img.onerror = function(e) {
-        errorService.notification('Unable to load badge.');
-      };
-
-      img.src = attrs.loadingSrc;
+        img.src = attrs.loadingSrc;
+      });
     }
   };
 };

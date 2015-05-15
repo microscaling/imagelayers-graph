@@ -13,17 +13,19 @@ angular.module('iLayers')
 BadgeDialogCtrl.$inject = ['$scope', '$sce']; 
                                   
 function BadgeDialogCtrl($scope, $sce, registryService) {
-  
   var nameChanged = function(current, previous) {
     var newName = current.name,
         oldName = previous.name;
     
     return (newName !== undefined && 
-        newName !== oldName &&
-        newName.length < 3);
+        newName !== oldName);
   };
   
-  $scope.selectedImage = {};
+  var newImage = function() {
+    return { name: '', tag: 'latest' };
+  };
+  
+  $scope.selectedImage = newImage();
 
   $scope.imageList = function() {
     var data = $scope.graph,
@@ -31,10 +33,9 @@ function BadgeDialogCtrl($scope, $sce, registryService) {
         list = [];
 
     angular.forEach(data, function(image) {
-      images[image.repo.name] = image.repo;
+      image.repo.label = image.repo.name + ':' + image.repo.tag;
+      list.push(image.repo);
     });
-
-    list = Object.keys(images).map(function(key){return images[key]});
 
     if (list.length < 1) {
       $scope.selectedWorkflow = 'hub'; 
@@ -44,35 +45,36 @@ function BadgeDialogCtrl($scope, $sce, registryService) {
   };
 
   $scope.$watch('selectedWorkflow', function() {
-    $scope.selectedImage = {};
+    $scope.selectedImage = newImage();
   });
 
   $scope.$watch('selectedImage', function(newValue, oldValue) {
     var image = $scope.selectedImage;
 
-    if ($scope.selectedWorkflow === 'imagelayers' && image.name) {
+    if ($scope.selectedWorkflow === 'imagelayers' && image.name.length > 0) {
       $scope.selectedImage.selected = true; 
     }
 
-    if ($scope.selectedWorkflow === 'hub' 
-        && (image.missing || nameChanged(newValue, oldValue))) {
-       $scope.selectedImage.selected = false; 
+    if ($scope.selectedWorkflow === 'hub') {
+      if (image.missing || nameChanged(newValue, oldValue)) {
+        $scope.selectedImage.selected = false;  
+      } 
     }
 
     $scope.htmlCopied = false;
     $scope.markdownCopied = false;
   }, true);
-
+  
   $scope.badgeAsHtml = function () {
-    if ($scope.selectedImage == undefined) return "";
-    return $sce.trustAsHtml("<a href='https://imagelayers.io/?images=" + $scope.selectedImage.name + ":latest' title='Get your own badge on imagelayers.io'>" +
-    "<img src='https://badge.imagelayers.io/" + $scope.selectedImage.name + ".svg'></a>")
+    if ($scope.selectedImage.selected !== true) return "";
+    return $sce.trustAsHtml("<a href='https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + "' title='Get your own badge on imagelayers.io'>" +
+    "<img src='https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg'></a>")
   };
 
   $scope.badgeAsMarkdown = function () {
-    if ($scope.selectedImage == undefined) return "";
-    return "[![](https://badge.imagelayers.io/" + $scope.selectedImage.name + ".svg)]" +
-      "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":latest 'Get your own badge on imagelayers.io')";
+    if ($scope.selectedImage.selected !== true) return "";
+    return "[![](https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg)]" +
+      "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + " 'Get your own badge on imagelayers.io')";
   };
 };
 
