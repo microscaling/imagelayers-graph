@@ -179,7 +179,7 @@ header {
   &.copy {
     cursor: pointer;
     &:before {
-      background: #CCCCCC;
+      background: #AAAAAA;
     }
     &:after {
       top: 4px;
@@ -371,9 +371,14 @@ section.search {
       $sharing-icons: (facebook, twitter, linkedin, google_plus);
       @each $icon in $sharing-icons {
         a[class*=#{$icon}]:after {
-          @extend .icon-#{$icon}-xlarge
+          @extend .icon-#{$icon}-xlarge;
+          @include icon-light-grey;
+        }
+        a[class*=#{$icon}]:hover:after {
+          @include icon-grey;
         }
       }
+
 
       .at-circular {
         background-color: transparent;
