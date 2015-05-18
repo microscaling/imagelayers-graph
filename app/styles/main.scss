@@ -80,7 +80,7 @@ header {
     margin: 0;
     float: left;
 
-    a {
+    a, > span {
       overflow: hidden;
       white-space: nowrap;
       text-indent: -9999px;
@@ -90,6 +90,7 @@ header {
       display: block;
       height: 54px;
       margin: 0 auto;
+      background: url('../images/logo_image_layers.svg') no-repeat 10px center;
     }
   }
 
@@ -99,10 +100,6 @@ header {
       border: none;
       padding: 0;
       margin: 0;
-    }
-
-    a {
-      background: url('../images/logo_image_layers.svg') no-repeat 10px center;
     }
   }
 
