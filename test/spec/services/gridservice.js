@@ -91,11 +91,35 @@ describe('Service: gridService', function () {
 
   describe('findLeaves', function() {
     it('creates an array of repo items', function() {
-      var data = { cols: 1,rows: 1,  matrix: { map: [[{layer: { id: 'foo' } }]],
-                                      inventory: {'foo': {image: { repo: 'test' } } } } },
-          res = gridService.findLeaves(data);
+      var data = {
+        cols: 1,rows: 1,  matrix: {
+          map: [[{layer: { id: 'foo' } }]],
+          inventory: {'foo': {image: { repo: { name: 'test' } } } }
+        }
+      },
+      res = gridService.findLeaves(data);
 
       expect(res.length).toEqual(1);
+    });
+    it('creates a valid docker hub link for official images', function(){
+      var data = {
+        cols: 1,rows: 1,  matrix: {
+          map: [[{layer: { id: 'foo' } }]],
+          inventory: {'foo': {image: { repo: { name: 'official' } } } }
+        }
+      },
+      res = gridService.findLeaves(data);
+      expect(res[0].hub_link).toEqual('https://registry.hub.docker.com/_/official');
+    });
+    it('creates a valid docker hub link for images from individuals and organizations', function () {
+      var data = {
+        cols: 1,rows: 1,  matrix: {
+          map: [[{layer: { id: 'foo' } }]],
+          inventory: {'foo': {image: { repo: { name: 'foo/test' } } } }
+        }
+      },
+      res = gridService.findLeaves(data);
+      expect(res[0].hub_link).toEqual('https://registry.hub.docker.com/u/foo/test');
     });
   });
 });

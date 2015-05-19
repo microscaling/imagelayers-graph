@@ -104,7 +104,7 @@ var directive, scope, route, controller, layer, commandService, gridService;
   describe('$scope.unwrapGrid', function() {
     it('creates an array from matrix data', function() {
       var data = { cols: 1, rows: 1, matrix: { map: [[{layer: { id: 'foo' } }]],
-                                      inventory: {'foo': {image: { repo: 'test' } }, count: 1 } } },
+                                      inventory: {'foo': {image: { repo: { name: 'test' } } }, count: 1 } } },
           res = gridService.findLeaves(data);
 
       expect(res.length).toEqual(1);

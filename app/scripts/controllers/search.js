@@ -110,4 +110,4 @@ function SearchCtrl($window, $scope, $location, ngDialog) {
   $scope.removeImage = function(index) {
     $scope.searchList.splice(index,1);
   };
-};
+}

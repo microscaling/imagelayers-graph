@@ -19,7 +19,6 @@ function Leaf($location, commandService) {
     controller: function($scope) {
       var locked = commandService.locked(),
           leaf = $scope.leaf;
-
       if (locked !== undefined && leaf.name === locked.name && leaf.tag === locked.tag) {
         $scope.lockParam = true;         
       } 

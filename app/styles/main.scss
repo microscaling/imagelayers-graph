@@ -516,6 +516,15 @@ main {
     min-width: 96.5%;
     margin-right: 0;
 
+    a.hub-link {
+      color: #666;
+      margin-bottom: 4px;
+      display: block;
+      &:hover {
+        color: #229FE5;
+      }
+    }
+
     section {
       width: 180px;
       margin-left: 20px;
