@@ -76,8 +76,32 @@ describe('DashboardCtrl', function() {
       expect(scope.mobile).toEqual(true);
     });
 
+    it('should set $scope.mobile to true if the user agent is has the iPod keyword', function (){
+      setUserAgent(window, 'iPod');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(true);
+    });
+
+    it('should set $scope.mobile to true if the user agent is has the iPad keyword', function (){
+      setUserAgent(window, 'iPad');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(true);
+    });
+
     it('should set $scope.mobile to true if the user agent is has the android keyword', function (){
       setUserAgent(window, 'android');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(true);
+    });
+
+    it('should set $scope.mobile to true if the user agent is has the webOS keyword', function (){
+      setUserAgent(window, 'webOS');
+      ctrl.detectMobile();
+      expect(scope.mobile).toEqual(true);
+    });
+
+    it('should set $scope.mobile to true if the user agent is has the iemobile keyword', function (){
+      setUserAgent(window, 'iemobile');
       ctrl.detectMobile();
       expect(scope.mobile).toEqual(true);
     });
@@ -144,14 +168,14 @@ describe('DashboardCtrl', function() {
       expect(result.length).toEqual(1);
       expect(result[0].repo.name).toEqual('foo');
     });
-    
+
     it('should call commandService.release()', function() {
       spyOn(commandService,'release');
       scope.applyFilters(data, 'foo');
       scope.$digest();
       expect(commandService.release).toHaveBeenCalled();
     });
-    
+
     it('should call commandService.lock()', function() {
       spyOn(commandService,'lock');
       scope.applyFilters(data, 'foo');

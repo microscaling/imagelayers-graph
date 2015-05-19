@@ -2,9 +2,9 @@
 
 angular.module('iLayers')
   .controller('DashboardCtrl', DashboardCtrl);
-              
+
 DashboardCtrl.$inject = ['$scope', '$routeParams', '$window','registryService', 'commandService'];
-              
+
 function DashboardCtrl($scope, $routeParams, $window, registryService, commandService) {
   var self = this;
   $scope.loading = false;
@@ -52,7 +52,7 @@ function DashboardCtrl($scope, $routeParams, $window, registryService, commandSe
   //mobile device check
   self.detectMobile = function(){
     var userAgent = $window.navigator.userAgent;
-    var mobileRegex = new RegExp('/webOS|iphone|ipad|android|iemobile/', 'i');
+    var mobileRegex = new RegExp('webOS|ip(hone|od|ad)|android|iemobile', 'i');
     $scope.mobile = mobileRegex.test(userAgent);
   };
   self.detectMobile();
@@ -78,9 +78,9 @@ function DashboardCtrl($scope, $routeParams, $window, registryService, commandSe
       }
     }
 
-    $scope.$evalAsync(function() { 
+    $scope.$evalAsync(function() {
       commandService.release();
-      commandService.lock(locked) 
+      commandService.lock(locked)
     });
 
     return filteredData;
