@@ -104,6 +104,8 @@ function ImageSearch($sce, registryService) {
           loadTags();
         }
       });
+      
+      element.find('.image-name')[0].focus();
     }
   };
 };
