@@ -466,11 +466,13 @@ body.ngdialog-open {
     position: absolute;
     right: 10px;
     top: 15px;
+    z-index: 0;
     @include icon-grey;
     @extend .icon-thick-arrow-down;
   }
 
   select {
+    position: relative;
     background: transparent;
     width: 200px;
     margin: 10px 0 0 10px;
@@ -484,5 +486,7 @@ body.ngdialog-open {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    background: transparent;
+    z-index: 1;
   }
 }

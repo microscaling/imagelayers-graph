@@ -95,10 +95,12 @@ describe('Directive: imageSearch', function () {
       var deferredTag = $q.defer();
       spyOn(registryService, 'fetchTags').and.returnValue(deferredTag.promise);
       deferredTag.resolve({});
-
-      scope.model = { name: 'blah' };
+      scope.initialValue = function() { return true; }
+      scope.model = { name: 'one' }
+      scope.withTags = true;
+      scope.model.name = 'blah';
       scope.$digest();
-      scope.model = { name: 'blah' };
+      scope.model.name = 'blah';
       scope.$digest();
       expect(registryService.fetchTags).toHaveBeenCalled();
     }));

@@ -35,13 +35,7 @@ function ImageSearch($sce, registryService) {
           scope.model.name = item.value; 
         }
       }
-
-      var initialValue = function(newValue, oldValue) {
-        return newValue !== undefined 
-          && angular.equals(newValue, oldValue) 
-          && newValue.name.length > constants.termLimit;
-      };
-
+      
       var loadTags = function() {
         clearError();
         element.find('.styled-select').addClass('searching');
@@ -98,14 +92,26 @@ function ImageSearch($sce, registryService) {
         'on_attach': attached,
         'on_select': selected
       };
+      
+      scope.initialValue = function(newValue, oldValue) {
+        return newValue !== undefined 
+          && newValue === oldValue 
+          && newValue.length > constants.termLimit;
+      };
 
-      scope.$watch('model', function(newValue, oldValue) {
-        if (scope.withTags && initialValue(newValue, oldValue)) {
+      scope.$watch('model.name', function(newValue, oldValue) {
+        if (scope.withTags && scope.initialValue(newValue, oldValue)) {
           loadTags();
+        } else {
+          if (scope.model) {
+            scope.model.tag = 'latest';
+          }
         }
       });
       
-      element.find('.image-name')[0].focus();
+      if (scope.model && scope.model.name.length === 0) {
+        element.find('.image-name')[0].focus();
+      }
     }
   };
 };
