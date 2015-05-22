@@ -1,85 +1,87 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * @ngdoc directive
- * @name iLayers.directive:about
- * @description
- * # about
- */
-angular.module('iLayers')
-  .directive('about', About);
-        
-About.$inject = ['$timeout', '$templateRequest'];
-                       
-function About($timeout, $templateRequest) {
-  return {
-    restrict: 'A',
-    scope: {},
-    controller: function($scope) {
-      $templateRequest('views/about-menu.html');
-    },
-    link: function postLink(scope, element, attrs) {
-      var position = element.position(),
-          height = element.outerHeight(),
-          speed = 400;
+  /**
+   * @ngdoc directive
+   * @name iLayers.directive:about
+   * @description
+   * # about
+   */
+  angular.module('iLayers')
+    .directive('about', About);
 
-      scope.bindEvents = function(menu) {
-        menu.bind('mouseover', function() {
-            scope.menuActive = true;
-        });
-        menu.bind('mouseleave', function() {
-          scope.menuActive = false;
-          scope.hideMenu(menu);
-        });
-      };
+  About.$inject = ['$timeout', '$templateRequest'];
 
-      scope.unbindEvents = function(menu) {
-        menu.unbind('mouseover');
-        menu.unbind('mouseleave');
-      };
+  function About($timeout, $templateRequest) {
+    return {
+      restrict: 'A',
+      scope: {},
+      controller: function() {
+        $templateRequest('views/about-menu.html');
+      },
+      link: function postLink(scope, element) {
+        var position = element.position(),
+            height = element.outerHeight(),
+            speed = 400;
 
-      scope.showMenu = function(aboutMenu) {
-        if (!scope.menuVisible) {
-          scope.bindEvents(aboutMenu);
-
-          aboutMenu.css('display', 'block');
-          aboutMenu.animate({
-            'top': (position.top + height) + 'px',
-            'opacity': 1
-          }, speed, function() {
-            scope.menuVisible = true;
+        scope.bindEvents = function(menu) {
+          menu.bind('mouseover', function() {
+              scope.menuActive = true;
           });
-        }
-      };
-
-      scope.hideMenu = function(aboutMenu) {
-        if (scope.menuVisible && !scope.menuActive) {
-          scope.unbindEvents(aboutMenu);
-
-          aboutMenu.animate({
-            'top': (position.top + 90) + 'px',
-            'opacity': 0
-          }, speed, function() { 
-            aboutMenu.css('display','none'); 
-            scope.menuVisible = false;
+          menu.bind('mouseleave', function() {
+            scope.menuActive = false;
+            scope.hideMenu(menu);
           });
-        }
-      };
+        };
 
-      scope.menuVisible = false;
-      scope.menuActive = false;
+        scope.unbindEvents = function(menu) {
+          menu.unbind('mouseover');
+          menu.unbind('mouseleave');
+        };
 
-      element.bind('mouseover', function() {
-        var aboutMenu = $('ul.about');
-        scope.showMenu(aboutMenu);
-      });
+        scope.showMenu = function(aboutMenu) {
+          if (!scope.menuVisible) {
+            scope.bindEvents(aboutMenu);
 
-      element.bind('mouseleave', function() {
-        var aboutMenu = $('ul.about');
-        $timeout(function() {
-          scope.hideMenu(aboutMenu);
-        }, 120);
-      });
-    } 
-  };
-};
+            aboutMenu.css('display', 'block');
+            aboutMenu.animate({
+              'top': (position.top + height) + 'px',
+              'opacity': 1
+            }, speed, function() {
+              scope.menuVisible = true;
+            });
+          }
+        };
+
+        scope.hideMenu = function(aboutMenu) {
+          if (scope.menuVisible && !scope.menuActive) {
+            scope.unbindEvents(aboutMenu);
+
+            aboutMenu.animate({
+              'top': (position.top + 90) + 'px',
+              'opacity': 0
+            }, speed, function() { 
+              aboutMenu.css('display','none'); 
+              scope.menuVisible = false;
+            });
+          }
+        };
+
+        scope.menuVisible = false;
+        scope.menuActive = false;
+
+        element.bind('mouseover', function() {
+          var aboutMenu = $('ul.about');
+          scope.showMenu(aboutMenu);
+        });
+
+        element.bind('mouseleave', function() {
+          var aboutMenu = $('ul.about');
+          $timeout(function() {
+            scope.hideMenu(aboutMenu);
+          }, 120);
+        });
+      } 
+    };
+  }
+})();

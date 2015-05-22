@@ -1,35 +1,37 @@
-'use strict';
+(function() {
+  'use strict';
 
-/**
- * @ngdoc directive
- * @name iLayers.directive:loadingSrc
- * @description
- * # loadingSrc
- */
-angular.module('iLayers')
-  .directive('loadingSrc', LoadingSrc);
+  /**
+   * @ngdoc directive
+   * @name iLayers.directive:loadingSrc
+   * @description
+   * # loadingSrc
+   */
+  angular.module('iLayers')
+    .directive('loadingSrc', LoadingSrc);
 
-LoadingSrc.$inject = ['errorService'];
+  LoadingSrc.$inject = ['errorService'];
 
-function LoadingSrc(errorService) {
-  return {
-    restrict: 'A',
-    link: function postLink(scope, element, attrs) {
-      var img = new Image();
-      
-      attrs.$observe('loadingSrc', function(val) {
-        element[0].src = (attrs.loading) ? attrs.loading : '/images/loading.gif';
+  function LoadingSrc(errorService) {
+    return {
+      restrict: 'A',
+      link: function postLink(scope, element, attrs) {
+        var img = new Image();
 
-        img.onload = function() { 
-          element[0].src = img.src;
-        };
+        attrs.$observe('loadingSrc', function() {
+          element[0].src = (attrs.loading) ? attrs.loading : '/images/loading.gif';
 
-        img.onerror = function(e) {
-          errorService.notification('Unable to load badge.');
-        };
+          img.onload = function() { 
+            element[0].src = img.src;
+          };
 
-        img.src = attrs.loadingSrc;
-      });
-    }
-  };
-};
+          img.onerror = function() {
+            errorService.notification('Unable to load badge.');
+          };
+
+          img.src = attrs.loadingSrc;
+        });
+      }
+    };
+  }
+})();
