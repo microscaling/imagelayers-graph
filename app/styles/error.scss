@@ -1,8 +1,6 @@
-* {
-  box-sizing: border-box;
-}
+@import 'reset';
 
-body {
+body.error-page {
   width: 100%;
   font-family: Helvetica, Arial, sans-serif;
 
@@ -23,12 +21,11 @@ body {
       color: #a0a0a0;
     }
   }
-}
-
-h1.logo {
-  height: 150px;
-  width: auto;
-  text-indent: -9999px;
-  color: transparent;
-  background: url('../images/logo_image_layers.svg') no-repeat 10px center;
+  h1.logo {
+    height: 150px;
+    width: auto;
+    text-indent: -9999px;
+    color: transparent;
+    background: url('images/logo_image_layers.svg') no-repeat 10px center;
+  }
 }

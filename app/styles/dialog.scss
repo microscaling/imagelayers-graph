@@ -95,7 +95,7 @@ body.ngdialog-open {
 }
 
 .ngdialog.ngdialog-theme-layers .ngdialog-close:before {
-  background: url(../images/cross.svg) top left no-repeat;
+  background: url('../images/cross.svg') top left no-repeat;
   background-size: 30px 30px;
   content: '';
   height: 30px;
@@ -211,36 +211,29 @@ body.ngdialog-open {
     float: left;
     position: relative;
     padding-bottom: 20px;
-    padding-left: 25px;
+    padding-left: 30px;
+    margin-left: 5px;
     text-decoration: underline;
-    
+    &:after, &:before {
+      left: -5px;
+      top: 0;
+    }
+
     &:hover {
       cursor: pointer;
       text-decoration: none;
     }
-    
-    &:before {
-      content: ' ';
-      position: absolute;
-      left: 0;
-      top: 2px;
-      width: 20px;
-      height: 20px;
-      border-radius: 10px;
-      background-color: #91B748;
+  }
+  .icon-button.copy {
+    &:before{
+      top: 0;
+      left: -3px;
     }
-    
     &:after {
-      content: ' ';
-      position: absolute;
-      left: 2px;
-      top: 4px;
-      width: 20px;
-      height: 20px;
-      @extend .icon-plus-medium;
-      @include icon-white;
+      top: 5px;
+      left: 1px;
     }
-  } 
+  }
 }
 
 .ngdialog.ngdialog-theme-layers .ngdialog-buttons {
@@ -350,13 +343,21 @@ body.ngdialog-open {
           margin-bottom: 30px;
         }
       }
+      font-style: normal;
     }
     select {
-      z-index: +1;
+      z-index: 1;
       margin-bottom: 30px;
+      font-size: 12px;
+    }
+    .styled-select {
+      select {
+        margin-top: 13px;
+        font-size: 14px;
+      }
     }
 
-    label {
+      label {
       margin: 18px 7px 0 0;
       float: left;
     }
