@@ -18,7 +18,7 @@ describe('Directive: about', function () {
     rootScope.$digest();
     controller = elem.controller('about');
     scope = elem.isolateScope();
-    menu = $('ul.about');
+    menu = $('div.about');
   }));
   
   describe('scope.showMenu', function() {    

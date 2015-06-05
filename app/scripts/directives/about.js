@@ -71,12 +71,12 @@
         scope.menuActive = false;
 
         element.bind('mouseover', function() {
-          var aboutMenu = $('ul.about');
+          var aboutMenu = $('div.about');
           scope.showMenu(aboutMenu);
         });
 
         element.bind('mouseleave', function() {
-          var aboutMenu = $('ul.about');
+          var aboutMenu = $('div.about');
           $timeout(function() {
             scope.hideMenu(aboutMenu);
           }, 120);
