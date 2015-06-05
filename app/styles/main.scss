@@ -6,6 +6,32 @@ body {
   background-color: #d8d8d8;
   overflow-x: hidden;
 }
+// base project logo
+.imagelayers-logo {
+  width: 190px;
+  padding: 0;
+  margin: 0;
+  a {
+    display: block;
+    background: url('../images/logo_image_layers.svg') no-repeat 10px center;
+    text-indent: -9999px;
+    color: transparent;
+  }
+}
+
+// base centurylink logo
+.ctl-logo {
+  width: 140px;
+  padding: 0;
+  margin: 0;
+  a {
+    display: block;
+    background: url('../images/ctl_logo_base_grey.svg') 0 15px no-repeat;
+    background-size: 140px 30px;
+    text-indent: -9999px;
+    color: transparent;
+  }
+}
 
 #error {
   background: rgb(217,0,0);
