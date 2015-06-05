@@ -1,131 +1,115 @@
 @import '_icons';
 
-ul.about {
-  z-index: 300;
+div.about {
   display: none;
-  font-size: 0.8em;
-  font-weight: normal;
+  z-index: 300;
   position: absolute;
   top: 100px;
   left: 190px;
-  opacity: 1;
   width: 722px;
-  margin: 0;
-  padding: 0;
+  background-color: #fff;
+  opacity: 1;
+  padding: 20px;
+  border: 1px solid #999999;
+  border-top: none;
+  font-size: .8em;
+  line-height: 1.25em;
+  color: #666666;
 
-  .logo {
-    width: 190px;
-    border: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    padding: 20px;
-    background: #fff;
-    overflow: auto;
-    border: 1px solid #999;
-    border-top: none;
-    color: #777;
-
-    .strong {
-      font-weight: bold;
+  header {
+    margin-bottom: 15px;
+    .logo {
+      width: 190px;
     }
   }
 
-  p {
-    padding-top: 10px;
-    line-height: 1.25em;
-
-    > a {
-      color: #9c9c9c;
-      text-decoration: none;
-
-      &:hover {
-        color: #666;
-        text-decoration: underline;
-      }
+  a {
+    font-weight: normal;
+    color: #9c9c9c;
+    text-decoration: none;
+    &:hover {
+      color: #666;
+      text-decoration: underline;
     }
-
-    a.github {
+    &.github {
+      margin-right: 8px;
       border-right: 1px solid #9c9c9c;
       padding-right: 10px;
-      margin-right: 6px;
     }
   }
 
-  hr {
-    display: block; height: 1px;
-    border: 0; border-top: 1px solid #ccc;
-    margin: 1.1em 0;
-    padding: 0;
+  > p {
+    margin-bottom: 15px;
+    &.info {
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
   }
 
-  h3 {
-    margin-bottom: 1em;
-  }
-  
-  a.project {
-    display: inline-block;
-    background: #f1f1f1;
-    margin-right: 10px;
-    color: inherit;
-    text-decoration: none;
-    float: left;
-
-    &:hover {
-      background: #e1e1e1;
-
-      mark {
+  ul {
+    width: 100%;
+    overflow: auto;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+    padding: 20px 0;
+    li {
+      width: 32%;
+      float: left;
+      margin-top: 20px;
+      margin-right: 2%;
+      &:last-child {
+        margin-right: 0;
+      }
+      > a {
+        background: #f1f1f1;
+        padding: 10px;
         text-decoration: none;
-      }
-    }
+        display: block;
+        font-size: .9em;
 
-    &:nth-last-of-type(1) {
-      margin-right: 0;
-    }
-    article {
-      width: 220px;
-      padding: 20px;
+        span {
+          color: #2d2d2d;
+          text-decoration: underline;
+        }
 
-      p {
-        font-size: 0.9em;
-        padding: 0;
-      }
+        &:hover {
+          text-decoration: none;
+          background: #e1e1e1;
+          span {
+            text-decoration: none;
+          }
+        }
 
-      mark {
-        background: none;
-        text-decoration: underline;
-      }
+        h4 {
+          color: #666;
+          margin: 15px 0;
+        }
 
-      h4 {
-        margin: 20px 0 0 0;
-        color: #444;
-      }
+        [class*='-logo'] {
+          padding: 0 0 60px 0;
+        }
 
-      [class*='-logo'] {
-        padding: 0 0 50px 0;
-      }
+        .pmx-logo {
+          background: url('../images/panamax_id_02.svg') -135px -310px no-repeat;
+          background-size: 245%;
+        }
 
-      .pmx-logo {
-        background: url('../images/panamax_id_02.svg') -125px -290px no-repeat;
-        background-size: 245%;
-      }
+        .lorry-logo {
+          background: url('../images/logo_lorry.svg') -5px 0 no-repeat;
+        }
 
-      .lorry-logo {
-        background: url('../images/logo_lorry.svg') -5px -5px no-repeat;
-      }
-
-      .dray-logo {
-        background: url('../images/logo_dray_long.svg') -190px -285px no-repeat;
-        background-size: 260%;
+        .dray-logo {
+          background: url('../images/logo_dray_long.svg') -170px -300px no-repeat;
+          background-size: 260%;
+        }
       }
     }
   }
 
   footer {
     display: block;
-    position: static;
+    position: relative;
     height: auto;
     background: none;
     font-weight: bold;
@@ -135,6 +119,7 @@ ul.about {
     a {
       color: #666;
       text-decoration: none;
+      font-weight: bold;
       &:hover {
         color: #333;
         text-decoration: underline;
@@ -144,116 +129,114 @@ ul.about {
 }
 
 /* Header and Nav*/
-main > header {
-  min-width: 1000px;
-}
-
-header {
-  width: 100%;
-  background: #d8d8d8;
-  height: 58px;
-  top: 0;
-
-  .logo {
-    width: 190px;
-    border: none;
-    padding: 0;
-    margin: 0;
-    float: left;
-
-    a {
-      overflow: hidden;
-      white-space: nowrap;
-      text-indent: -9999px;
-      color: transparent;
-      background-size: 100%;
-      width: 100%;
-      display: block;
-      height: 54px;
-      margin: 0 auto;
-    }
-  }
-
-
-  h1.logo {
-    float: left;
-    &:hover {
+main {
+  > header {
+    width: 100%;
+    min-width: 1000px;
+    background: #d8d8d8;
+    height: 59px;
+    top: 0;
+    .logo {
+      width: 190px;
       border: none;
       padding: 0;
       margin: 0;
-    }
-
-    a {
-      background: url('../images/logo_image_layers.svg') no-repeat 10px center;
-    }
-  }
-
-  nav.ctl {
-    width: 100%;
-    display: block;
-    padding-left: 190px;
-    margin-bottom: 0;
-    padding-top: 21px;
-
-    ul > li {
-      font-size: 0.8em;
-      font-weight: normal;
       float: left;
-      position: relative;
-      padding-right: 20px;
-      padding-bottom: 25px;
 
-      h4 {
+      a {
+        overflow: hidden;
+        white-space: nowrap;
+        text-indent: -9999px;
+        color: transparent;
+        background-size: 100%;
+        width: 100%;
+        display: block;
+        height: 54px;
+        margin: 0 auto;
+      }
+    }
+
+
+    h1.logo {
+      float: left;
+      &:hover {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      a {
+        background: url('../images/logo_image_layers.svg') no-repeat 10px center;
+      }
+    }
+
+    nav.ctl {
+      width: 100%;
+      display: block;
+      padding-left: 190px;
+      margin-bottom: 0;
+      padding-top: 21px;
+
+      ul > li {
+        font-size: 0.8em;
+        font-weight: normal;
+        float: left;
+        position: relative;
+        padding-right: 20px;
+        padding-bottom: 25px;
+
+        h4 {
+          a {
+            color: #666;
+          }
+        }
+
         a {
-          color: #666;
-        }
-      }
+          color: #888;
+          text-decoration: none;
 
-      a {
-        color: #888;
-        text-decoration: none;
-
-        &:after {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 3px;
-          right: 0;
-          width: 16px;
-          height: 16px;
-          @extend .icon-thin-arrow-down;
-          @include icon-light-grey;
+          &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 3px;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            @extend .icon-thin-arrow-down;
+            @include icon-light-grey;
+          }
         }
       }
     }
-  }
 
-  cite {
-    float: right;
-    &.cloud {
-      width: 150px;
-      padding-left: 20px;
-      border-left: 1px solid #a0a0a0;
-      margin: 13px 10px 0 20px;
-      a {
-        text-decoration: none;
-        font-style: normal;
-        color: #a0a0a0;
-        font-size: 14px;
-        span {
-          position: relative;
-          top: -2px;
-          display: inline-block;
-          color: #777;
-        }
-      }
-    }
-    &.logo {
+    cite {
       float: right;
-      width: 140px;
-      a {
-        background: url('../images/ctl_logo_base_grey.svg') 0 15px no-repeat;
-        background-size: 140px 30px;
+      &.cloud {
+        width: 150px;
+        padding-left: 20px;
+        border-left: 1px solid #a0a0a0;
+        margin: 13px 10px 0 20px;
+        a {
+          text-decoration: none;
+          font-style: normal;
+          color: #a0a0a0;
+          font-size: 14px;
+          span {
+            position: relative;
+            top: -2px;
+            display: inline-block;
+            color: #777;
+          }
+        }
+      }
+      &.logo {
+        float: right;
+        width: 140px;
+        a {
+          background: url('../images/ctl_logo_base_grey.svg') 0 15px no-repeat;
+          background-size: 140px 30px;
+        }
       }
     }
   }
