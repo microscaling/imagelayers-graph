@@ -21,7 +21,6 @@
       },
       link: function postLink(scope, element) {
         var position = element.position(),
-            height = element.outerHeight(),
             speed = 400;
 
         scope.bindEvents = function(menu) {
@@ -45,7 +44,7 @@
 
             aboutMenu.css('display', 'block');
             aboutMenu.animate({
-              'top': (position.top + height) + 'px',
+              'top': 59 + 'px',
               'opacity': 1
             }, speed, function() {
               scope.menuVisible = true;

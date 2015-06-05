@@ -1,5 +1,7 @@
 @import '_icons';
 
+
+/* About Dropdown */
 div.about {
   display: none;
   z-index: 300;
@@ -18,8 +20,8 @@ div.about {
 
   header {
     margin-bottom: 15px;
-    .logo {
-      width: 190px;
+    a {
+      height: 45px;
     }
   }
 
@@ -100,8 +102,8 @@ div.about {
         }
 
         .dray-logo {
-          background: url('../images/logo_dray_long.svg') -170px -300px no-repeat;
-          background-size: 260%;
+          background: url('../images/logo_dray_long.svg') -275px -415px no-repeat;
+          background-size: 350%;
         }
       }
     }
@@ -136,106 +138,70 @@ main {
     background: #d8d8d8;
     height: 59px;
     top: 0;
-    .logo {
-      width: 190px;
-      border: none;
-      padding: 0;
-      margin: 0;
+
+    h1.imagelayers-logo {
       float: left;
-
+      height: 100%;
       a {
-        overflow: hidden;
-        white-space: nowrap;
-        text-indent: -9999px;
-        color: transparent;
-        background-size: 100%;
-        width: 100%;
-        display: block;
-        height: 54px;
-        margin: 0 auto;
-      }
-    }
-
-
-    h1.logo {
-      float: left;
-      &:hover {
-        border: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        background: url('../images/logo_image_layers.svg') no-repeat 10px center;
+        margin-top: 5px;
+        height: 50px;
       }
     }
 
     nav.ctl {
-      width: 100%;
-      display: block;
-      padding-left: 190px;
-      margin-bottom: 0;
+      width: 58px;
+      float: left;
+      position: relative;
+      height: 100%;
       padding-top: 21px;
-
-      ul > li {
-        font-size: 0.8em;
-        font-weight: normal;
-        float: left;
-        position: relative;
-        padding-right: 20px;
-        padding-bottom: 25px;
-
-        h4 {
-          a {
-            color: #666;
-          }
-        }
-
-        a {
-          color: #888;
-          text-decoration: none;
-
-          &:after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 3px;
-            right: 0;
-            width: 16px;
-            height: 16px;
-            @extend .icon-thin-arrow-down;
-            @include icon-light-grey;
-          }
+      margin-left: 10px;
+      a {
+        color: #888;
+        font-size: .8em;
+        text-decoration: none;
+        margin-top: 21px;
+        &:after {
+          @extend .icon-thin-arrow-down;
+          @include icon-light-grey;
+          content: '';
+          display: block;
+          position: absolute;
+          top: 26px;
+          right: 5px;
+          width: 16px;
+          height: 16px;
         }
       }
     }
 
-    cite {
-      float: right;
-      &.cloud {
-        width: 150px;
-        padding-left: 20px;
-        border-left: 1px solid #a0a0a0;
-        margin: 13px 10px 0 20px;
-        a {
-          text-decoration: none;
-          font-style: normal;
-          color: #a0a0a0;
-          font-size: 14px;
-          span {
-            position: relative;
-            top: -2px;
-            display: inline-block;
-            color: #777;
+    .ctl-cloud {
+      background-color: #0040D0;
+      cite {
+        float: right;
+        &.ctl-logo {
+          display: block;
+          a {
+            height: 50px;
           }
         }
-      }
-      &.logo {
-        float: right;
-        width: 140px;
-        a {
-          background: url('../images/ctl_logo_base_grey.svg') 0 15px no-repeat;
-          background-size: 140px 30px;
+
+        &.cloud {
+          width: 150px;
+          padding-left: 20px;
+          border-left: 1px solid #a0a0a0;
+          margin: 13px 10px 0 20px;
+          a {
+            text-decoration: none;
+            font-style: normal;
+            color: #a0a0a0;
+            font-size: 14px;
+            span {
+              position: relative;
+              top: -2px;
+              display: inline-block;
+              color: #777;
+            }
+          }
         }
       }
     }
