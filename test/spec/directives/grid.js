@@ -5,6 +5,7 @@ describe('Directive: grid', function () {
   beforeEach(module('iLayers'));
   // Load the templates
   beforeEach(module('views/grid.html'));
+  beforeEach(module('views/leaf.html'));
 
 var directive, scope, route, controller, layer, commandService, gridService;
 

@@ -24,7 +24,7 @@
           $scope.lockParam = true;         
         } 
       },
-      link: function(scope) { 
+      link: function(scope, element) {
 
         scope.showCommands = function(repo, force) {
           var data = scope.graph;

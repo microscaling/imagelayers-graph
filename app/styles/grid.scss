@@ -28,64 +28,6 @@ main {
     display: block;
   }
 
-  nav {
-    z-index: 10;
-    &:not(.sticky) {
-      div.leaves {
-        position: relative;
-        overflow: visible;
-        &:before,
-        &:after {
-          z-index: -9;
-          right: -20px;
-          width: 100%;
-          display: block;
-          content: '';
-          position: absolute;
-        }
-        &:before {
-          height: 71px;
-          top: -159px;
-          background-color: #2d2d2d;
-        }
-        //search
-        &:after {
-          height: 60px;
-          top: -88px;
-          background-color: #ffffff;
-        }
-      }
-    }
-
-    &.sticky {
-      position: fixed;
-      background: #d8d8d8;
-      overflow: hidden;
-      width: calc(100% - 15px);
-      top: 0;
-      left: 0;
-
-      div.leaves {
-        position: relative;
-        background: #d8d8d8;
-
-        > section {
-          position: relative;
-        }
-      }
-
-      section.search {
-        width: 100%;
-        border-bottom: 1px solid #999;
-        box-shadow: 0 4px 5px -5px rgba(0,0,0,.4);
-      }
-
-      ~ .graph {
-        padding-top: 158px;
-      }
-    }
-  }
-
   div.info {
     width: 90%;
     margin: 50px auto 0;
@@ -104,16 +46,23 @@ main {
   }
 
   div.leaves {
-    margin-top: 28px;
+    padding-top: 28px;
     padding-left: 10px;
     white-space: nowrap;
     overflow: hidden;
     box-sizing: content-box;
     border-bottom: 1px solid #b3b3b3;
+    background-color: #d8d8d8;
     position: relative;
     z-index: 9;
     min-width: 96.5%;
     margin-right: 0;
+
+    &.sticky {
+      position: fixed;
+      top: 50px;
+      width: 100%;
+    }
 
     a.hub-link {
       color: #666;
@@ -165,11 +114,12 @@ main {
   }
 
   .matrix {
-    margin-left: 20px;
   }
 
   section.graph {
     position: relative;
+    width: 100%;
+    overflow: scroll;
 
     .noop {
       width: 0;
@@ -185,6 +135,7 @@ main {
       color: #222;
       margin: 10px;
       position: relative;
+      left: 20px;
       font-size: 0.9em;
 
       &.locked {

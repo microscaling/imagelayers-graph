@@ -19,33 +19,27 @@
       <badge></badge>
       <metrics></metrics> 
     </section>
-    <nav sticky offset='134'>
-        <section class="search" ng-controller="SearchCtrl as search">
-          <div class="manage-images">
-            <h3>Docker Images</h3>
-            <div class="icon-button plus" ng-click="showSearch()">Manage Images</div>
-            <input type='text' ng-model="filters.image" placeholder='Filter images...' reset-field>
-          </div>
+    <section sticky offset='134' class="search" ng-controller="SearchCtrl as search">
+      <div class="manage-images">
+        <h3>Docker Images</h3>
+        <div class="icon-button plus" ng-click="showSearch()">Manage Images</div>
+        <input type='text' ng-model="filters.image" placeholder='Filter images...' reset-field>
+      </div>
 
-          <div class="sharing">
-            <span>Share URL</span>
-            <div class="addthis-icons addthis_custom_sharing"></div>
-            <div class="icon-button copy" ng-class="{ copied: copied }"  ui-zeroclip zeroclip-copied="copied=true"
-                 zeroclip-text="{{ URL }}">
-              <span ng-hide="copied">Copy URL</span>
-              <span ng-show="copied">Copied!</span>
-            </div>
-          </div>
-        </section>
-        <notification></notification>
-        <div class="leaves lock-horizon" ng-show="leaves.length > 0" style="width: {{ leaves.length * 210 }}px;">
-            <leaf ng-repeat="leaf in leaves" ng-mouseenter="showCommands(leaf)"></leaf>
+      <div class="sharing">
+        <span>Share URL</span>
+        <div class="addthis-icons addthis_custom_sharing"></div>
+        <div class="icon-button copy" ng-class="{ copied: copied }"  ui-zeroclip zeroclip-copied="copied=true"
+             zeroclip-text="{{ URL }}">
+          <span ng-hide="copied">Copy URL</span>
+          <span ng-show="copied">Copied!</span>
         </div>
-    </nav>
-    <section class="graph" grid>
+      </div>
+    </section>
+    <section sticky offset="142" class="graph" grid>
     </section>
 </main>
-<footer id="journal">
+<footer id="journal-wrapper">
     <draggable></draggable>
     <section class="journal" scroll-glue ng-controller="JournalCtrl">
         <ul>

@@ -21,8 +21,12 @@
   </span>
   <div class="button"  ng-controller="SearchCtrl" ng-click="showExampleSearch()">Load a sample image set</div>
 </div>
-
+<notification></notification>
 <div class="matrix">
+  <div sticky sync-scroll sync-target=".graph" offset="134" class="leaves" ng-show="leaves.length > 0" style="min-width: {{ leaves.length * 205 }}px;">
+    <leaf ng-repeat="leaf in leaves" ng-mouseenter="showCommands(leaf)"></leaf>
+  </div>
+
   <div ng-repeat="box in grid" class="repeat-animation"  ng-switch on="box.layer.id">
 
     <div class="box empty" ng-switch-when="empty"></div>

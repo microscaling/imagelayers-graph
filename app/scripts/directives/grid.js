@@ -9,7 +9,7 @@
   function Grid($timeout, $sce, $routeParams, commandService, gridService) {
     /*jshint camelcase: false */
     var constants = {
-      colWidth: 210,
+      colWidth: 205,
       boxWidth: 160
     };
 
@@ -141,7 +141,7 @@
         scope.buildGrid = function(graph) {
           var gridData = gridService.buildGrid(graph);
 
-          element.find('.matrix').css('width', (gridData.cols * constants.colWidth) + 'px');
+          element.find('.matrix').css('min-width', (gridData.cols * constants.colWidth) + 'px');
           scope.leaves = gridService.findLeaves(gridData);
           return scope.unwrapGrid(gridData);
         };

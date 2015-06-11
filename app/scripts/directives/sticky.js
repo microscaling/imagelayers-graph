@@ -14,15 +14,10 @@
     return {
       restrict: 'A',
       link: function postLink(scope, element, attrs) {
-        var main = element.parent('main'),
-            offset = (attrs.offset) ? attrs.offset : 0,
-            locked = element.find('.lock-horizon');
+        var main = element.closest('main'),
+            offset = (attrs.offset) ? attrs.offset : 0;
 
         main.bind('scroll', function() {
-          if (locked) {
-            locked.children().css('left',  '-' + $(this).scrollLeft() + 'px');
-          }
-
           if (main.scrollTop() >= offset) {
             element.addClass('sticky');
           } else {

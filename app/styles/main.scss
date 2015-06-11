@@ -219,6 +219,13 @@ section.search {
   position: relative;
   z-index: 99;
 
+  &.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #ccc;
+  }
+
   .manage-images {
     float: left;
 
@@ -344,19 +351,6 @@ section.search {
   }
 }
 
-body.error{
-  &:not(.sticky) {
-    div.leaves {
-      &:before {
-        top: -207px;
-      }
-      //search
-      &:after {
-        top: -136px;
-      }
-    }
-  }
-}
 /* Footer */
 footer {
   width: 100%;
