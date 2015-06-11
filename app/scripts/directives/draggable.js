@@ -24,7 +24,7 @@
 
         scope.updatePosition = function(pos) {
             $('main').css('bottom', pos + 'px');
-            $('footer').css('height', pos + 'px');
+            $('footer#journal').css('height', pos + 'px');
         };
 
         handle.bind('mousedown', function(e) {

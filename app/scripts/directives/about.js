@@ -45,7 +45,7 @@
 
             aboutMenu.css('display', 'block');
             aboutMenu.animate({
-              'top': (position.top + height) + 'px',
+              'top': (position.top + (height - $('main').scrollTop())) + 'px',
               'opacity': 1
             }, speed, function() {
               scope.menuVisible = true;
