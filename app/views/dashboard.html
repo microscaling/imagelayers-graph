@@ -15,9 +15,10 @@
             <a about href="">About</a>
         </nav>
     </header>
-    <section class="metrics"> 
+    <div ng-include="'views/about-menu.html'"></div>
+    <section class="metrics">
       <badge></badge>
-      <metrics></metrics> 
+      <metrics></metrics>
     </section>
     <section sticky offset='134' class="search" ng-controller="SearchCtrl as search">
       <div class="manage-images">
@@ -47,4 +48,3 @@
         </ul>
     </section>
 </footer>
-<div ng-include="'views/about-menu.html'"></div>
