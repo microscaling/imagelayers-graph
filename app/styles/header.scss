@@ -152,15 +152,15 @@ main {
       width: 58px;
       float: left;
       position: relative;
-      height: 100%;
-      height: 100%;
-      padding-top: 21px;
       margin-left: 10px;
+      height: 100%;
       a {
         color: #888;
         font-size: .8em;
         text-decoration: none;
-        margin-top: 21px;
+        padding-top: 23px;
+        display: block;
+        height: 59px;
         &:after {
           @extend .icon-thin-arrow-down;
           @include icon-light-grey;
