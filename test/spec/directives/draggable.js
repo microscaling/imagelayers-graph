@@ -9,14 +9,14 @@ describe('Directive: draggable', function () {
 
   beforeEach(inject(function ($compile, $rootScope, $window) {
     var scope = $rootScope.$new(),
-        elem = angular.element("<div><style>main { bottom: 0px; } footer { height: 0px; }</style><main></main><footer></footer><draggable></draggable></div>");
+        elem = angular.element("<div><style>main { bottom: 0px; } footer { height: 0px; }</style><main></main><footer id='journal-wrapper'></footer><draggable></draggable></div>");
 
     window = $window;
     directive = $compile(elem)(scope);
     scope.$digest();
     element = elem.find('.draggable');
     main = elem.find('main');
-    footer = elem.find('footer');
+    footer = elem.find('footer#journal-wrapper');
     isoScope = element.isolateScope();
   }));
 
