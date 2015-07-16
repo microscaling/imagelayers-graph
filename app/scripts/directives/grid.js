@@ -111,7 +111,7 @@
               }
             }
           }
-
+          
           return data;
         };
       },
@@ -142,6 +142,7 @@
           var gridData = gridService.buildGrid(graph);
 
           element.find('.matrix').css('min-width', (gridData.cols * constants.colWidth) + 'px');
+
           scope.leaves = gridService.findLeaves(gridData);
           return scope.unwrapGrid(gridData);
         };
