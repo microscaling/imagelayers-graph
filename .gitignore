@@ -7,7 +7,6 @@ config.js
 .DS_Store
 .bowerrc
 .editorconfig
-.jshintrc
 .travis.yml
 .yo-rc.json
 .gitattributes
