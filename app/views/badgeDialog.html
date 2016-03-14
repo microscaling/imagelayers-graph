@@ -35,7 +35,7 @@
         <li>
           <label>HTML</label>
           <input type="text" value="{{ badgeAsHtml() }}"/>
-          <div class="icon-button copy" ng-class="{ copied: htmlCopied }"  ui-zeroclip zeroclip-copied="htmlCopied=true"
+          <div class="icon-button copy" ng-class="{ copied: htmlCopied }" ui-zeroclip zeroclip-copied="htmlCopied=true"
                zeroclip-text="{{  badgeAsHtml() }}">
             <span ng-hide="htmlCopied">Copy to Clipboard</span>
             <span ng-show="htmlCopied">Copied to Clipboard</span>
@@ -44,10 +44,19 @@
         <li>
           <label>Markdown</label>
           <input type="text" value="{{ badgeAsMarkdown() }}"/>
-          <div class="icon-button copy" ng-class="{ copied: markdownCopied }"  ui-zeroclip zeroclip-copied="markdownCopied=true"
+          <div class="icon-button copy" ng-class="{ copied: markdownCopied }" ui-zeroclip zeroclip-copied="markdownCopied=true"
                zeroclip-text="{{  badgeAsMarkdown() }}">
             <span ng-hide="markdownCopied">Copy to Clipboard</span>
             <span ng-show="markdownCopied">Copied to Clipboard</span>
+          </div>
+        </li>
+        <li>
+          <label>AsciiDoc</label>
+          <input type="text" value="{{ badgeAsAsciiDoc() }}"/>
+          <div class="icon-button copy" ng-class="{ copied: asciiDocCopied }" ui-zeroclip zeroclip-copied="asciiDocCopied=true"
+               zeroclip-text="{{  badgeAsAsciiDoc() }}">
+            <span ng-hide="asciiDocCopied">Copy to Clipboard</span>
+            <span ng-show="asciiDocCopied">Copied to Clipboard</span>
           </div>
         </li>
       </ul>
