@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: imagelayers
+    version: provisional
+  name: imagelayers
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    app: imagelayers
+    version: provisional
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: imagelayers-ui
+    version: beta
+  name: imagelayers-ui
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: imagelayers-ui
+    version: beta
+  sessionAffinity: None
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: imagelayers
+    version: provisional
+  name: imagelayers
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    app: imagelayers
+    version: provisional
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: imagelayers
+        version: provisional
+      name: imagelayers
+    spec:
+      containers:
+      - image: ntfrnzn/imagelayers:provisional
+        imagePullPolicy: IfNotPresent
+        name: imagelayers
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+status:
+  observedGeneration: 1
+  replicas: 1
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: imagelayers-ui
+    version: beta
+  name: imagelayers-ui
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    app: imagelayers-ui
+    version: beta
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: imagelayers-ui
+        version: beta
+      name: imagelayers-ui
+    spec:
+      containers:
+      - image: ntfrnzn/imagelayers-ui:beta
+        imagePullPolicy: IfNotPresent
+        name: imagelayers-ui
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+status:
+  observedGeneration: 1
+  replicas: 1
