@@ -20,59 +20,69 @@ describe('Controller: BadgedialogCtrl', function () {
       $scope: scope
     });
   }));
-  
+
   describe('$watch selectedWorkflow', function() {
     it('should initialze selectedImage to empty image', function() {
       scope.selectedImage = { name: 'boo' };
       scope.$digest();
-      
+
       expect(scope.selectedImage.name).toEqual('');
       expect(scope.selectedImage.tag).toEqual('latest');
     });
   });
-  
+
   describe('$watch selectedImage', function() {
     it('should set htmlCopied to false', function() {
       scope.htmlCopied = true;
       scope.selectedImage = { name: 'foo' };
       scope.$digest();
-      
+
       expect(scope.htmlCopied).toBeFalsy();
     });
-    
+
     it('should set markdownCopied to false', function() {
       scope.markdownCopied = true;
       scope.selectedImage = { name: 'foo' };
-      
+
       expect(scope.markdownCopied).toBeTruthy();
       scope.$digest();
-      
+
       expect(scope.markdownCopied).toBeFalsy();
     });
-    
+
+    it('should set asciiDocCopied to false', function() {
+      scope.asciiDocCopied = true;
+      scope.selectedImage = { name: 'foo' };
+
+      expect(scope.asciiDocCopied).toBeTruthy();
+      scope.$digest();
+
+      expect(scope.asciiDocCopied).toBeFalsy();
+    });
+
     describe('when workflow is imagelayers', function() {
       it('set selectedImage.selected = true', function() {
         scope.selectedWorkflow = 'imagelayers';
         scope.$digest();
         scope.selectedImage = { name: 'foo' };
-        
+
         expect(scope.selectedImage.selected).toBeFalsy();
         scope.$digest();
-        
+
         expect(scope.selectedImage.selected).toBeTruthy();
       })
     });
-    
+
     describe('when workflow is hub', function() {
       it('set selectedImage.selected = false when missing', function() {
         scope.selectedWorkflow = 'hub';
         scope.$digest();
-                
+
         scope.selectedImage = { name: 'foo', missing: true, selected: true };
-        
+
         expect(scope.selectedImage.selected).toBeTruthy();
         scope.$digest();
-        
+
         expect(scope.selectedImage.selected).toBeFalsy();
       })
     });
@@ -107,10 +117,18 @@ describe('Controller: BadgedialogCtrl', function () {
   });
 
   describe('$scope.badgeAsMarkdown', function  () {
-    it('should return an HTML embed code', function () {
+    it('should return a Markdown embed code', function () {
       scope.selectedImage = { name: 'node', tag: 'latest', selected: true };
       var embedCode = scope.badgeAsMarkdown();
       expect(embedCode).toEqual("[![](https://badge.imagelayers.io/node:latest.svg)](https://imagelayers.io/?images=node:latest 'Get your own badge on imagelayers.io')")
+    });
+  });
+
+  describe('$scope.badgeAsAsciiDoc', function() {
+    it('should return AsciiDoc embed code', function() {
+      scope.selectedImage = { name: 'node', tag: 'latest', selected: true };
+      var embedCode = scope.badgeAsAsciiDoc();
+      expect(embedCode).toEqual('image:https://badge.imagelayers.io/node:latest.svg[title="Get your own badge on imagelayers.io", alt="Get your own badge on imagelayers.io", link="https://imagelayers.io/?images=node:latest"]');
     });
   });
 });

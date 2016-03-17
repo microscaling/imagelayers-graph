@@ -11,14 +11,14 @@
   angular.module('iLayers')
     .controller('BadgeDialogCtrl', BadgeDialogCtrl);
 
-  BadgeDialogCtrl.$inject = ['$scope', '$sce']; 
+  BadgeDialogCtrl.$inject = ['$scope', '$sce'];
 
   function BadgeDialogCtrl($scope, $sce) {
     var nameChanged = function(current, previous) {
       var newName = current.name,
           oldName = previous.name;
 
-      return (newName !== undefined && 
+      return (newName !== undefined &&
           newName !== oldName);
     };
 
@@ -38,7 +38,7 @@
       });
 
       if (list.length < 1) {
-        $scope.selectedWorkflow = 'hub'; 
+        $scope.selectedWorkflow = 'hub';
       }
 
       return list;
@@ -52,24 +52,25 @@
       var image = $scope.selectedImage;
 
       if ($scope.selectedWorkflow === 'imagelayers' && image.name.length > 0) {
-        $scope.selectedImage.selected = true; 
+        $scope.selectedImage.selected = true;
       }
 
       if ($scope.selectedWorkflow === 'hub') {
         if (image.missing || nameChanged(newValue, oldValue)) {
-          $scope.selectedImage.selected = false;  
-        } 
+          $scope.selectedImage.selected = false;
+        }
       }
 
       $scope.htmlCopied = false;
       $scope.markdownCopied = false;
+      $scope.asciiDocCopied = false;
     }, true);
 
     $scope.badgeAsHtml = function () {
       if ($scope.selectedImage.selected !== true) {
         return "";
       }
-      
+
       return $sce.trustAsHtml("<a href='https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + "' title='Get your own badge on imagelayers.io'>" +
       "<img src='https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg'></a>");
     };
@@ -78,9 +79,18 @@
       if ($scope.selectedImage.selected !== true) {
         return "";
       }
-      
+
       return "[![](https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg)]" +
         "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + " 'Get your own badge on imagelayers.io')";
     };
+
+    $scope.badgeAsAsciiDoc = function() {
+      if ($scope.selectedImage.selected !== true) {
+        return "";
+      }
+
+      return 'image:https://badge.imagelayers.io/' + $scope.selectedImage.name + ':' + $scope.selectedImage.tag + '.svg' +
+        '[title="Get your own badge on imagelayers.io", alt="Get your own badge on imagelayers.io", link="https://imagelayers.io/?images=' + $scope.selectedImage.name + ':' + $scope.selectedImage.tag + '"]';
+    }
   }
 })();
