@@ -220,8 +220,8 @@
             if (id !== 'empty') {
               angular.copy(grid.matrix.inventory[id].image.repo, repo);
               repo.identity = repo.name + '::' + repo.tag + Math.floor(Math.random() * 10000);
-              var link = repo.name.lastIndexOf('/') < 0 ? '_/' + repo.name : 'u/' + repo.name;
-              repo.hub_link = 'https://registry.hub.docker.com/' + link;
+              var link = repo.name.lastIndexOf('/') < 0 ? '_/' + repo.name : 'r/' + repo.name;
+              repo.hub_link = 'https://hub.docker.com/' + link;
               leaves.push(repo);
               break;
             }
