@@ -109,7 +109,7 @@ describe('Service: gridService', function () {
         }
       },
       res = gridService.findLeaves(data);
-      expect(res[0].hub_link).toEqual('https://registry.hub.docker.com/_/official');
+      expect(res[0].hub_link).toEqual('https://hub.docker.com/_/official');
     });
     it('creates a valid docker hub link for images from individuals and organizations', function () {
       var data = {
@@ -119,7 +119,7 @@ describe('Service: gridService', function () {
         }
       },
       res = gridService.findLeaves(data);
-      expect(res[0].hub_link).toEqual('https://registry.hub.docker.com/u/foo/test');
+      expect(res[0].hub_link).toEqual('https://hub.docker.com/r/foo/test');
     });
   });
 });
