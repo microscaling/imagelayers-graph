@@ -16,21 +16,24 @@
   function BadgeDialogCtrl($scope, $sce) {
     var nameChanged = function(current, previous) {
       var newName = current.name,
-          oldName = previous.name;
+        oldName = previous.name;
 
       return (newName !== undefined &&
-          newName !== oldName);
+        newName !== oldName);
     };
 
     var newImage = function() {
-      return { name: '', tag: 'latest' };
+      return {
+        name: '',
+        tag: 'latest'
+      };
     };
 
     $scope.selectedImage = newImage();
 
     $scope.imageList = function() {
       var data = $scope.graph,
-          list = [];
+        list = [];
 
       angular.forEach(data, function(image) {
         image.repo.label = image.repo.name + ':' + image.repo.tag;
@@ -66,23 +69,22 @@
       $scope.asciiDocCopied = false;
     }, true);
 
-    $scope.badgeAsHtml = function () {
+    $scope.badgeAsHtml = function() {
       if ($scope.selectedImage.selected !== true) {
         return "";
       }
 
       return $sce.trustAsHtml("<a href='https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + "' title='Get your own badge on imagelayers.io'>" +
-      "<img src='https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg'></a>");
+        "<img src='https://imagelayers.io/badge/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg'></a>");
     };
 
-    $scope.badgeAsMarkdown = function () {
+    $scope.badgeAsMarkdown = function() {
       if ($scope.selectedImage.selected !== true) {
         return "";
       }
 
-      return "[![](https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg)]" +
-        "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + " 'Get your own badge on imagelayers.io')";
-    };
+      return "[![](https://imagelayers.io/badge/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg)]" +
+        "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + " 'Get your own badge on imagelayers.io')";    };
 
     $scope.badgeAsAsciiDoc = function() {
       if ($scope.selectedImage.selected !== true) {
