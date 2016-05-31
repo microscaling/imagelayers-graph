@@ -13,8 +13,12 @@ ImageLayers uses Grunt. To install Grunt, you must first have [npm installed on 
 The last step is to install Compass. ImageLayers recommends using the latest version of Ruby.
 `gem install compass`
 
-Next, make sure the [imagelayers API](https://github.com/CenturyLinkLabs/imagelayers/) is running. 
+Next, make sure the [imagelayers API](https://github.com/CenturyLinkLabs/imagelayers/) is running.
 Run `grunt` for building the UI and `grunt serve` for preview. The ImageLayers UI will automatically open in a browser window.
+
+### Deploying in Kubernetes
+
+Please see deployment/README.md
 
 ## Testing
 Running `grunt test` will run the unit tests with karma.

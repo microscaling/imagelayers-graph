@@ -1,7 +1,8 @@
-FROM centurylink/nginx:1.6.2
+FROM nginx:1.8.1
 
-MAINTAINER CenturyLink Labs <ctl-labs-futuretech@centurylink.com>
+MAINTAINER Nathan Franzen <nathan.franzen@ctl.io>
 EXPOSE 9000
+EXPOSE 8080
 
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD /dist /data/dist
