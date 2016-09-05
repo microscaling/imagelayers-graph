@@ -23,6 +23,19 @@ Each of these three imagelayers components has associated Kubernetes service
 and pods. They are deployed with the _kubectl_ binary and the manifests found
 in the _deployment/_ subdirectory.
 
+Edit the Services
+
+The imagelayers-web and badger services use SSL certificates from ACM
+(AWS Certificate Manager). Get the ARN for the certificates from the
+[AWS console](http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-manage.html).
+
+```
+annotations:
+  service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:*****:certificate/*****
+  service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+  service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+```
+
 Create the Services
 ```
 kubectl --namespace=staging -f deployment/imagelayers-svc.yml			
@@ -37,7 +50,21 @@ kubectl --namespace=staging -f deployment/badger-deployment.yml
 kubectl --namespace=staging -f deployment/imagelayers-web-deployment.yml
 ```
 
-# Deploying the TLS proxy
+# Upgrading imagelayers-web
+
+Using Kubernetes [Deployments](http://kubernetes.io/docs/user-guide/deployments/)
+will make most updates straightforward.
+
+`kubectl edit deployment/imagelayers-web` will allow you to edit the details of
+the pod specs and configurations, and apply a rolling update to the system.  It
+is strongly advised, however, to read the relevant Kubernetes documentation as
+the recommended update processes may well have changed since this writing.
+
+# Alternate solution for SSL
+
+If you don't want to use ELB or ACM you can use an nginx proxy to terminate TLS.
+
+## Deploying the TLS proxy
 We'll use an ansible playbook which creates the Kubernetes manifests for the
 ssl-proxy deployment and copies the TLS certificates into a Kubernetes secret.
 The details of this process are described in
@@ -81,13 +108,3 @@ manifest, so it's best to clean that up
 ```
 rm ${K8SP}/manifests/*
 ```
-
-# Upgrading imagelayers-web
-
-Using Kubernetes [Deployments](http://kubernetes.io/docs/user-guide/deployments/)
-will make most updates straightforward.
-
-`kubectl edit deployment/imagelayers-web` will allow you to edit the details of
-the pod specs and configurations, and apply a rolling update to the system.  It
-is strongly advised, however, to read the relevant Kubernetes documentation as
-the recommended update processes may well have changed since this writing.
