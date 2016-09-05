@@ -16,7 +16,7 @@ spec:
       name: imagelayers-web
     spec:
       containers:
-      - image: centurylink/imagelayers-ui:kubernetes-v1.2
+        image: microscaling/imagelayers-web:1.1.0
         imagePullPolicy: IfNotPresent
         name: imagelayers-web
         resources: {}

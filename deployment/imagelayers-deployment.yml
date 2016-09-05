@@ -16,7 +16,7 @@ spec:
       name: imagelayers
     spec:
       containers:
-      - image: centurylink/imagelayers-api
+        image: microscaling/imagelayers-api:1.1.0
         imagePullPolicy: IfNotPresent
         name: imagelayers
         resources: {}
