@@ -5,15 +5,17 @@ Imagelayers is a set of three services
 - badger, constructing imagelayers svg badge graphics objects
 
 None of the three core services are exposed directly -- the imagelayers and
-badger services services are exposed externally through an nginx proxy which
-terminates TLS.  The imagelayers-web proxy is the main point of contact for the
+badger services services are exposed externally using an Elastic Load Balancer
+(ELB) from AWS which terminates TLS.
+
+The imagelayers-web proxy is the main point of contact for the
 angular client interface.  In a production system, that  endpoint will be
 [https://imagelayers.io](https://imagelayers.io).  This web service allows
 the client to  communicate with the imagelayers-api by proxying the path
- _/registry_ and with  the badge service by proxying the path _/badge_.  
+ _/registry_ and with  the badge service by proxying the path _/badge_.
 
-The badge service is exposed to external clients through a second url, through
-another TLS proxy, expected to have the endpoint
+The badge service is exposed to external clients through a second ELB,
+expected to have the endpoint
 [https://badge.imagelayers.io](https://badge.imagelayers.io).
 
 # Deploying imagelayers
