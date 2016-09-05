@@ -75,7 +75,7 @@
       }
 
       return $sce.trustAsHtml("<a href='https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + "' title='Get your own badge on imagelayers.io'>" +
-        "<img src='https://imagelayers.io/badge/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg'></a>");
+        "<img src='https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg'></a>");
     };
 
     $scope.badgeAsMarkdown = function() {
@@ -83,7 +83,7 @@
         return "";
       }
 
-      return "[![](https://imagelayers.io/badge/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg)]" +
+      return "[![](https://badge.imagelayers.io/" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + ".svg)]" +
         "(https://imagelayers.io/?images=" + $scope.selectedImage.name + ":" + $scope.selectedImage.tag + " 'Get your own badge on imagelayers.io')";    };
 
     $scope.badgeAsAsciiDoc = function() {
