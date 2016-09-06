@@ -1,4 +1,4 @@
-FROM nginx:1.11.3
+FROM nginx:1.10-alpine
 
 MAINTAINER Ross Fairbanks <ross@microscaling.com>
 
