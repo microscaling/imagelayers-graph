@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: imagelayers-web
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -16,13 +16,14 @@ spec:
       name: imagelayers-web
     spec:
       containers:
-      - image: centurylink/imagelayers-ui:kubernetes-v1.2
-        imagePullPolicy: IfNotPresent
-        name: imagelayers-web
-        resources: {}
-        securityContext:
-          privileged: false
-        terminationMessagePath: /dev/termination-log
+        - name: imagelayers-web
+          image: microscaling/imagelayers-web:1.1.2
+          imagePullPolicy: IfNotPresent
+          name: imagelayers-web
+          resources: {}
+          securityContext:
+            privileged: false
+          terminationMessagePath: /dev/termination-log
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       securityContext: {}

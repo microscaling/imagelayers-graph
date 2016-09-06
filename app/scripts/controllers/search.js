@@ -75,12 +75,8 @@
 
     $scope.showExampleSearch = function () {
       $scope.searchList = [
-        {name: 'java', tag:'latest', found: true},
-        {name: 'golang', tag:'latest', found: true},
-        {name: 'node', tag:'latest', found: true},
-        {name: 'python', tag:'latest', found: true},
-        {name: 'php', tag:'latest', found: true},
-        {name: 'ruby', tag:'latest', found: true}
+        {name: 'microscaling/imagelayers-api', tag:'latest', found: true},
+        {name: 'microscaling/imagelayers-web', tag:'latest', found: true}
       ];
       $scope.addImages();
     };

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: imagelayers
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -16,13 +16,13 @@ spec:
       name: imagelayers
     spec:
       containers:
-      - image: centurylink/imagelayers-api
-        imagePullPolicy: IfNotPresent
-        name: imagelayers
-        resources: {}
-        securityContext:
-          privileged: false
-        terminationMessagePath: /dev/termination-log
+        - name: imagelayers
+          image: microscaling/imagelayers-api:1.1.2
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          securityContext:
+            privileged: false
+          terminationMessagePath: /dev/termination-log
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       securityContext: {}

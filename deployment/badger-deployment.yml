@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: badger
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -19,7 +19,7 @@ spec:
       - env:
         - name: MODE
           value: production
-        image: centurylink/badger
+        image: microscaling/imagelayers-badger:1.1.2
         imagePullPolicy: IfNotPresent
         name: badger
         resources: {}
