@@ -36,7 +36,7 @@
     return {
       inspect: function (list) {
         function doInspection() {
-          return $http.post(ENV.apiEndpoint + '/registry/analyze', { 'repos': list })
+          return $http.post((ENV.apiEndpoint || '') + '/registry/analyze', { 'repos': list })
             .then(function(response) {
               var images = response.data,
                   list = [],
@@ -64,12 +64,12 @@
       },
       search: function(name) {
         return retryQuery(function() {
-          return $http.get(ENV.apiEndpoint + '/registry/search?name='+name);
+          return $http.get((ENV.apiEndpoint || '') + '/registry/search?name='+name);
         }, 3);
       },
       fetchTags: function(name) {
         return retryQuery(function() {
-          return $http.get(ENV.apiEndpoint + '/registry/images/'+name+'/tags');
+          return $http.get((ENV.apiEndpoint || '') + '/registry/images/'+name+'/tags');
         }, 3);
       }
     };
