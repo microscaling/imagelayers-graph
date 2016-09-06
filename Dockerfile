@@ -2,6 +2,10 @@ FROM nginx:1.10-alpine
 
 MAINTAINER Ross Fairbanks <ross@microscaling.com>
 
+RUN apk update && \
+    apk upgrade && \
+    rm -rf /var/cache/apk/*
+
 EXPOSE 9000
 EXPOSE 8080
 
