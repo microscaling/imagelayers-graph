@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: imagelayers
-          image: microscaling/imagelayers-api:1.1.0
+          image: microscaling/imagelayers-api:1.1.2
           imagePullPolicy: IfNotPresent
           resources: {}
           securityContext:

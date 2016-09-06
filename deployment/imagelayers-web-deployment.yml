@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: imagelayers-web
-          image: microscaling/imagelayers-web:1.1.0
+          image: microscaling/imagelayers-web:1.1.2
           imagePullPolicy: IfNotPresent
           name: imagelayers-web
           resources: {}
