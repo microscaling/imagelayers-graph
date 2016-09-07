@@ -19,7 +19,7 @@ spec:
       - env:
         - name: MODE
           value: production
-        image: microscaling/imagelayers-badger:1.1.2
+          image: microscaling/imagelayers-badger:latest
         imagePullPolicy: IfNotPresent
         name: badger
         resources: {}
