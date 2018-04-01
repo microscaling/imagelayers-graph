@@ -28,5 +28,12 @@ spec:
         terminationMessagePath: /dev/termination-log
       dnsPolicy: ClusterFirst
       restartPolicy: Always
+      resources:
+        limits:
+          cpu: 100m
+          memory: 30Mi
+        requests:
+          cpu: 50m
+          memory: 20Mi
       securityContext: {}
       terminationGracePeriodSeconds: 30

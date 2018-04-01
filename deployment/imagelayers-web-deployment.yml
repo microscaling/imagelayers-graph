@@ -20,7 +20,13 @@ spec:
           image: microscaling/imagelayers-web:1.1.2
           imagePullPolicy: IfNotPresent
           name: imagelayers-web
-          resources: {}
+          resources:
+            limits:
+              cpu: 75m
+              memory: 20Mi
+            requests:
+              cpu: 50m
+              memory: 10Mi
           securityContext:
             privileged: false
           terminationMessagePath: /dev/termination-log
