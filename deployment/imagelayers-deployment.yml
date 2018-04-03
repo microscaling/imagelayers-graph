@@ -19,7 +19,13 @@ spec:
         - name: imagelayers
           image: microscaling/imagelayers-api:1.1.2
           imagePullPolicy: IfNotPresent
-          resources: {}
+          resources:
+            limits:
+              cpu: 75m
+              memory: 30Mi
+            requests:
+              cpu: 50m
+              memory: 20Mi
           securityContext:
             privileged: false
           terminationMessagePath: /dev/termination-log
