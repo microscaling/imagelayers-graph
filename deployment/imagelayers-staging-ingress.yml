@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: imagelayers
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+    certmanager.k8s.io/issuer: letsencrypt-production
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - staging.imagelayers.io
+    secretName: imagelayers-letsencrypt
+  rules:
+  - host: staging.imagelayers.io
+    http:
+      paths:
+      - path: /
+        backend:
+            serviceName: imagelayers-web
+            servicePort: 80
